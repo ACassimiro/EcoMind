@@ -1,19 +1,16 @@
 from pymongo import *
 from datetime import datetime
 from bson.objectid import ObjectId
+from database.user import *
+from database.connection import *
 
-db = 0
-    
-def connect_to_database():
-    client = MongoClient('localhost', 27017)
-    global db
-    db = client.ecomind_database
  
 def start ():
     print "a"
-    connect_to_database() 
+    db = connect_to_database() 
+    user = User(db)
     print "b"
-    #insert_user("heloisacarbone@gmail.com", "Heloisa Carbone", "030394", [1994,3,3], "female", "sjsjsjs", ["water", "trash"], [])
+    user.insert_user("ricks@gmail.com", "Ricardo Sakurai", "030394", [1994,6,10], "male", "fff", ["water", "electricity"], [])
     # a = find_one_user("56a92a1e3666cf6105dc9feb")
     #update_user("56a92a1e3666cf6105dc9feb", {"photo": "shshshaushshsuahs"})
     print "c"

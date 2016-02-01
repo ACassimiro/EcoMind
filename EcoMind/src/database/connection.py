@@ -1,8 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 from pymongo import *
 
-db = 0
-    
+""" Creates a connection with a database"""    
 def connect_to_database():
     client = MongoClient('localhost', 27017)
-    global db
-    db = client.ecomind_database
+    return client.ecomind_database
+    
