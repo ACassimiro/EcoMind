@@ -1,54 +1,44 @@
-import socket
+# -*- test-case-name: test_streamer -*-
+"""WebSocket Echo.
+Install: pip install twisted txws
+Run: twistd -ny streamer.py
+Visit http://localhost:8080/
+"""
+from twisted.application         import strports # pip install twisted
+from twisted.application.service import Application
+from twisted.internet.protocol   import Factory, Protocol
+from twisted.python              import log
 
-import sys
+from txws import WebSocketFactory # pip install txws
 
-def init_server():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(("", 9999))
-    sock.listen(5)
-     
-    handshake = '\
-    HTTP/1.1 101 Web Socket Protocol Handshake\r\n\
-    Upgrade: WebSocket\r\n\
-    Connection: Upgrade\r\n\
-    WebSocket-Origin: http://localhost:8888\r\n\
-    WebSocket-Location: ws://localhost:9999/\r\n\r\n\
-    '
-    handshaken = False
-     
-    print "TCPServer Waiting for client on port 9999"
-      
-    data = ''
-    header = ''
-     
-    client, address = sock.accept()
-    print client, address
-    
-    #while True:
-    if handshaken == False:
-        print "1 "
-        print handshaken 
-        header += client.recv(16)
-        print header
-        if header.find('\r\n\r\n') != -1:
-            data = header.split('\r\n\r\n', 1)[1]
-            print data
-            handshaken = True
-            client.send(handshake)
-    else:
-        print "2"
-        tmp = client.recv(128)
-        data += tmp;
-        print data
-        validated = []
- 
-        msgs = data.split('\xff')
-        data = msgs.pop()
-        print data
-        for msg in msgs:
-            if msg[0] == '\x00':
-                validated.append(msg[1:])
- 
-        for v in validated:
-            print v
-            client.send('\x00' + v + '\xff')
+from data_handler import *
+
+"""
+All data must have the following fixed fields.
+JSON = {
+	action: GET/POST
+	type: 
+}
+"""
+class EchoUpper(Protocol):
+    """Echo uppercased."""
+    def dataReceived(self, data):
+        log.msg("Got %r" % (data,))
+        handle(data)
+        self.transport.write(data.upper())
+
+application = Application("ws-streamer")
+
+echofactory = Factory()
+echofactory.protocol = EchoUpper # use Factory.buildProtocol()
+service = strports.service("tcp:8076:interface=127.0.0.1",
+                           WebSocketFactory(echofactory))
+service.setServiceParent(application)
+
+from twisted.web.server   import Site
+from twisted.web.static   import File
+
+resource = File('.') # serve current directory
+webservice = strports.service("tcp:8080:interface=127.0.0.1",
+                              Site(resource))
+webservice.setServiceParent(application)
