@@ -11,81 +11,45 @@ var io;
 function initializeServer() {
 	var app = express();
 	app.use(express.static('./public'));
-	//Specifying the public folder of the server to make the html accesible using the static middleware
 	 
 	var server = http.createServer(app).listen(config.server.httpServerPort, function(){
 		console.log('app.js @', config.server.httpServerPort);
 	});
-	//Server listens on the port 8124
 	io = socketio.listen(server); 
-	/*initializing the websockets communication , server instance has to be sent as the argument */
 	io.sockets.on("connection", requestHandler);
 
 }
 
+/*
+	This is where the magic happens.
+	The message sent from the client must be a JSON in the following format
+	{
+		action_type: login/registration/news_post/search
+		action: function-name
+		http_type: GET/POST
+		message: everything that needs to be sent 
+		user_email
+	} 
+*/
 function requestHandler(socket){
-	var message_to_client = {
-        data:"Connection with the server established"
-      }
-      socket.send(JSON.stringify(message_to_client)); 
-      /*sending data to the client , this triggers a message event at the client side */
-    console.log('Socket.io Connection with the client established');
+
     socket.on("message",function(data){
         /*This event is triggered at the server side when client sends the data using socket.send() method */
         data = JSON.parse(data);
- 
-        console.log(data);
-        /*Printing the data */
-        var ack_to_client = {
-        data:"Server Received the message"
-      }
-      socket.send(JSON.stringify(ack_to_client));
-        /*Sending the Acknowledgement back to the client , this will trigger "message" event on the clients side*/
+
+        socket_server.requestListener(socket, data);
+
     });
 }
 
-// function initializeServer() {
-//     var httpServer = http.createServer();
-//     httpServer.on('request', requestListener)
-//         .listen(config.server.httpServerPort, function () {
-//             console.log('app.js @', config.server.httpServerPort);
-//         });
-//     var io = socketio.listen(httpServer);
-
-// }
 
 
-// function requestListener(req, res) {
 
-//     var backend_modules = [
-//         socket_server
-//     ];
 
-//     var _execute = function (array) {
-
-//         for (var i = 0; i < array.length; i++) {
-//             if (array[i].requestListener(req, res) === true) {
-//                 return true;
-//             }
-//         }
-
-//         return false;
-//     };
-
-   
-//     if (_execute(backend_modules) === true) {
-//         return true;
-//     }
-        
-
-//     return staticContent.requestListener(req, res);
-
-    
-// }
-
-// Inits the magic
+// Inits the magic. Connects to the database
 database.initialize(function () {
     console.log('Initializing server');
+    // Initialize the server
     initializeServer();
 });
 

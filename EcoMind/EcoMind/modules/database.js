@@ -1,12 +1,17 @@
 var mongo = require('mongodb');
 
 
-var database_modules_list = {
- 	news_posts: require("../database/news_posts.js"),
-    objectives: require("../database/objectives.js"),
-    user: require("../database/user.js")
+var database_modules_list = [
+    'users'
+];
 
-};
+function initialize_modules(main_database) {
+    console.log("database.initialize_modules: Initializing database modules...");
+    database_modules_list.forEach(function (coll) {
+        module.exports[coll] = require('../database/' + coll + '.js')();
+        module.exports[coll].initialize(main_database);
+    });
+}
 
 var exportable = {
 
@@ -27,6 +32,8 @@ var exportable = {
             }
 
             console.log('database.MongoClient.connect: Database connected @ecomind_database');
+
+            initialize_modules(client);
 			
 			callback();
             

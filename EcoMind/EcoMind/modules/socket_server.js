@@ -1,55 +1,27 @@
 var database = require('./database.js');
 
-var io = null;
-
-var sockets = [];
 var formidable = require('formidable');
 var url = require('url');
+var http = require('http');
+var socketio = require('socket.io');
 
-function initialize(socketServer) {
-    console.log("Initialize socket server");
-    io = socketServer;
-    io.sockets.on('connection', onConnect);
-}
-
-function onConnect(socket) {
-    var user = {
-        'id': socket.id, // legacy, but good anyway.
-        'socket': socket,
-        'userName': socket.handshake.user,
-        'session': socket.handshake.session
-    };
-    sockets.push(user);
-
-
-/*
-    database['users'].loadSupervisor(operator.userName, function (err, isSupervisor) {
-        if (err && !isSupervisor) {
-            console.error('socket_api.onConnect: Error while retrieving client list. Setting list to []. Error:', err);
-            isSupervisor = false;
-        } else {
-            isSupervisor = isSupervisor.supervisor;
-        }
-    });*/
-}
-
-function test(req, res) {
-    if (req.method.toLowerCase() === 'post') {
-        console.log("FUCKKK", req);
-        res.writeHead(200);
-        res.end();
-    }   
+function registration(socket, req) {
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].add(req.message.email, req.message.password, req.message.name, req.message.birthdate, req.message.gender, function (err, user) {
+            if (err || !user) {
+                console.error('database.add: Could not add new user. err:', err);
+            } else {
+                console.log('database.add: User ', req.message.email, " was successfully created", user);
+            }
+        });
+    }
 
 }
 
-
-function requestListener(req, res) {
-  switch (url.parse(req.url).pathname) {
-        case '/index.html':
-            test(req, res);
-            break;
-        case '/socket.html':
-            test(req, res);
+function requestListener(socket, req) {
+  switch (req.action_type) {
+        case 'registration':
+            registration(socket, req);
             break;
         default:
             return false;
