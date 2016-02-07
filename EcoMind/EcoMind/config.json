@@ -1,5 +1,7 @@
 {	
 	"server": {	
-	    "httpServerPort": 8080
+	    "httpServerPort": 8080,
+	    "staticContentExpire": 1,
+	    "staticContentRoot": "./public"
 	}
 }

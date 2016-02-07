@@ -3,8 +3,11 @@ var database = require('./database.js');
 var io = null;
 
 var sockets = [];
+var formidable = require('formidable');
+var url = require('url');
 
 function initialize(socketServer) {
+    console.log("Initialize socket server");
     io = socketServer;
     io.sockets.on('connection', onConnect);
 }
@@ -30,11 +33,29 @@ function onConnect(socket) {
     });*/
 }
 
-var callbacks = {
+function test(req, res) {
+    if (req.method.toLowerCase() === 'post') {
+        console.log("FUCKKK", req);
+        res.writeHead(200);
+        res.end();
+    }   
 
-    test: function (msg, fn) {
-        if (msg !== null && msg !== undefined) {
-            console.log('info', msg.info);
-        }
+}
+
+
+function requestListener(req, res) {
+  switch (url.parse(req.url).pathname) {
+        case '/index.html':
+            test(req, res);
+            break;
+        case '/socket.html':
+            test(req, res);
+            break;
+        default:
+            return false;
     }
-};
+
+    return true;
+}
+
+exports.requestListener = requestListener;
