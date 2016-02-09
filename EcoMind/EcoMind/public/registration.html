@@ -9,23 +9,31 @@
     <body>
 
         <form id="registration">
-            <div align="center">
-                Email *: <input type="email" id="email" /><br/>
+            <div>
+                Email *: <input type="email" id="reg_email" /><br/>
      
-                Password *: <input type="password" id="password" /><br/>
+                Password *: <input type="password" id="reg_password" /><br/>
      
-                Name *: <input type="text" id="name" /><br/>
+                Name *: <input type="text" id="reg_name" /><br/>
      
-                Date of Birth *: <input type="date of birth" id="dob" /><br/>
+                Date of Birth *: <input type="date of birth" id="reg_dob" /><br/>
 
-                <select id="gender">
+                Gender: <select id="reg_gender">
                   <option value="female">Female</option>
                   <option value="male">Male</option>
                 </select>
+                <br/>
+                Preferences:
+                <div id="reg_preferences">
+                    <input type="checkbox" name="water"/>Water<br/>
+                    <input type="checkbox" name="electricity"/>Electricity<br/>
+                    <input type="checkbox" name="food waste"/>Food waste<br/>
+                    <input type="checkbox" name="trash"/>Trash<br/>
+                    <input type="checkbox" name="car usage"/>Car usage<br/>
+                </div>
      
             <input id="submit" type="button" value="Submit" />
             </div>
-            <div id="content"></div>
         </form>
  
         <script type="text/javascript">
@@ -37,10 +45,19 @@
                     using socket.on("message") , one cna listen for the ,message event and associate a callback to 
                     be executed . The Callback function gets the dat sent from the server 
                 */
-                console.log("Message from the server arrived");
                 message = JSON.parse(message);
                 console.log(message); /*converting the data into JS object */
-                $('#content').append('<div >'+message.data+'</div>'); /*appending the data on the page using Jquery */
+                if (message.data) {
+                    alert("Your account was succesfully created");
+                } else {
+                    alert("We were not able to create your account");
+                }
+
+                $('#reg_email').val('');
+                $('#reg_password').val('');
+                $('#reg_name').val('');
+                $('#reg_dob').val('');
+                 /*appending the data on the page using Jquery */
             });
 
             $(function(){
@@ -49,15 +66,20 @@
                         action_type: "registration",
                         http_type: "POST",
                         message: {
-                            email: $('#email').val(),
-                            password: $('#password').val(),
-                            name: $('#name').val(),
-                            birthdate: $('#dob').val(),
-                            gender: $("#gender option:selected").val()
+                            email: $('#reg_email').val(),
+                            password: $('#reg_password').val(),
+                            name: $('#reg_name').val(),
+                            birthdate: $('#reg_dob').val(),
+                            gender: $("#reg_gender option:selected").val()
                         }, 
                         user_id: undefined
                                 
                     }
+
+                    data['message']['preferences'] = [];
+                    $('#reg_preferences input:checked').each( function () {
+                        data['message']['preferences'].push($(this).attr('name'));
+                    });
                     socket.send(JSON.stringify(data)); 
                     /*Data can be sent to server very easily by using socket.send() method 
                     The data has to be changed to a JSON before sending

@@ -4,40 +4,21 @@ module.exports = function () {
 
     return {
 
-        /**
-        * Initialization function. Called when database module starts working.
-        * @param {mongo.Db} main_database Main shared PRP MongoDB Database object. {@link http://mongodb.github.io/node-mongodb-native/api-generated/db.html|See more}
-        * @param {mongo.Db} store_database PRP Store Database. {@link http://mongodb.github.io/node-mongodb-native/api-generated/db.html|See more}
-        */
         initialize: function (main_database) {
             users = main_database.collection('users');
             console.log("database.users: users collection created");
         },
 
-        /**
-         * Check if an user exists and attemp to authenticate.
-         * @param {String} user User name
-         * @param {String} pass Password
-         * @param {function} callback function (Error, Object)
-         */
         check: function (email, pass, callback) {
-            users.findOne({ _id: user, pass: pass, active: true}, callback);
+            users.findOne({ _id: email, pass: pass, active: true}, callback);
         },
 
-        /**
-         * Inserts a new user to the database
-         * @param {String} user User name
-         * @param {String} pass User password
-         * @param {String} email User email
-         * @param {String} type User type ('admin', 'user')
-         * @param {function} callback function (Error, Object)
-         */
-        add: function (email, pass, name, birthdate, gender, callback) {
+        add: function (email, pass, name, birthdate, gender, preferences, callback) {
             var _userNotFound_then_add = function (err, obj) {
                 if (err) {
                     callback(err, undefined);
                 } else if (!obj) {
-                    users.insert({ _id: email, pass: pass, name: name, registerDate: new Date(), birthdate: birthdate, gender: gender}, {safe: true}, callback);
+                    users.insert({ _id: email, pass: pass, name: name, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
                 } else {
                     callback({err: 'User email already in use'}, undefined);
                 }
