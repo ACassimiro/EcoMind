@@ -24,10 +24,32 @@ function registration(socket, req) {
 
 }
 
+function create_user_post(socket, req) {
+    var message_to_client = {};
+      
+    if (req.message !== null && req.message !== undefined) {
+        database['news_posts'].add(req.message.user, req.message.type, req.message.ecological_field, req.message.title, req.message.description, null, function (err, post) {
+            if (err || !post) {
+                console.error('database.add: Could not add new post. err:', err);
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log('database.add: Post ', req.message.title, " was successfully created by", req.message.user);
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    } 
+
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'registration':
             registration(socket, req);
+            break;
+        case 'createPost':
+            create_user_post(socket, req);
             break;
         default:
             return false;

@@ -2,7 +2,8 @@ var mongo = require('mongodb');
 
 
 var database_modules_list = [
-    'users'
+    'users',
+    'news_posts'
 ];
 
 function initialize_modules(main_database) {

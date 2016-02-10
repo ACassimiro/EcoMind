@@ -9,10 +9,6 @@ module.exports = function () {
             console.log("database.users: users collection created");
         },
 
-        check: function (email, pass, callback) {
-            users.findOne({ _id: email, pass: pass, active: true}, callback);
-        },
-
         add: function (email, pass, name, birthdate, gender, preferences, callback) {
             var _userNotFound_then_add = function (err, obj) {
                 if (err) {
@@ -27,6 +23,9 @@ module.exports = function () {
             users.findOne({_id: email}, _userNotFound_then_add);
         },
 
+        check: function (email, pass, callback) {
+            users.findOne({ _id: email, pass: pass, active: true}, callback);
+        },
         
         getUser: function (email, callback) {
             users.findOne({_id: email}, callback);
