@@ -26,9 +26,14 @@ function registration(socket, req) {
 
 function create_user_post(socket, req) {
     var message_to_client = {};
+
       
     if (req.message !== null && req.message !== undefined) {
-        database['news_posts'].add(req.message.user, req.message.type, req.message.ecological_field, req.message.title, req.message.description, null, function (err, post) {
+        var options = null;
+        if (req.message.options !== null && req.message.options !== undefined) {
+            options = req.message.options;
+        }
+        database['news_posts'].add(req.message.user, req.message.type, req.message.ecological_field, req.message.title, req.message.description, options, function (err, post) {
             if (err || !post) {
                 console.error('database.add: Could not add new post. err:', err);
                 message_to_client['data'] = false;
