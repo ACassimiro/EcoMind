@@ -6,7 +6,9 @@ module.exports = function () {
 
         initialize: function (main_database) {
             users = main_database.collection('users');
-            console.log("database.users: users collection created");
+            relationship = main_database.collection('relationship');
+            progress = main_database.collection('progress');
+            console.log("database.users: users and relationship collection created");
         },
 
         add: function (email, pass, name, birthdate, gender, preferences, callback) {
@@ -31,12 +33,6 @@ module.exports = function () {
             users.findOne({_id: email}, callback);
         },
 
-        /**
-         * Edit an user password
-         * @param {String} user User name
-         * @param {String} new_pass New password
-         * @param {function} callback function (Error, Object)
-         */
         editPassword: function (email, new_pass, callback) {
             if (typeof user === 'string' && typeof new_pass === 'string' && new_pass !== '') {
                 users.update({ _id: email }, {$set: { pass: new_pass }}, {safe: true}, callback);
@@ -45,22 +41,34 @@ module.exports = function () {
             }
         },
 
-        /**
-         * Find users
-         * @param {Object} filter MongoDB Query to filter
-         * @param {function} callback function (Error, Object)
-         */
+
+        updateUser: function (email, fields) {
+            users.update({ _id: email }, {$set: fields}, {safe: true}, callback);
+        }
+
         getList: function (filter, callback) {
             users.find(filter, {_id: 1}).toArray(callback);
         },
 
-        /**
-         * Find an user by the name
-         * @param {String} user User name
-         * @param {function} callback function (Error, Object)
-         */
         findOne: function (email, callback) {
             users.findOne({ _id: email}, callback);
+        },
+
+        addFan: function (fan_email, idol_email, callback) {
+            relationship.insert({"fan": fan_email, "idol": idol_email}, callback);
+        },
+
+        findFanList: function (idol_email, callback) {
+            relationship.find({"idol": idol_email}, {"fan": 1, "_id": 0, "idol": 0}).toArray(callback);
+        },
+
+        findIdolsList: function (fan_email, callback) {
+            relationship.find({"fan": fan_email}, {"idol": 1, "_id": 0, "fan": 0}).toArray(callback);
+        },
+
+        addUserProgress: function (email, ecological_footprint, callback) {
+            progress.insert({"email": userId, "timestamp": new Date(), "ecological_footprint": ecological_footprint }, callback)
         }
+
     };
-};
+}
