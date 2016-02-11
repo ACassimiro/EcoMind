@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			div {
+				border-radius: 10px;
+			}
+
+			body {
+				background-image:url(http://www.download-free-wallpaper.com/img2/kekehzijyoljskajgges.jpg);
+				background-attachment: fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				background-size: cover;
+			}
+
+
+			.box {
+				position: fixed;
+				margin-top: 15vh;
+				display: inline-block;
+				height: auto;
+				width: 13vw;
+				right: 0;
+			    left: 0;
+			    margin-right: auto;
+			    margin-left: auto;
+				border: 5px solid #00ff00;
+				box-shadow: 10px 10px 5px #888888;
+			}
+
+			.box form{
+				padding-top: 5vh;
+				padding-bottom: 5vh;
+				padding-left: 1vw;
+				padding-right: 1vw;
+
+
+				margin: 0 auto;
+			}
+
+			.box img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+
+			#header {
+				position: fixed;
+				margin-top: -3vh;
+				width: 99vw;
+				height: 8vh;
+				background-color: #00ff00;
+				clear: both;
+				font-family: Verdana, sans-serif;
+				font-size: 14px;
+				text-align: center;
+				color: #ffffff;
+			}
+
+			#header p {
+				color: black;
+				position: relative;
+				margin-top: 3.5vh;
+
+			}
+		</style>
+		<title></title>
+	</head>
+	<body style="background-image:url(http://www.download-free-wallpaper.com/img2/kekehzijyoljskajgges.jpg);">
+			
+	
+		<div id="header">
+			<p>Ecomind Login Page</p>
+		</div>
+		
+		<div class="box">
+			<img src="logo.png"/>
+
+			<form action="action_page.php">
+				Email:<br>
+				<input type="text" name="email" value="">
+				<br>
+				<br>Password:<br>
+				<input type="text" name="password" value="">
+				<br><br>
+				<input type="submit" value="Submit">
+				<input type="submit" value="Register">
+			</form> 
+		</div>
+
+		
+	</body>
+</html>
