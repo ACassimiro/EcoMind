@@ -48,6 +48,25 @@ function create_user_post(socket, req) {
 
 }
 
+function requestLogin(socket, req) {
+	console.log("Aqui");
+	var message_to_client = {};
+		
+	if (req.message !== null && req.message !== undefined) {
+		database['users'].check(req.message.email, req.message.password, function (err, user) {
+            if (err || !user) {
+                console.error('database.check: Could not authenticate user. err:', err);
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log('database.check: User ', req.message.email, " was authenticated", user);
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+	}
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'registration':
@@ -56,6 +75,9 @@ function requestListener(socket, req) {
         case 'createPost':
             create_user_post(socket, req);
             break;
+        case 'login':
+        	requestLogin(socket, req);
+        	break;
         default:
             return false;
     }

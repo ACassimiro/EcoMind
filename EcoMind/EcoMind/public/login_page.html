@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>  
+        
 		<style>
 			div {
 				border-radius: 10px;
@@ -74,20 +77,73 @@
 		</div>
 		
 		<div class="box">
-			<img src="logo.png"/>
+			<img src="images/ecomindlogo.png"/>
 
 			<form action="action_page.php">
 				Email:<br>
-				<input type="text" name="email" value="">
+				<input type="text" name="email" id="loginEmail" value="">
 				<br>
 				<br>Password:<br>
-				<input type="text" name="password" value="">
+				<input type="text" name="password" id="loginPassword" value="">
 				<br><br>
-				<input type="submit" value="Submit">
-				<input type="submit" value="Register">
+				<input type="submit" id="loginSubmit" value="Submit">
+				<a href="registration.html">Register</a>
 			</form> 
 		</div>
-
 		
+		<script type="text/javascript">
+            var socket = io.connect("/"); 
+
+            socket.on("message",function(message){  
+                /*
+                    When server sends data to the client it will trigger "message" event on the client side , by 
+                    using socket.on("message") , one cna listen for the ,message event and associate a callback to 
+                    be executed . The Callback function gets the dat sent from the server 
+                */
+                message = JSON.parse(message);
+                console.log(message); /*converting the data into JS object */
+                if (message.data) {
+                    location.href = "home.html";
+                } else {
+                    alert("There was a problem obtaining your credentials. Try again.");
+                }
+
+                $('#loginEmail').val('');
+                $('#loginPassword').val('');
+                 /*appending the data on the page using Jquery */
+            });
+
+            $(function(){
+                $('#loginSubmit').click(function(){ /*listening to the button click using Jquery listener*/
+                    var data = { /*creating a Js ojbect to be sent to the server*/ 
+                        action_type: "login",
+                        http_type: "POST",
+                        message: {
+                            email: $('#loginEmail').val(),
+                            password: $('#loginPassword').val(),
+                        }, 
+                        user_id: undefined
+                                
+                    };
+
+                	/*
+                    data['message']['preferences'] = [];
+                    $('#reg_preferences input:checked').each( function () {
+                        data['message']['preferences'].push($(this).attr('name'));
+                    });
+                    */
+                    
+                    socket.send(JSON.stringify(data)); 
+                    /*Data can be sent to server very easily by using socket.send() method 
+                    The data has to be changed to a JSON before sending
+                                          it (JSON.stringify() does this job )*/
+                    /* This triggers a message event on the server side 
+                    and the event handler obtains the data sent */ 
+ 
+                    //Emptying the text box value using jquery 
+ 
+                });
+            });
+         </script>
 	</body>
 </html>

@@ -26,7 +26,7 @@ module.exports = function () {
         },
 
         check: function (email, pass, callback) {
-            users.findOne({ _id: email, pass: pass, active: true}, callback);
+            users.findOne({ _id: email, pass: pass}, callback);
         },
         
         getUser: function (email, callback) {
@@ -44,7 +44,7 @@ module.exports = function () {
 
         updateUser: function (email, fields) {
             users.update({ _id: email }, {$set: fields}, {safe: true}, callback);
-        }
+        },
 
         getList: function (filter, callback) {
             users.find(filter, {_id: 1}).toArray(callback);
