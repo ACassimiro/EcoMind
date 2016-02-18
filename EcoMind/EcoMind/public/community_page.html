@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="icon" href="images/favicon_ecomind.ico">
+
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
+
+    <script src="js/client.js"></script>
+
+    <title>Ecomind</title>
+
+
+
 <style>
 #header {
     background-color:#81F79F;
@@ -23,6 +45,52 @@
 </head>
 <body>
 
+<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
+    <div id="userEmailID" style="display: none;">admin@gmail.com</div>
+
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home.html">Ecomind</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="profile_page.html">User Profile</a></li>
+            <li><a href="news.html">News</a></li>
+            <!--<li><a href="#community">Community</a></li>-->
+            <li class="active"><a href="community_page.html">Community</a></li>
+          </ul>
+
+          <ul class ="nav navbar-nav navbar-center">
+             <li>
+              <form action="action_page.php">
+                <input type="text" name="search">
+                <input type ="submit">
+              </form>
+            </li>
+          </ul>
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <!--<li><a href="../navbar/">Default</a></li>
+            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li> -->
+            <li><a href="login_page.html">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+
 <h1>ABOUT US</h1>
 <div>
 <img src="images/heloisa.png" alt="user image" width="250" height="250" style="float:left" border=3px hspace=20>
@@ -38,27 +106,19 @@
 
 <h1>GUIDELINES</h1>
 <div class="boxed">
-		<ol>
-			<li>No harassing other users</li>
-			<li>No swearing or posting inappropriate or leude material</li>
-			<li>Treat everybody with respect</li>
-			<li>Do not use this website as a way to exchange goods or services</li>
-		</ol>
-	</div>
+        <ol>
+            <li>No harassing other users</li>
+            <li>No swearing or posting inappropriate or leude material</li>
+            <li>Treat everybody with respect</li>
+            <li>Do not use this website as a way to exchange goods or services</li>
+        </ol>
+    </div>
 <h1>HELP</h1>
 <div class="boxed">
 <p>If you have questions/inquiries, please email us at speerbetsy@gmail.com or fill out the contact sheet below</p>
 </div>
 <h1>CONTACT US</h1>
 <h4>Name</h4>
-<
-
-
-
-
-
-
-
 
 </body>
 </html>
