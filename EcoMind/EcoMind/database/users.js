@@ -54,20 +54,20 @@ module.exports = function () {
             users.findOne({ email: email}, callback);
         },
 
-        addFan: function (fan_email, idol_email, callback) {
-            relationship.insert({"fan": fan_email, "idol": idol_email}, callback);
+        addFan: function (fan_id, idol_id, callback) {
+            relationship.insert({"fan": fan_id, "idol": idol_id}, callback);
         },
 
-        findFanList: function (idol_email, callback) {
-            relationship.find({"idol": idol_email}, {"fan": 1, "_id": 0, "idol": 0}).toArray(callback);
+        findFanList: function (idol_id, callback) {
+            relationship.find({"idol": idol_id}, {"fan": 1, "_id": 0, "idol": 0}).toArray(callback);
         },
 
-        findIdolsList: function (fan_email, callback) {
-            relationship.find({"fan": fan_email}, {"idol": 1, "_id": 0, "fan": 0}).toArray(callback);
+        findIdolsList: function (fan_id, callback) {
+            relationship.find({"fan": fan_id}, {"idol": 1, "_id": 0, "fan": 0}).toArray(callback);
         },
 
         addUserProgress: function (email, ecological_footprint, callback) {
-            progress.insert({"email": userId, "timestamp": new Date(), "ecological_footprint": ecological_footprint }, callback)
+            progress.insert({"userId": userId, "timestamp": new Date(), "ecological_footprint": ecological_footprint }, callback)
         }
 
     };
