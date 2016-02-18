@@ -125,3 +125,28 @@ function createEcoInformationForm(info) {
     });
 
 }
+
+function becomeFanOfOtherUser(){
+    var socket = io.connect("/"); 
+
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "becomeAFan",
+        http_type: "POST",
+        message: {idol: $($("#userEmailID")[0]).html();}, 
+        user_id: $($("#userEmailID")[0]).html();  // session here  
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.data) {
+           //Change Become a Fan Button to IDOL something like this
+        } else {
+            
+        }
+
+    });
+}

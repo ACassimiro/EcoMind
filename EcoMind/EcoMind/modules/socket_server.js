@@ -49,7 +49,6 @@ function create_user_post(socket, req) {
 }
 
 function requestLogin(socket, req) {
-	console.log("Aqui");
 	var message_to_client = {};
 		
 	if (req.message !== null && req.message !== undefined) {
@@ -65,6 +64,24 @@ function requestLogin(socket, req) {
             }
         });
 	}
+}
+
+function becomeAFan(socket, req) {
+    var message_to_client = {};
+        
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].addFan(req.user_id, req.message.idol, function (err, user) {
+            if (err || !user) {
+                console.error('database.addFan: Could not add idol to user. err:', err);
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log('database.addFan: User ', req.user_id, " added ", req.message.idol, " as his idol");
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    }
 }
 
 function getEcoInformationQuestions(socket, req) {
@@ -86,6 +103,8 @@ function requestListener(socket, req) {
         case 'getEcoInformationQuestions':
             getEcoInformationQuestions(socket, req);
             break;
+        case 'becomeAFan':
+            becomeAFan(socket, req);
         default:
             return false;
     }
