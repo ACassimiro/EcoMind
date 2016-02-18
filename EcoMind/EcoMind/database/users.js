@@ -16,26 +16,26 @@ module.exports = function () {
                 if (err) {
                     callback(err, undefined);
                 } else if (!obj) {
-                    users.insert({ _id: email, pass: pass, name: name, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
+                    users.insert({email: email, pass: pass, name: name, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
                 } else {
                     callback({err: 'User email already in use'}, undefined);
                 }
             };
 
-            users.findOne({_id: email}, _userNotFound_then_add);
+            users.findOne({email: email}, _userNotFound_then_add);
         },
 
         check: function (email, pass, callback) {
-            users.findOne({ _id: email, pass: pass}, callback);
+            users.findOne({ email: email, pass: pass}, callback);
         },
         
         getUser: function (email, callback) {
-            users.findOne({_id: email}, callback);
+            users.findOne({email: email}, callback);
         },
 
         editPassword: function (email, new_pass, callback) {
             if (typeof user === 'string' && typeof new_pass === 'string' && new_pass !== '') {
-                users.update({ _id: email }, {$set: { pass: new_pass }}, {safe: true}, callback);
+                users.update({email: email }, {$set: { pass: new_pass }}, {safe: true}, callback);
             } else {
                 callback(null, null);
             }
@@ -43,15 +43,15 @@ module.exports = function () {
 
 
         updateUser: function (email, fields) {
-            users.update({ _id: email }, {$set: fields}, {safe: true}, callback);
+            users.update({ email: email }, {$set: fields}, {safe: true}, callback);
         },
 
         getList: function (filter, callback) {
-            users.find(filter, {_id: 1}).toArray(callback);
+            users.find(filter, {email: 1}).toArray(callback);
         },
 
         findOne: function (email, callback) {
-            users.findOne({ _id: email}, callback);
+            users.findOne({ email: email}, callback);
         },
 
         addFan: function (fan_email, idol_email, callback) {
