@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
+		<link rel="icon" href="images/favicon_ecomind.ico">
+    	<title>Ecomind</title>
 		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>  
+		<link href="css/general.css" rel="stylesheet">
+		
         
 		<style>
 			div {
@@ -15,57 +20,10 @@
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				background-size: cover;
-			}
-
-
-			.box {
-				position: fixed;
-				margin-top: 15vh;
-				display: inline-block;
-				height: auto;
-				width: 13vw;
-				right: 0;
-			    left: 0;
-			    margin-right: auto;
-			    margin-left: auto;
-				border: 5px solid #00ff00;
-				box-shadow: 10px 10px 5px #888888;
-			}
-
-			.box form{
-				padding-top: 5vh;
-				padding-bottom: 5vh;
-				padding-left: 1vw;
-				padding-right: 1vw;
-
-
-				margin: 0 auto;
-			}
-
-			.box img {
-				max-width: 100%;
-				max-height: 100%;
-			}
-
-			#header {
-				position: fixed;
-				margin-top: -3vh;
-				width: 99vw;
-				height: 8vh;
-				background-color: #00ff00;
-				clear: both;
-				font-family: Verdana, sans-serif;
-				font-size: 14px;
-				text-align: center;
-				color: #ffffff;
-			}
-
-			#header p {
-				color: black;
-				position: relative;
-				margin-top: 3.5vh;
 
 			}
+
+			
 		</style>
 		<title></title>
 	</head>
@@ -77,18 +35,20 @@
 		</div>
 		
 		<div class="box">
-			<img src="images/ecomindlogo.png"/>
+			<img src="images/ecomindlogo.png" width="300" height="300" />
 
 			<form action="action_page.php">
-				Email:<br>
+				<div class="formfields">
+				Email<br>
 				<input type="text" name="email" id="loginEmail" value="">
 				<br>
-				<br>Password:<br>
-				<input type="text" name="password" id="loginPassword" value="">
+				<br>Password<br>
+				<input type="password" name="password" id="loginPassword" value="">
 				<br><br>
+			</div>
 				<input type="submit" id="loginSubmit" value="Submit">
-				<a href="registration.html">Register</a>
 			</form> 
+			<button onclick="location.href = 'registration.html';">Register</button>
 		</div>
 		
 		<script type="text/javascript">

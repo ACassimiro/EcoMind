@@ -71,3 +71,57 @@ function addPollPostOption(trigger) {
 	$("#pollPostOptions").append("<input type='radio' name='poll_options' value='"+newValue+"'>"+newValue+"<br/>");
 
 }
+
+function initEcoInfoForm() {
+    var socket = io.connect("/"); 
+
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getEcoInformationQuestions",
+        http_type: "GET"
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.data) {
+           createEcoInformationForm(message.data);
+        } else {
+            alert("We had a problem, please reload the page.");
+        }
+
+    });
+}
+
+
+/*
+[{
+    question:xxx
+    type: number/radio
+    unit: pound
+    options: ifradio
+    ecological_field: 
+}]
+
+*/
+function createEcoInformationForm(info) {
+    var formHTML = "";
+
+    info.forEach(function (e) {
+        formHTML += e.question + " ";
+        if (e.type === "number") {
+            formHTML +=   "<input type='text' name='" + e.ecological_field + "' />" + e.unit+" <br/>"
+        } else if (e.type === "radio") {
+            formHTML += "<div id='"+ e.id_field + "'>";
+            e.options.forEach(function (opt) {
+                formHTML +=   "<input type='radio' name='" + opt + "' />" + opt +" <br/>"
+            });
+            formHTML += "</div>";
+        }
+
+        $("#ecoInfoForm").html(formHTML);
+    });
+
+}

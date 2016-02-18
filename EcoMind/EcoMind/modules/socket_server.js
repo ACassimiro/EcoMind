@@ -1,4 +1,5 @@
 var database = require('./database.js');
+var ecoInfo = require('./../ecoInformationQuestions.json');
 
 var formidable = require('formidable');
 var url = require('url');
@@ -26,7 +27,6 @@ function registration(socket, req) {
 
 function create_user_post(socket, req) {
     var message_to_client = {};
-
       
     if (req.message !== null && req.message !== undefined) {
         var options = null;
@@ -67,6 +67,11 @@ function requestLogin(socket, req) {
 	}
 }
 
+function getEcoInformationQuestions(socket, req) {
+    var message_to_client = {data: ecoInfo.questions};
+    socket.send(JSON.stringify(message_to_client));
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'registration':
@@ -78,6 +83,9 @@ function requestListener(socket, req) {
         case 'login':
         	requestLogin(socket, req);
         	break;
+        case 'getEcoInformationQuestions':
+            getEcoInformationQuestions(socket, req);
+            break;
         default:
             return false;
     }

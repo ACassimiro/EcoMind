@@ -1,0 +1,68 @@
+{	
+	"questions": [
+	{
+		"question":"Amount of Water wasted in a month:",
+     	"type": "number",
+     	"unit": "galons",
+     	"ecological_field": "water" 
+    },
+    {
+    	"question":"Amount of Electricity wasted per hour:",
+     	"type": "number",
+     	"unit": "KWh",
+     	"ecological_field": "electricity" 
+    },
+     {
+    	"question":"Do you recycle trash?",
+     	"type": "radio",
+     	"options":["Yes", "No"],
+     	"ecological_field": "trash" ,
+     	"id_field": "recycle_trash_radio"
+    },
+    {
+    	"question":"What is the amount of trash that is produced in a week approximately?",
+     	"type": "number",
+     	"unit": "Pounds",
+     	"ecological_field": "trash" 
+    },
+     {
+    	"question":"The amount of food loss and waste in a week approximately:",
+     	"type": "number",
+     	"unit": "Pounds",
+     	"ecological_field": "food waste" 
+    },
+    {
+    	"question":"Do you normally drive a car?",
+     	"type": "radio",
+     	"options":["Yes", "No"],
+     	"ecological_field": "car usage",
+     	"id_field": "car_usage_radio" 
+    },
+    {
+    	"question":"How many days in a week?",
+     	"type": "number",
+     	"unit": "Day(s)",
+     	"ecological_field": "car usage" 
+    },
+    {
+    	"question":"How many hours per day?",
+     	"type": "number",
+     	"unit": "Hour(s)",
+     	"ecological_field": "car usage" 
+    },
+    {
+    	"question":"How many days in a week?",
+     	"type": "number",
+     	"unit": "Day(s)",
+     	"ecological_field": "car usage" 
+    },
+    {
+    	"question":"What type of fuel do you use?",
+     	"type": "number",
+     	"unit": "",
+     	"ecological_field": "car usage" 
+    }
+
+
+	]
+}
