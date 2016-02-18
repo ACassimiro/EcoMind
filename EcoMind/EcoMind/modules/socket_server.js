@@ -58,6 +58,7 @@ function requestLogin(socket, req) {
                 message_to_client['data'] = false;
                 socket.send(JSON.stringify(message_to_client));
             } else {
+                message_to_client['client_id'] = user._id;
                 console.log('database.check: User ', req.message.email, " was authenticated", user);
                 message_to_client['data'] = true;
                 socket.send(JSON.stringify(message_to_client));
