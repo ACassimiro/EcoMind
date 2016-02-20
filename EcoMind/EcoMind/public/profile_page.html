@@ -74,11 +74,7 @@
 
 </style>
 </head>
-<body>
-
-	<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
-    <div id="userEmailID" style="display: none;">admin@gmail.com</div>
-
+<body onload="createUserProfile()">
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -120,17 +116,11 @@
       </div>
     </nav>
 
-	<div id="header">
-	<h2>My Profile</h2>
-	</div> 
-
 	<div id="nav">
-		<div>
-		<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>
-		</div>
+		<div id="profileUserImage"></div>
 		
 		<div>
-		<p>Spock<br>
+		<img src="images/config.png" width="10" height="10" onclick="DoSomething();" /> edit
 		</div>
 		
 		<div class="title">
@@ -146,13 +136,8 @@
 	</div>
 	
 	<div id="section">
-	<p>
-		<strong>NAME:</strong> Spock <br>
-		<strong>AGE:</strong> 83 <br>
-		<strong>GENDER:</strong> Male <br>
-		<strong>COUNTRY:</strong> United States <br>
-		<strong>EMAIL:</strong> llap@rocketmail.com <br>
-	</p>
+    <div id="profileUserInfo"></div>
+	
 	
 	<div class="title">
 		<h1>Action Feed</h1>

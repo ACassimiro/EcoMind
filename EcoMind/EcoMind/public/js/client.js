@@ -1,6 +1,7 @@
-
+var socket = io.connect("/"); 
 
 function submitUserPost() {
+
 	var ecological_field = [];
 	$("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
         ecological_field.push($(this).val());
@@ -26,9 +27,6 @@ function submitUserPost() {
         });
     }
     console.log(message);
-
-    var socket = io.connect("/"); 
-
     socket.on("message",function(response){  
 
         response = JSON.parse(response);
@@ -75,7 +73,6 @@ function addPollPostOption(trigger) {
 }
 
 function initEcoInfoForm(userID) {
-    var socket = io.connect("/"); 
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getEcoInformationQuestions",
@@ -155,8 +152,6 @@ function submitEcoInfoForm() {
         question8: $("#question8").val(),
         question9: $("#question9").val()
     };
-    
-    var socket = io.connect("/"); 
 
     socket.on("message",function(response){  
         var formHTML = "";
@@ -186,7 +181,7 @@ function submitEcoInfoForm() {
 }
 
 function becomeFanOfOtherUser(){
-    var socket = io.connect("/"); 
+    
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "becomeAFan",
@@ -208,4 +203,45 @@ function becomeFanOfOtherUser(){
         }
 
     });
+}
+
+function createUserProfile() {
+    console.log("createUserProfile");
+    var userId = document.cookie.split("=")[1];
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.user !== null && message.user !== undefined) {
+           fillUserProfile(message.user);
+        } else {
+            alart("Sorry. We could not load the user. Try again.");
+        }
+
+    });
+}
+
+function fillUserProfile(user) {
+    console.log(user);
+    // Change user image
+    $("#profileUserImage").html('<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>'); 
+/*
+    <p>
+        <strong>NAME:</strong> Spock <br>
+        <strong>AGE:</strong> 83 <br>
+        <strong>GENDER:</strong> Male <br>
+        <strong>COUNTRY:</strong> United States <br>
+        <strong>EMAIL:</strong> llap@rocketmail.com <br>
+    </p>*/
+
+
+
 }

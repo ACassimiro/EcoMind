@@ -36,12 +36,28 @@ function submitEcoInfoForm(socket, req) {
                 message_to_client['data'] = false;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-                console.log('database.addUserProgress: User ', req.message.email, " progress was updated");
+                console.log('database.addUserProgress: User ', req.user_id, " progress was updated");
                 message_to_client['data'] = true;
                 socket.send(JSON.stringify(message_to_client));
             }
         });
     } 
+}
+
+function getUserInfo(socket, req) {
+    var message_to_client = {};
+    if (req.user_id !== null && req.user_id !== undefined) {
+        database['users'].getUserId(req.user_id, function (err, user) {
+            if (err || !user) {
+                console.error('database.getUserId: Could not find user id. err:', err);
+                message_to_client['user'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                message_to_client['user'] = user;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    }
 }
 
 function create_user_post(socket, req) {
@@ -127,6 +143,8 @@ function requestListener(socket, req) {
             becomeAFan(socket, req);
         case 'submitEcoInfoForm':
             submitEcoInfoForm(socket, req);
+        case 'getUserInfo':
+            getUserInfo(socket, req);
         default:
             return false;
     }
