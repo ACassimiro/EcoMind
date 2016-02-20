@@ -18,11 +18,30 @@ function registration(socket, req) {
             } else {
                 console.log('database.add: User ', req.message.email, " was successfully created", user);
                 message_to_client['data'] = true;
+                message_to_client['id'] = user.ops[0]._id;
                 socket.send(JSON.stringify(message_to_client));
             }
         });
     } 
 
+}
+
+function submitEcoInfoForm(socket, req) {
+    var message_to_client = {};
+    if (req.message !== null && req.message !== undefined) {
+        
+        database['users'].addUserProgress(req.user_id, req.message, function (err, progress) {
+            if (err || !progress) {
+                console.error('database.addUserProgress: Could not add user progress. err:', err);
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log('database.addUserProgress: User ', req.message.email, " progress was updated");
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    } 
 }
 
 function create_user_post(socket, req) {
@@ -106,6 +125,8 @@ function requestListener(socket, req) {
             break;
         case 'becomeAFan':
             becomeAFan(socket, req);
+        case 'submitEcoInfoForm':
+            submitEcoInfoForm(socket, req);
         default:
             return false;
     }

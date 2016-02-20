@@ -66,7 +66,7 @@ module.exports = function () {
             relationship.find({"fan": fan_id}, {"idol": 1, "_id": 0, "fan": 0}).toArray(callback);
         },
 
-        addUserProgress: function (email, ecological_footprint, callback) {
+        addUserProgress: function (userId, ecological_footprint, callback) {
             progress.insert({"userId": userId, "timestamp": new Date(), "ecological_footprint": ecological_footprint }, callback)
         }
 

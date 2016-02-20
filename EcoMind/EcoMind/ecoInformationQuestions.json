@@ -4,63 +4,66 @@
 		"question":"Amount of Water wasted in a month:",
      	"type": "number",
      	"unit": "galons",
-     	"ecological_field": "water" 
+     	"ecological_field": "water" ,
+        "flag": "question1"
     },
     {
     	"question":"Amount of Electricity wasted per hour:",
      	"type": "number",
      	"unit": "KWh",
-     	"ecological_field": "electricity" 
+     	"ecological_field": "electricity",
+        "flag": "question2" 
     },
      {
     	"question":"Do you recycle trash?",
      	"type": "radio",
      	"options":["Yes", "No"],
      	"ecological_field": "trash" ,
-     	"id_field": "recycle_trash_radio"
+     	"id_field": "recycle_trash_radio",
+        "flag": "question3"
     },
     {
     	"question":"What is the amount of trash that is produced in a week approximately?",
      	"type": "number",
      	"unit": "Pounds",
-     	"ecological_field": "trash" 
+     	"ecological_field": "trash" ,
+        "flag": "question4"
     },
      {
     	"question":"The amount of food loss and waste in a week approximately:",
      	"type": "number",
      	"unit": "Pounds",
-     	"ecological_field": "food waste" 
+     	"ecological_field": "food waste" ,
+        "flag": "question5"
     },
     {
     	"question":"Do you normally drive a car?",
      	"type": "radio",
      	"options":["Yes", "No"],
      	"ecological_field": "car usage",
-     	"id_field": "car_usage_radio" 
+     	"id_field": "car_usage_radio" ,
+        "flag": "question6"
     },
     {
     	"question":"How many days in a week?",
      	"type": "number",
      	"unit": "Day(s)",
-     	"ecological_field": "car usage" 
+     	"ecological_field": "car usage" ,
+        "flag": "question7"
     },
     {
     	"question":"How many hours per day?",
      	"type": "number",
      	"unit": "Hour(s)",
-     	"ecological_field": "car usage" 
-    },
-    {
-    	"question":"How many days in a week?",
-     	"type": "number",
-     	"unit": "Day(s)",
-     	"ecological_field": "car usage" 
+     	"ecological_field": "car usage" ,
+        "flag": "question8"
     },
     {
     	"question":"What type of fuel do you use?",
      	"type": "number",
      	"unit": "",
-     	"ecological_field": "car usage" 
+     	"ecological_field": "car usage" ,
+        "flag": "question9"
     }
 
 

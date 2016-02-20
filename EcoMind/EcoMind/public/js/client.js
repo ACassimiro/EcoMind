@@ -72,7 +72,7 @@ function addPollPostOption(trigger) {
 
 }
 
-function initEcoInfoForm() {
+function initEcoInfoForm(userID) {
     var socket = io.connect("/"); 
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
@@ -87,12 +87,22 @@ function initEcoInfoForm() {
         message = JSON.parse(message);
         console.log(message); /*converting the data into JS object */
         if (message.data) {
-           createEcoInformationForm(message.data);
+           createEcoInformationForm(message.data, userID);
         } else {
             alert("We had a problem, please reload the page.");
         }
 
     });
+}
+
+function showEcoFormPopUp(userID) {
+    initEcoInfoForm(userID);
+    event.preventDefault(); // disable normal link function so that it doesn't refresh the page
+    var docHeight = $(document).height(); //grab the height of the page
+    var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
+    $('.overlay-bg').show().css({'height' : docHeight}); //display your popup background and set height to the page height
+    $("#overlay-ecoform").show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
+
 }
 
 
@@ -106,24 +116,71 @@ function initEcoInfoForm() {
 }]
 
 */
-function createEcoInformationForm(info) {
-    var formHTML = "";
+function createEcoInformationForm(info, userID) {
+    var formHTML = "Your account was succesfully created. Please, fill the Eco-Information Form.<br/>" +
+        "<button onclick='location.href = \"login_page.html\"';>Cancel</button><br/><form>" +
+        "<div id='userID' style='display: none;'>" + userID + "</div>";
+
 
     info.forEach(function (e) {
         formHTML += e.question + " ";
         if (e.type === "number") {
-            formHTML +=   "<input type='text' name='" + e.ecological_field + "' />" + e.unit+" <br/>"
+            formHTML +=   "<input type='text' id='" + e.flag+ "' name='" + e.ecological_field + "' />" + e.unit+" <br/>"
         } else if (e.type === "radio") {
             formHTML += "<div id='"+ e.id_field + "'>";
             e.options.forEach(function (opt) {
-                formHTML +=   "<input type='radio' name='" + opt + "' />" + opt +" <br/>"
+                formHTML +=   "<input type='radio' id='" + e.flag+ "' name='" + e.id_field + "' value='" + opt+"'/>" + opt +" <br/>"
             });
             formHTML += "</div>";
         }
-
-        $("#ecoInfoForm").html(formHTML);
     });
 
+    formHTML += "</form><button onclick=\"submitEcoInfoForm()\">Submit</button>";   
+
+    $("#overlay-ecoform").html(formHTML);
+
+}
+
+function submitEcoInfoForm() {
+    var responses = {
+        question1: $("#question1").val(),
+        question2: $("#question2").val(),
+        question3: $($("input[type='radio'][name='recycle_trash_radio']:checked")[0]).val(),
+        question4: $("#question4").val(),
+        question5: $("#question5").val(),
+        question6: $($("input[type='radio'][name='car_usage_radio']:checked")[0]).val(),
+        question7: $("#question7").val(),
+        question8: $("#question8").val(),
+        question9: $("#question9").val()
+    };
+    
+    var socket = io.connect("/"); 
+
+    socket.on("message",function(response){  
+        var formHTML = "";
+
+        response = JSON.parse(response);
+        console.log(response); /*converting the data into JS object */
+        if (response.data) {
+            formHTML += "<p>Your Eco-Information was succesfully saved</p><button onclick=\"location.href = 'login_page.html';\">OK</button>";   
+        } else {
+            formHTML += "<p>We were not able to save your Eco-Information. Try it later</p><button onclick=\"location.href = 'login_page.html';\">OK</button>";   
+            alert("We were not able to create your post");
+        }
+
+        $("#overlay-ecoform").html(formHTML);
+    });
+
+
+
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "submitEcoInfoForm",
+        http_type: "POST",
+        message: responses, 
+        user_id: $("#userID").html()           
+    };
+    
+    socket.send(JSON.stringify(data)); 
 }
 
 function becomeFanOfOtherUser(){
