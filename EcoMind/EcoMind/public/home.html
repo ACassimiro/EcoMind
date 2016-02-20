@@ -61,7 +61,7 @@
           <ul class="nav navbar-nav navbar-right">
             <!--<li><a href="../navbar/">Default</a></li>
             <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li> -->
-            <li><a href="login_page.html">Logout</a></li>
+            <li><a id="logoutSubmit">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -179,7 +179,17 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
-	    alert(document.cookie);
+	    alert("Current user id :" + document.cookie);
+	    
+	    $(function(){
+            $('#logoutSubmit').click(function(){ /*listening to the button click using Jquery listener*/
+            	document.cookie = "client_id=;";
+            	alert("Current user id :" + document.cookie);
+            	location.href = "login_page.html";
+            	
+            });
+        });
+     </script>
     </script>
   </body>
 </html>

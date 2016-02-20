@@ -55,6 +55,7 @@
 		<script type="text/javascript">
             var socket = io.connect("/"); 
 
+            
             socket.on("message",function(message){  
                 /*
                     When server sends data to the client it will trigger "message" event on the client side , by 
