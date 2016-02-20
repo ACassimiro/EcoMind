@@ -64,7 +64,8 @@
                 message = JSON.parse(message);
                 console.log(message); /*converting the data into JS object */
                 if (message.data) {
-                	alert(message.client_id);
+                	document.cookie=("client_id=").concat(message.client_id);
+                	//alert(document.cookie);
                     location.href = "home.html";
                 } else {
                     alert("There was a problem obtaining your credentials. Try again.");

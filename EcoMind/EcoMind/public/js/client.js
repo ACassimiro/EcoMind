@@ -1,3 +1,5 @@
+
+
 function submitUserPost() {
 	var ecological_field = [];
 	$("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
