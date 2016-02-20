@@ -29,8 +29,12 @@ module.exports = function () {
             users.findOne({ email: email, pass: pass}, callback);
         },
         
-        getUser: function (email, callback) {
+        getUserEmail: function (email, callback) {
             users.findOne({email: email}, callback);
+        },
+
+        getUserId: function (userId, callback) {
+            users.findOne({_id: new mongo.ObjectID(userId)}, callback);
         },
 
         editPassword: function (email, new_pass, callback) {
