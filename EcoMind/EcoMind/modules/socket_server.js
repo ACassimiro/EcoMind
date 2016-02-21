@@ -60,7 +60,7 @@ function getUserInfo(socket, req) {
     }
 }
 
-function create_user_post(socket, req) {
+function createUserPost(socket, req) {
     var message_to_client = {};
       
     if (req.message !== null && req.message !== undefined) {
@@ -131,7 +131,7 @@ function requestListener(socket, req) {
             registration(socket, req);
             break;
         case 'createPost':
-            create_user_post(socket, req);
+            createUserPost(socket, req);
             break;
         case 'login':
         	requestLogin(socket, req);

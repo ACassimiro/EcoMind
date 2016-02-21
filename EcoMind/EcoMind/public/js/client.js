@@ -7,7 +7,7 @@ function submitUserPost() {
         ecological_field.push($(this).val());
     });	
     var type = $($("input[type='radio'][name='radio_user_post_type']:checked")[0]).val();
-    var user = $($("#userEmailID")[0]).html();
+    var user = document.cookie.split("=")[1];
 	var message = {
         user: user,
         type: type,
@@ -206,7 +206,6 @@ function becomeFanOfOtherUser(){
 }
 
 function createUserProfile() {
-    console.log("createUserProfile");
     var userId = document.cookie.split("=")[1];
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getUserInfo",
@@ -230,18 +229,22 @@ function createUserProfile() {
 }
 
 function fillUserProfile(user) {
-    console.log(user);
     // Change user image
     $("#profileUserImage").html('<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>'); 
-/*
-    <p>
-        <strong>NAME:</strong> Spock <br>
-        <strong>AGE:</strong> 83 <br>
-        <strong>GENDER:</strong> Male <br>
-        <strong>COUNTRY:</strong> United States <br>
-        <strong>EMAIL:</strong> llap@rocketmail.com <br>
-    </p>*/
 
+    var userInfo = "<h1>" + user.name + "</h1></br>"+
+                    "<p><strong>BIRTHDATE:</strong> " + user.birthdate+ "</br>" +
+                    "<strong>GENDER:</strong> " + user.gender+"</br>" +
+                    "<strong>EMAIL:</strong> " + user.email + "</br></p>";
+    $("#profileUserInfo").html(userInfo);
 
+    var userPreferences = "<ul>";
+    user.preferences.forEach(function (preference) {
+        userPreferences += "<li>" + preference + "</li>";
+    });
+
+    userPreferences += "</ul>"
+
+    $("#profileUserPreferences").html(userPreferences);
 
 }
