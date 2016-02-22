@@ -11,11 +11,6 @@ function getCookie() {
 
 }
 
-function checkLoginID(){
-	var cookie = getCookie();
-	
-}
-
 function removeECookie(key) {
     var obj = getCookie();
     var keys = Object.keys(obj);
