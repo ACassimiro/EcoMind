@@ -248,3 +248,27 @@ function fillUserProfile(user) {
     $("#profileUserPreferences").html(userPreferences);
 
 }
+
+function createIdolProfile() {
+    //var userId = document.cookie.split("=")[1]; //get idol id
+    var userId = null;
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.user !== null && message.user !== undefined) {
+           fillUserProfile(message.user);
+        } else {
+            alart("Sorry. We could not load the user. Try again.");
+        }
+
+    });
+}

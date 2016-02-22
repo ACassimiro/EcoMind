@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
+  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -29,35 +29,52 @@
     text-align:center;
     padding:5px;
 }
+
 #nav {
-    background-color:gray;
-    height:700px;
+    background-color:#aeaeae;
+    height:auto;
     width:2400px0px;
     float:left;
-    padding:5px;	      
+    padding:5px;   
+    margin-left: 5px;
 }
+
 #section {
-	line-height:300px
+  line-height:300px
     width:350px;
     float:left;
-    padding:10px 40px 10px 100px;	 	 
+    padding:10px 40px 10px 100px;    
 }
-#aside {
-    background-color:gray;
-    height:700px;
-    width:2400px0px;
+
+#profileButtons {
+  float:right;
+}
+
+#objectivesAchievements {
+    background-color:#aeaeae;
+    height:auto;
+    width: 250px;
     float:right;
-    padding:10px 40px 10px 100px;;	      
+    padding:5px;  
+    margin:5px;      
 }
+
 #footer {
     background-color:black;
     color:white;
     clear:both;
     text-align:center;
-   padding:5px;	 	 
+   padding:5px;    
 }
 .boxed {
-  border: 4px solid green ;
+  padding: 10px;
+  width:780px;
+}
+.userPost {
+  position: relative;
+  padding: 5px;
+  margin: 5px;  
+  background-color: #8bc4aa;
 }
 .boxedAction {
   border: 3px solid black;
@@ -68,17 +85,10 @@
   margin:20px 70px
 }
 
-.title {
-  margin:100px 0px 0px 0px;
-}
 
 </style>
 </head>
-<body>
-
-	<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
-    <div id="userEmailID" style="display: none;">admin@gmail.com</div>
-
+<body onload="createIdolProfile()">
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -120,79 +130,64 @@
       </div>
     </nav>
 
-	<div id="header">
-	<h2>My Profile</h2>
-	</div> 
-
-	<div id="nav">
-		<div>
-		<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>
-		</div>
-		
-		<div>
-		<p>Spock<br>
-		</div>
-		
-		<div class="title">
-		<h1>Preferences</h1>
-		</div>
-		
-		<div class="boxed">
-		<ul>
-			<li>Water</li>
-			<li>Electricity</li>
-		</ul>
-		</div>
-	</div>
-	
-	<div id="section">
-	<p>
-		<strong>NAME:</strong> Spock <br>
-		<strong>AGE:</strong> 83 <br>
-		<strong>GENDER:</strong> Male <br>
-		<strong>COUNTRY:</strong> United States <br>
-		<strong>EMAIL:</strong> llap@rocketmail.com <br>
-	</p>
-	
-	<div class="title">
-		<h1>Action Feed</h1>
-	</div>
-		
-	<div class="boxed">
-		<ul>
-			<li>
-				<div class="boxedAction">Kirk listed "Animal Rights" as a preference</div>
-			</li>
-			<li>
-				<div class="boxedAction">Scotty listed "Electricity" as a preference</div>
-			</li>
-		</ul>
-	</div>
-	</div>
-	
-	<div id="aside">
-		<p class="boxedFans">FANS LIST</p>
-		<p class="boxedFans">FANS</p>
-		
-		<div class="title">
-		<h3>Objectives and Achievements</h3>
-		</div>
-		<div class="boxed">
-		<ul>
-			<li>Saved 3 gallons</li>
-			<li>Reduced gas usage by 5%</li>
-		</ul>
-		</div>
-		
-	</div>
-	
-	<div id="footer">
-	Copyright © W3Schools.com
-	</div>
+  <div id="nav">
+    <div id="profileUserImage"></div>
+    
+    <div>
+    <img src="images/config.png" width="10" height="10" onclick="DoSomething();" /> edit
+    </div>
+    
+    <div class="title">
+    <h1>Preferences</h1>
+    </div>
+    
+    <div id="profileUserPreferences"></div>
+  </div>
+  
+  <div id="section">
+    <div id="profileButtons">
+      <button onClick="getFansList()">Fans List</button>
+      <button onClick="becomeFanOfOtherUser()">Become a fan</button>
+    </div>
+    <div id="profileUserInfo"></div>
+  
+  <div class="boxed">
+    <div class="title">
+      <h1>Action Feed</h1>
+    </div>
+      
+    
+      <div class="userPost">
+        <h3>Post1</h3>
+        <p>This is the body paragraph of the example of post. Keep in mind 
+          that this is just an example so do not care about what I am writing here. :)</p>
+          <img src="images/remove.png" alt="ecomind" style="width:10px;height:10px;">
+      </div>    
+      <div class="userPost">
+        <h3>Post2</h3>
+        <p>This is the body paragraph of the example of post. Keep in mind <br/>
+          that this is just an example so do not care about what I am writing here. :)</p>
+          <img src="images/remove.png" alt="ecomind" style="width:10px;height:10px;">
+      </div>  
+    </div>
+  </div>
+  
+  <div id="objectivesAchievements"> 
+    
+    <div class="title">
+    <h2>Objectives and Achievements</h2>
+    </div>
+    <div class="boxed">
+    <ul>
+      <li>Saved 3 gallons</li>
+      <li>Reduced gas usage by 5%</li>
+    </ul>
+    </div>
+    
+  </div>
 </body>
 </html>
 
 
 
-  
   
