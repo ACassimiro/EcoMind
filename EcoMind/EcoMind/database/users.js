@@ -61,6 +61,14 @@ module.exports = function () {
             relationship.insert({"fan": fan_id, "idol": idol_id}, callback);
         },
 
+        removeIdol: function (fan_id, idol_id, callback) {
+            relationship.remove({"fan": fan_id, "idol": idol_id}, callback);
+        },
+
+        findIdol: function (fan_id, idol_id, callback) {
+            relationship.findOne({"fan": fan_id, "idol": idol_id}, callback);
+        },
+
         findFanList: function (idol_id, callback) {
             relationship.find({"idol": idol_id}, {"fan": 1, "_id": 0, "idol": 0}).toArray(callback);
         },

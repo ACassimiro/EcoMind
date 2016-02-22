@@ -120,9 +120,59 @@ function becomeAFan(socket, req) {
     }
 }
 
+function removeIdol(socket, req) {
+    var message_to_client = {};
+        
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].removeIdol(req.user_id, req.message.idol, function (err, user) {
+            if (err || !user) {
+                console.error('database.removeIdol: Could not remove idol to user. err:', err);
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log('database.removeIdol: User ', req.user_id, " removed ", req.message.idol, " as his idol");
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    }
+}
+
+function findIdol(socket, req) {
+    var message_to_client = {};
+        
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].findIdol(req.user_id, req.message.idol, function (err, user) {
+            if (err || !user) {
+                message_to_client['data'] = false;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                message_to_client['data'] = true;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    }
+}
+
 function getEcoInformationQuestions(socket, req) {
     var message_to_client = {data: ecoInfo.questions};
     socket.send(JSON.stringify(message_to_client));
+}
+
+function getUserPosts(socket, req) {
+    var message_to_client = {};
+        
+    if (req.user_id !== null && req.user_id !== undefined) {
+        database['news_posts'].getUserPosts(req.user_id, 10, function (err, posts) {
+            if (err || !posts) {
+                message_to_client['posts'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                message_to_client['posts'] = posts;
+                socket.send(JSON.stringify(message_to_client));
+            }
+        });
+    }
 }
 
 function requestListener(socket, req) {
@@ -141,10 +191,22 @@ function requestListener(socket, req) {
             break;
         case 'becomeAFan':
             becomeAFan(socket, req);
+            break;
+        case 'removeIdol':
+            removeIdol(socket, req);
+            break;
+        case 'findIdol':
+            findIdol(socket, req);
+            break;
         case 'submitEcoInfoForm':
             submitEcoInfoForm(socket, req);
+            break;
         case 'getUserInfo':
             getUserInfo(socket, req);
+            break;
+        case 'getUserPosts':
+            getUserPosts(socket, req);
+            break;
         default:
             return false;
     }

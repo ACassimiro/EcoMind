@@ -13,7 +13,7 @@ function getCookie() {
 
 function removeECookie(key) {
     var obj = getCookie();
-    var keys = Object.keys(myArray);
+    var keys = Object.keys(obj);
     var count = 0;
     var newCookie= ""
     keys.forEach(function (k) {
@@ -37,7 +37,7 @@ function submitUserPost() {
         ecological_field.push($(this).val());
     });	
     var type = $($("input[type='radio'][name='radio_user_post_type']:checked")[0]).val();
-    var user = document.cookie.split("=")[1];
+    var user = getCookie().client_id;
 	var message = {
         user: user,
         type: type,
@@ -56,16 +56,17 @@ function submitUserPost() {
             
         });
     }
-    console.log(message);
+
     socket.on("message",function(response){  
 
         response = JSON.parse(response);
-        console.log(response); /*converting the data into JS object */
         if (response.data) {
             alert("Your post was succesfully created");
         } else {
             alert("We were not able to create your post");
         }
+        $("#home_user_post_title").val('');
+        $("#home_user_post_body").val('');
     });
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
@@ -114,7 +115,6 @@ function initEcoInfoForm(userID) {
     socket.on("message", function(message){  
 
         message = JSON.parse(message);
-        console.log(message); /*converting the data into JS object */
         if (message.data) {
            createEcoInformationForm(message.data, userID);
         } else {
@@ -188,7 +188,6 @@ function submitEcoInfoForm() {
         var formHTML = "";
 
         response = JSON.parse(response);
-        console.log(response); /*converting the data into JS object */
         if (response.data) {
             formHTML += "<p>Your Eco-Information was succesfully saved</p><button onclick=\"location.href = 'login_page.html';\">OK</button>";   
         } else {
@@ -217,8 +216,8 @@ function becomeFanOfOtherUser(){
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "becomeAFan",
         http_type: "POST",
-        message: {idol: $($("#userEmailID")[0]).html()}, 
-        user_id: $($("#userEmailID")[0]).html() // session here  
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
     };
 
     socket.send(JSON.stringify(data)); 
@@ -226,15 +225,37 @@ function becomeFanOfOtherUser(){
     socket.on("message", function(message){  
 
         message = JSON.parse(message);
-        console.log(message); /*converting the data into JS object */
         if (message.data) {
-           //Change Become a Fan Button to IDOL something like this
-        } else {
-            
-        }
+           $("#becomeFanButton").html("IDOL");
+           $("#becomeFanButton").attr("onclick","removeIdol()");
+        } 
 
     });
 }
+
+function removeIdol(){
+    
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "removeIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.data) {
+           $("#becomeFanButton").html("Become a fan");
+           $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        } 
+
+    });
+}
+
 
 function createUserProfile() {
 
@@ -252,7 +273,6 @@ function createUserProfile() {
     socket.on("message", function(message){  
 
         message = JSON.parse(message);
-        console.log(message); /*converting the data into JS object */
         if (message.user !== null && message.user !== undefined) {
            fillUserProfile(message.user);
         } else {
@@ -281,13 +301,42 @@ function fillUserProfile(user) {
 
     $("#profileUserPreferences").html(userPreferences);
 
+    getUserPosts(user._id);
+
+
+}
+
+function getUserPosts(id) {
+
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserPosts",
+        http_type: "GET",
+        user_id: id
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message);
+        var htmlposts = "";
+        message.posts.forEach(function(post) {
+        htmlposts += '<div class="userPost">' +
+                '<h3>' + post.title + '</h3>' +
+                '<p>' + post.description + '</p>' +
+                '</div>' 
+        });
+        $("#postsArea").html(htmlposts);
+
+    });
 }
 
 function createIdolProfile() {
     var socket = io.connect("/"); 
     //var userId = document.cookie.split("=")[1]; //get idol id
     var userId = getCookie().idol_id;
-    console.log(userId);
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getUserInfo",
         http_type: "GET",
@@ -301,12 +350,43 @@ function createIdolProfile() {
         message = JSON.parse(message);
         console.log(message); /*converting the data into JS object */
         if (message.user !== null && message.user !== undefined) {
-           fillUserProfile(message.user);
+            var idol = checkIdol();
+            fillUserProfile(message.user);
         } else {
             alart("Sorry. We could not load the user. Try again.");
         }
 
     });
+}
+
+function checkIdol() {
+
+    var socket = io.connect("/"); 
+
+    var data = { 
+        action_type: "findIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+
+        if (message.data) {
+            $("#becomeFanButton").html("IDOL");
+            $("#becomeFanButton").attr("onclick","removeIdol()");
+        } else {
+            $("#becomeFanButton").html("Become a fan");
+            $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        }
+
+    });
+
+    
 }
 
 function viewIdolProfile(id) {

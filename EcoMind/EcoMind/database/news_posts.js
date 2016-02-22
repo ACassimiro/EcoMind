@@ -28,6 +28,17 @@ module.exports = function () {
                 
         },
 
+        getUserPosts: function (user, limit, callback) {
+            var cursor = news_posts.find({user: user});
+                
+            if (limit !== null && limit !== undefined) {
+                cursor.limit(limit);
+            }
+
+            cursor.toArray(callback);
+        
+        },
+
         getList: function (filter, callback) {
             news_posts.find(filter).toArray(callback);
         },
