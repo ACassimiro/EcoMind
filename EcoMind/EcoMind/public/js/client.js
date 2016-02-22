@@ -1,7 +1,37 @@
-var socket = io.connect("/"); 
+function getCookie() {
+    var obj = {};
+    var str = document.cookie;
+        str = str.split(',');
+    for (var i = 0; i < str.length; i++) {
+        var tmp = str[i].split('=');
+        obj[tmp[0]] = tmp[1];
+    }
+
+    return obj;
+
+}
+
+function removeECookie(key) {
+    var obj = getCookie();
+    var keys = Object.keys(myArray);
+    var count = 0;
+    var newCookie= ""
+    keys.forEach(function (k) {
+        if (k !== key) {
+            if (count > 0) {
+                newCookie += ","
+            }
+            newCookie += k + "=" + obj[k];
+            count++;
+        }
+        
+    });
+
+    document.cookie = newCookie;
+}
 
 function submitUserPost() {
-
+    var socket = io.connect("/"); 
 	var ecological_field = [];
 	$("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
         ecological_field.push($(this).val());
@@ -73,7 +103,7 @@ function addPollPostOption(trigger) {
 }
 
 function initEcoInfoForm(userID) {
-
+    var socket = io.connect("/"); 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getEcoInformationQuestions",
         http_type: "GET"
@@ -141,6 +171,7 @@ function createEcoInformationForm(info, userID) {
 }
 
 function submitEcoInfoForm() {
+    var socket = io.connect("/"); 
     var responses = {
         question1: $("#question1").val(),
         question2: $("#question2").val(),
@@ -182,7 +213,7 @@ function submitEcoInfoForm() {
 
 function becomeFanOfOtherUser(){
     
-
+    var socket = io.connect("/"); 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "becomeAFan",
         http_type: "POST",
@@ -206,7 +237,10 @@ function becomeFanOfOtherUser(){
 }
 
 function createUserProfile() {
-    var userId = document.cookie.split("=")[1];
+
+    var userId = getCookie().client_id;
+
+    var socket = io.connect("/"); 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getUserInfo",
         http_type: "GET",
@@ -250,8 +284,10 @@ function fillUserProfile(user) {
 }
 
 function createIdolProfile() {
+    var socket = io.connect("/"); 
     //var userId = document.cookie.split("=")[1]; //get idol id
-    var userId = null;
+    var userId = getCookie().idol_id;
+    console.log(userId);
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getUserInfo",
         http_type: "GET",
@@ -271,4 +307,11 @@ function createIdolProfile() {
         }
 
     });
+}
+
+function viewIdolProfile(id) {
+    removeECookie("idol_id");
+    document.cookie+=(",idol_id=").concat(id);
+    location.href = 'profile_page_idol.html';
+    
 }
