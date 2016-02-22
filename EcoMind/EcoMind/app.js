@@ -5,6 +5,7 @@ var express = require('express');
 var config = require('./config.json');
 var database = require('./modules/database.js');
 var socket_server = require('./modules/socket_server.js');
+var email_sender = require('./modules/email_sender.js');
 var staticContent = require('./modules/static_content.js');
 var io;
  
@@ -38,6 +39,7 @@ function requestHandler(socket){
         data = JSON.parse(data);
 
         socket_server.requestListener(socket, data);
+        email_sender.requestListener(socket, data);
 
     });
 }

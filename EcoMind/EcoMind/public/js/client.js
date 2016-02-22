@@ -400,3 +400,26 @@ function viewIdolProfile(id) {
     location.href = 'profile_page_idol.html';
     
 }
+
+function sendEmail() {
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "sendEmail",
+        message: {
+            name: $("#nameContact").val(),
+            email: $("#emailContact").val(),
+            msg: $("#messageContact").val()
+        }, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        // Do the return of sendEmail
+
+    });
+
+}
