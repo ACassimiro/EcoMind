@@ -15,16 +15,28 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
-
+	
+	<script src="js/posts.js"></script>
     <script src="js/client.js"></script>
-    <script src="js/posts.js"></script>
+    
+    <script>
+            $(document).ready(function() {
+                $(window).scroll(function() {
+    				//alert($('body').height() + " : " + $(window).height() + " : " + $(window).scrollTop());
+                	if ($('body').height() - 30 <= ($(window).height() + $(window).scrollTop())) {
+                        alert('Bottom reached!');
+                        getPostList();
+                	}
+                });
+            });    
+        </script>
 
     <title>Ecomind</title>
   </head>
 
   <body>
 
-<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
+	<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
     <div id="userEmailID" style="display: none;">admin@gmail.com</div>
 
 
@@ -114,7 +126,7 @@
 
     <hr class="featurette-divider">
 
-    <div class="container">
+      <div class="container"> 
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -172,6 +184,9 @@
 
     </div> <!-- /container -->
 
+	<div id="postContainer">
+	
+	</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

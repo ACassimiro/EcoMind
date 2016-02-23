@@ -159,6 +159,21 @@ function getEcoInformationQuestions(socket, req) {
     socket.send(JSON.stringify(message_to_client));
 }
 
+
+function getPostList(socket, req) {
+	var message_to_client = {};
+    
+    database['news_posts'].getList({}, function (err, posts) {
+        if (err || !posts) {
+            message_to_client['posts'] = null;
+            socket.send(JSON.stringify(message_to_client));
+        } else {
+            message_to_client['posts'] = posts;
+            socket.send(JSON.stringify(message_to_client));
+        }
+    });
+}
+
 function getUserPosts(socket, req) {
     var message_to_client = {};
         
@@ -206,6 +221,9 @@ function requestListener(socket, req) {
             break;
         case 'getUserPosts':
             getUserPosts(socket, req);
+            break;
+        case 'getPostList':
+        	getPostList(socket, req);
             break;
         default:
             return false;
