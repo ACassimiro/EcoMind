@@ -177,29 +177,34 @@ function getUserPosts(socket, req) {
 }
 
 function getFansList(socket, req) {
-    console.log("getFansList");
     var message_to_client = {};
         
     if (req.user_id !== null && req.user_id !== undefined) {
-        database['users'].findFanList(req.user_id, function (err, fans) {
+        database['users'].findFansList(req.user_id, function (err, fans) {
             if (err || !fans) {
                 message_to_client['fans'] = null;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-                console.log(fans);
+                var fansList = [];
                 async.each(fans, function(fan, callback) {
+
                     database['users'].getUserId(fan.fan, function (err, completeFan) {
                         if (err || !completeFan) {
                             callback();
                         } else{
-                            callback(completeFan);
+                            fansList.push(completeFan);
+                            callback();
                         }
                     });
-                }, function(complete){ 
-                    message_to_client['fans'] = complete;
-                    socket.send(JSON.stringify(message_to_client));
+                }, function(){ 
+                    
+                    if (fansList.length == fans.length) {
+                        message_to_client['fans'] = fansList;
+                        socket.send(JSON.stringify(message_to_client));
+                    }
                 });    
             }
+            
         });
     }
 }
@@ -213,20 +218,26 @@ function getIdolsList(socket, req) {
                 message_to_client['idols'] = null;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-                console.log(idols);
+                var idolsList = [];
                 async.each(idols, function(idol, callback) {
+
                     database['users'].getUserId(idol.idol, function (err, completeIdol) {
                         if (err || !completeIdol) {
                             callback();
                         } else{
-                            callback(completeIdol);
+                            idolsList.push(completeIdol);
+                            callback();
                         }
                     });
-                }, function(complete){ 
-                    message_to_client['idols'] = complete;
-                    socket.send(JSON.stringify(message_to_client));
+                }, function(){ 
+                    
+                    if (idolsList.length == fans.length) {
+                        message_to_client['idols'] = idolsList;
+                        socket.send(JSON.stringify(message_to_client));
+                    }
                 });    
             }
+            
         });
     }
 }

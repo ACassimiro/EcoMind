@@ -69,12 +69,12 @@ module.exports = function () {
             relationship.findOne({"fan": fan_id, "idol": idol_id}, callback);
         },
 
-        findFanList: function (idol_id, callback) {
-            relationship.find({"idol": idol_id}, {"fan": 1, "_id": 0, "idol": 0}).toArray(callback);
+        findFansList: function (idol_id, callback) {
+            relationship.find({"idol": idol_id}).toArray(callback);
         },
 
         findIdolsList: function (fan_id, callback) {
-            relationship.find({"fan": fan_id}, {"idol": 1, "_id": 0, "fan": 0}).toArray(callback);
+            relationship.find({"fan": fan_id}).toArray(callback);
         },
 
         addUserProgress: function (userId, ecological_footprint, callback) {

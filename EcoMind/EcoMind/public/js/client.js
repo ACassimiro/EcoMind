@@ -447,7 +447,7 @@ function getIdolsList() {
 
     var socket = io.connect("/"); 
     var data = { 
-        action_type: "getFansList",
+        action_type: "getIdolsList",
         user_id: getCookie().client_id 
     };
 
@@ -456,6 +456,7 @@ function getIdolsList() {
     socket.on("message", function(message) {  
 
         message = JSON.parse(message);
+        console.log(message);
 
     });
 
