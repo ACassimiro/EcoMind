@@ -130,7 +130,7 @@ function showEcoFormPopUp(userID) {
     var docHeight = $(document).height(); //grab the height of the page
     var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
     $('.overlay-bg').show().css({'height' : docHeight}); //display your popup background and set height to the page height
-    $("#overlay-ecoform").show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
+    $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
 
 }
 
@@ -166,7 +166,7 @@ function createEcoInformationForm(info, userID) {
 
     formHTML += "</form><button onclick=\"submitEcoInfoForm()\">Submit</button>";   
 
-    $("#overlay-ecoform").html(formHTML);
+    $(".overlay-ecoform").html(formHTML);
 
 }
 
@@ -417,4 +417,51 @@ function sendEmail() {
 
     });
 
+}
+
+function getFansList() {
+    var socket = io.connect("/"); 
+    var data = { 
+        action_type: "getFansList",
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+        console.log(message);
+
+    });
+
+    event.preventDefault(); 
+    var docHeight = $(document).height();
+    var scrollTop = $(window).scrollTop();
+    $('.overlay-bg').show().css({'height' : docHeight});
+    $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'}); 
+
+}
+
+function getIdolsList() {
+
+    var socket = io.connect("/"); 
+    var data = { 
+        action_type: "getFansList",
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+
+    });
+
+    event.preventDefault(); 
+    var docHeight = $(document).height();
+    var scrollTop = $(window).scrollTop();
+    $('.overlay-bg').show().css({'height' : docHeight});
+    $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'}); 
 }

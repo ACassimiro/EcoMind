@@ -5,6 +5,7 @@ var formidable = require('formidable');
 var url = require('url');
 var http = require('http');
 var socketio = require('socket.io');
+var async = require('async');
 
 function registration(socket, req) {
     var message_to_client = {};
@@ -175,6 +176,61 @@ function getUserPosts(socket, req) {
     }
 }
 
+function getFansList(socket, req) {
+    console.log("getFansList");
+    var message_to_client = {};
+        
+    if (req.user_id !== null && req.user_id !== undefined) {
+        database['users'].findFanList(req.user_id, function (err, fans) {
+            if (err || !fans) {
+                message_to_client['fans'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log(fans);
+                async.each(fans, function(fan, callback) {
+                    database['users'].getUserId(fan.fan, function (err, completeFan) {
+                        if (err || !completeFan) {
+                            callback();
+                        } else{
+                            callback(completeFan);
+                        }
+                    });
+                }, function(complete){ 
+                    message_to_client['fans'] = complete;
+                    socket.send(JSON.stringify(message_to_client));
+                });    
+            }
+        });
+    }
+}
+
+function getIdolsList(socket, req) {
+    var message_to_client = {};
+        
+    if (req.user_id !== null && req.user_id !== undefined) {
+        database['users'].findIdolsList(req.user_id, function (err, idols) {
+            if (err || !idols) {
+                message_to_client['idols'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                console.log(idols);
+                async.each(idols, function(idol, callback) {
+                    database['users'].getUserId(idol.idol, function (err, completeIdol) {
+                        if (err || !completeIdol) {
+                            callback();
+                        } else{
+                            callback(completeIdol);
+                        }
+                    });
+                }, function(complete){ 
+                    message_to_client['idols'] = complete;
+                    socket.send(JSON.stringify(message_to_client));
+                });    
+            }
+        });
+    }
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'registration':
@@ -207,6 +263,10 @@ function requestListener(socket, req) {
         case 'getUserPosts':
             getUserPosts(socket, req);
             break;
+        case 'getFansList':
+            getFansList(socket, req);
+        case 'getIdolsList':
+            getIdolsList(socket, req);
         default:
             return false;
     }
