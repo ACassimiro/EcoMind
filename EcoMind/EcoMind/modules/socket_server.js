@@ -231,6 +231,20 @@ function getIdolsList(socket, req) {
     }
 }
 
+function getPostList(socket, req) {
+	var message_to_client = {};
+    
+    database['news_posts'].getList({}, function (err, posts) {
+        if (err || !posts) {
+            message_to_client['posts'] = null;
+            socket.send(JSON.stringify(message_to_client));
+        } else {
+            message_to_client['posts'] = posts;
+            socket.send(JSON.stringify(message_to_client));
+        }
+    });
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'registration':
@@ -265,8 +279,13 @@ function requestListener(socket, req) {
             break;
         case 'getFansList':
             getFansList(socket, req);
+            break;
         case 'getIdolsList':
             getIdolsList(socket, req);
+            break;
+        case 'getPostList':
+        	getPostList(socket, req);
+            break;
         default:
             return false;
     }
