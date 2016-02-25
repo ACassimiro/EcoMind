@@ -39,9 +39,10 @@ module.exports = function () {
         
         },
 
-        getList: function (filter, callback) {
-            news_posts.find(filter).toArray(callback);
-        },
+        getList: function (filter, number, callback) {
+    	    news_posts.find(filter).skip(number + 5).limit(5).toArray(callback);
+    	},
+
 
         findOne: function (id, callback) {
             news_posts.findOne({ _id: id}, callback);

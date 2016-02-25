@@ -333,6 +333,36 @@ function getUserPosts(id) {
     });
 }
 
+function getPostList(number){
+	var cookie = getCookie();
+	var socket = io.connect("/"); 
+	
+	//alert("Inside the function");
+	
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getPostList",
+        http_type: "GET",
+        number: number,
+        user_id: undefined
+    };
+
+    socket.send(JSON.stringify(data)); 
+    
+    socket.on("message", function(message){
+        message = JSON.parse(message);
+        console.log(message);
+        var htmlposts = "";
+        message.posts.forEach(function(post) {
+        htmlposts += '<div class="jumbotron">' +
+                '<h3>' + post.title + '</h3>' +
+                '<p>' + post.description + '</p>' +
+                '</div>' 
+        });
+        $("#postContainer").append(htmlposts);
+
+    });
+}
+
 function createIdolProfile() {
     var socket = io.connect("/"); 
     //var userId = document.cookie.split("=")[1]; //get idol id
