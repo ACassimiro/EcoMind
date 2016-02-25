@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
     <meta charset="utf-8">
@@ -7,49 +8,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
-    <link rel="icon" href="images/favicon_ecomind.ico">
-
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/navbar-static-top.css" rel="stylesheet">
-
-    <script src="js/ie-emulation-modes-warning.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
-
-    <script src="js/client.js"></script>
-
-    <title>Ecomind</title>
 
 
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-#header {
-    background-color:#81F79F;
-    color:green;
-    text-align:center;
-    padding:5px;
-}
-#nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;     
-}
-.boxed {
-  border: 4px solid green ;
-}
-</style>
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<body>
 
-<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
-    <div id="userEmailID" style="display: none;">admin@gmail.com</div>
-
-
-    <!-- Static navbar -->
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+	    <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -89,63 +71,128 @@
       </div>
     </nav>
 
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1>Community Page</h1>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <!-- About Section -->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+				<h2>ABOUT US</h2>
+				<div>
+					<img src="images/heloisa.png" alt="user image" width="150" height="150" border=3px hspace=10>
+					<img src="images/jay.png" alt="user image" width="150" height="150" border=3px hspace=10>
+					<img src="images/betsy.png" alt="user image" width="150" height="150" border=3px hspace=10>
+					<img src="images/aellison.png" alt="user image" width="150" height="150" border=3px hspace=10>
+				</div>
+				<div>
+					<p>We are computer science students at Syracuse University.  This website was created as our junior design project</p>
+					</div>
+            </div>
+        </div>
+    </section>
 
-<h1>ABOUT US</h1>
-<div>
-<img src="images/heloisa.png" alt="user image" width="250" height="250" style="float:left" border=3px hspace=20>
-<img src="images/jay.png" alt="user image" width="250" height="250" style="float:left" border=3px hspace=20>
-<img src="images/betsy.png" alt="user image" width="250" height="250" style="float:left" border=3px hspace=20>
-<img src="images/aellison.png" alt="user image" width="250" height="250" style="float:left" border=3px hspace=20>
-</div>
+    <!-- Guidelines Section -->
+    <section id="download" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Guidelines</h2>
+                    <div>
+						<h4>No harassing other users</h4>
+						<h4>No swearing or posting inappropriate or leude material</h4>
+						<h4>Treat everybody with respect</h4>
+						<h4>Do not use this website as a way to exchange goods or services</h4>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>	
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="boxed">
-<p>We are computer science students at Syracuse University.  This website was created as our junior design project</p>
-</div>
-
-<h1>GUIDELINES</h1>
-<div class="boxed">
-        <ol>
-            <li>No harassing other users</li>
-            <li>No swearing or posting inappropriate or leude material</li>
-            <li>Treat everybody with respect</li>
-            <li>Do not use this website as a way to exchange goods or services</li>
-        </ol>
-    </div>
-<h1>HELP</h1>
-<div class="boxed">
-<p>If you have questions/inquiries, please email us at speerbetsy@gmail.com or fill out the contact sheet below</p>
-</div>
-<h1>CONTACT US</h1>
- <form class="form-horizontal" role="form" method="post" action="index.php">
-    <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="nameContact" name="name" placeholder="First & Last Name" value="">
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+				<h1>CONTACT US</h1>
+				<p> Please contact us with any inquiries, tips, or to report another user</p>
+				<form class="form-horizontal" role="form" method="post" action="index.php">
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="nameContact" name="name" placeholder="First & Last Name" value="">
             
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="emailContact" name="email" placeholder="example@domain.com" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+						<input type="email" class="form-control" id="emailContact" name="email" placeholder="example@domain.com" value="">
+						
             
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="message" class="col-sm-2 control-label">Message</label>
-        <div class="col-sm-10">
-            <textarea class="form-control" id="messageContact" rows="4" name="message"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="message" class="col-sm-2 control-label">Message</label>
+						<div class="col-sm-10">
+						<textarea class="form-control" rows="4" name="messageContact"></textarea>
             
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-2">
+						<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+						<button class="btn btn-primary" onclick="sendEmail()">Send</button>
+						</div>
+ 
+
+						
+						</div>
+					</div>
+					<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<?php echo $result; ?>    
+					</div>
+					</div>
+				</form>
+            </div>
         </div>
-    </div>
-    </form>
-    <div class="form-group">
-        <div class="col-sm-10 col-sm-offset-2">
-            <button class="btn btn-primary" onclick="sendEmail()">Send</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>EcoMind 2016</p>
         </div>
-    </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
 
 </body>
+
 </html>
