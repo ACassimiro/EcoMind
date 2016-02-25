@@ -431,16 +431,36 @@ function getFansList() {
     socket.on("message", function(message) {  
 
         message = JSON.parse(message);
-        console.log(message);
+        displayHTMLOverlay(createUsersList(message.fans, "Fans List"));
 
     });
+
+     
+
+}
+
+function displayHTMLOverlay(htmlText) {
+    $(".overlay-ecoform").html(htmlText);
 
     event.preventDefault(); 
     var docHeight = $(document).height();
     var scrollTop = $(window).scrollTop();
     $('.overlay-bg').show().css({'height' : docHeight});
-    $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'}); 
+    $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'});
+}
 
+function createUsersList(users, title) {
+    var usersHTML = "<div id='usersList'><h3>" + title + "</h3>";
+    users.forEach(function (user) {
+        usersHTML += "<div class='user'><img src='images/heloisa.png' alt='"+ user.name +"' title='" + user.name + "' width='60' height='60'" + 
+            " align='left' hspace='20' onclick='viewIdolProfile(\"" + user._id +"\");'/>"+
+            "<h4>" +user.name+ "</h4> </div>";
+    });
+
+    usersHTML += "</div>";
+    console.log(usersHTML);
+
+    return usersHTML;
 }
 
 function getIdolsList() {
@@ -456,7 +476,7 @@ function getIdolsList() {
     socket.on("message", function(message) {  
 
         message = JSON.parse(message);
-        console.log(message);
+        displayHTMLOverlay(createUsersList(message.idols, "Idols List"));
 
     });
 
