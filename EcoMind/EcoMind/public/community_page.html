@@ -123,12 +123,34 @@
     </section>	
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-				<h1>CONTACT US</h1>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>// <![CDATA[
+	$(document).ready(function(){
+    var from,to,subject,text;
+    $("#send_email").click(function(){      
+        to=$("#to").val();
+        subject=$("#subject").val();
+        text=$("#content").val();
+        $("#message").text("Sending E-mail...Please wait");
+        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
+        if(data=="sent")
+        {
+            $("#message").empty().html("
+
+Email is been sent at "+to+" . Please check inbox !
+
+");
+        }
+
+});
+    });
+});
+</script>
+
+		<h1>CONTACT US</h1>
 				<p> Please contact us with any inquiries, tips, or to report another user</p>
-				<form class="form-horizontal" role="form" method="post" action="index.php">
+			<div id="container">
+				<form class="form-horizontal" role="form" method="post">
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Name</label>
 						<div class="col-sm-10">
@@ -154,22 +176,19 @@
 					<div class="form-group">
 						<div class="col-sm-10 col-sm-offset-2">
 						<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
-						<button class="btn btn-primary" onclick="sendEmail()">Send</button>
+						<!--<button class="btn btn-primary" id="send_email" onclick="sendEmail()">Send</button>-->
 						</div>
  
 
 						
-						</div>
+					</div>
 					</div>
 					<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						<?php echo $result; ?>    
-					</div>
+					
 					</div>
 				</form>
-            </div>
-        </div>
-    </section>
+			</div>
+
 
     <!-- Footer -->
     <footer>

@@ -7,7 +7,7 @@
 	{
 		margin: 0px;
 		padding: 0px;
-		background: #ad8667 url('images/bg.jpg');
+		background: #14ab26 url('images/bg.jpg');
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 12pt;
 		font-weight: 400;
@@ -30,7 +30,8 @@
 	ol, ul
 	{
 		padding: 0;
-		list-style: none;
+		margin-left: 10%;
+		margin-bottom: 90%;
 	}
 	
 	p
@@ -51,11 +52,20 @@
 	{
 		text-decoration: none;
 	}
+	.boxed {
+	padding: 10px;
+	width:780px;
+	}
 	
 	.container
 	{
 		margin: 0em auto;
 		width: 1200px;
+	}
+	
+	.basics {
+			margin-right: 10%;
+		
 	}
 	
 /*********************************************************************************/
@@ -115,7 +125,7 @@
 	{
 		overflow: hidden;
 		display: block;
-		padding: 2.80em 0em;
+		padding: 2.8em 0em;
 		border-top: 1px solid #D1CFCE;
 	}
 	
@@ -132,7 +142,7 @@
 	
 	ul.style1 h3
 	{
-		padding: 1.2em 0em 1em 0em;
+		padding: 0em 0em 0em 0em;
 		letter-spacing: 0.10em;
 		text-transform: uppercase;
 		font-size: 1.2em;
@@ -255,7 +265,7 @@
 
 	.title
 	{
-		margin-bottom: 3em;
+		margin-bottom: 1em;
 	}
 
 	.title h2
@@ -402,7 +412,7 @@
 
 	#sidebar
 	{
-		float: right;
+		float: left;
 		width: 500px;
 		padding: 50px;
 	}
