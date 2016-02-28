@@ -449,6 +449,32 @@ function sendEmail() {
 
 }
 
+function openEditUserInfo() {
+    displayHTMLOverlay(createEditUserInfo());
+}
+
+function createEditUserInfo(title) {
+    var form = "<div id='edituserform'><h3>Edit User Info</h3>" +
+        "<div class='edituserformitem'><h4>Edit Password</h4>" +
+        "<input type='password' placeholder='old password' size=30>" +
+        "<input type='password' placeholder='new password' size=30>" +
+        "<input type='password' placeholder='repeat new password' size=30>" +
+        "<button onclick='editPassword(this);'>Edit</button></div>"+
+        "<div class='edituserformitem'><h4>Edit Name</h4>" +
+        "<input type='text' placeholder='new name' size=93>" +
+        "<button onclick='editUserName(this);'>Edit</button></div>" +
+        "<div class='edituserformitem'><h4>Edit Preferences (Choose all the ones you want to see)</h4>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='water'> Water<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='electricity'> Electricity<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
+         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
+        "</div>";
+
+    return form;
+}
+
 function getFansList(type) {
     var user = "";
     if (type === "user") {

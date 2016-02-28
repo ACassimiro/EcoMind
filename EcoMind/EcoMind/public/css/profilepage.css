@@ -46,3 +46,24 @@ a.boxclose{
     content: "×";
 
 }
+
+#editbox {
+	padding: 5px;
+}
+
+#editbox img {
+	margin: 5px;
+}
+
+#editbox a {
+	text-decoration: none;
+	color: #72716e;
+}
+
+.edituserform h3 {
+	color:#72716e;
+}
+
+.edituserformitem h4 {
+	color:#72716e;
+}
