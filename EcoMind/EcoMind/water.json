@@ -1,0 +1,67 @@
+{	
+	"news": [
+	{	
+	    "title": "Unsafe Levels in tap water not limited to Flint",
+	    "description": "How the water crisis in Flint is also a threat to the rest of the nation",
+	    "url": "http://www.nytimes.com/2016/02/09/us/regulatory-gaps-leave-unsafe-lead-levels-in-water-nationwide.html?ref=earth",
+		"date": "02/08/2016"
+	},
+	{
+		"title": "Seas are rising at fastest rate in last 28 centuries",
+	    "description": "Because of human activity, tidal flooding is becoming a major problem",
+	    "url": "http://www.nytimes.com/2016/02/23/science/sea-level-rise-global-warming-climate-change.html?ref=earth",
+		"date": "02/22/2016"
+	},
+	{	
+	    "title": "Senators reach bipartisan funding deal for Flint water crisis",
+	    "description": "A bipartisan group of Senators on Wednesday reached a deal that would provide funding to help cities like Flint, Michigan, replace aging lead pipes that have contributed to public health crises in several states",
+	    "url": "http://www.chicagotribune.com/news/nationworld/ct-flint-water-crisis-funding-20160224-story.html",
+		"date": "02/24/2016"
+	},
+	{	
+	    "title": "Colorado rain-barrel bill passes house committee Monda",
+	    "description": "A new bill was passed which specifies the restrictions of collecting rain water in barrels",
+	    "url": "http://www.denverpost.com/news/ci_29548106/colorado-rainbarrel-bill-passes-house-committee-monday",
+		"date": "02/22/2016"
+	},
+	{	
+	    "title": "These 4 things need to happen to end California's drought",
+	    "description": "Environmental scenarios which could take California out of its historic drought",
+	    "url": "http://news.nationalgeographic.com/2016/01/160107-california-drought-snowpack-el-nino-rains/",
+		"date": "01/07/2016"
+	},
+	{	
+	    "title": "The importance of teaching children water safety",
+	    "description": "Former Olympian's program gives youngsters solid foundation in the basics",
+	    "url": "http://articles.latimes.com/2013/aug/30/health/la-he-0831-five-questions-krayzelberg-20130831",
+		"date": "08/30/2013"
+	},
+	{
+		"title": "Californians cut water usage by 27% in June, but officials remain wary",
+	    "description": "California suffers from water shortage despite conservation efforts",
+	    "url": "http://www.latimes.com/local/lanow/la-me-ln-water-conservation-20150729-story.html",
+		"date": "07/30/2015"
+	},
+	{	
+	    "title": "Torrential rain -- up to 20 inches in spots -- pummels much of Texas",
+	    "description": "Much of Texas was deluged Saturday by pounding, relentless rains causing dangerous flooding that washed away cars, a train and, possibly, one person",
+	    "url": "http://www.cnn.com/2015/10/24/us/texas-oklahoma-arkansas-lousiana-flooding/",
+		"date": "10/24/2015"
+	},
+	{	
+	    "title": "South Carolina flooding: Dams breached, more trouble ahead",
+	    "description": "The rain may have stopped, but South Carolina is grappling with a host of new concerns. Dam breaks",
+	    "url": "http://www.cnn.com/2015/10/06/us/south-carolina-flooding/",
+		"date": "10/07/2015"
+	},
+	{	
+	    "title": "Conserving water, one drop at a time",
+	    "description": "Tips on how to reduce water usage and protect the environment",
+	    "url": "http://energy.gov/energysaver/articles/conserving-water-one-drop-time",
+		"date": "05/27/2015"
+	}
+	
+	
+	
+]	
+}

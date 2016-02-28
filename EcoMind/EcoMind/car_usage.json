@@ -1,0 +1,67 @@
+{	
+	"news": [
+	{	
+	    "title": "Supreme Court’s Blow to Emissions Efforts May Imperil Paris Climate Accord",
+	    "description": "The Supreme Court’s decision to halt the carrying out of President Obama’s climate change regulation could weaken the international global warming accord reached in Paris climate diplomats say",
+	    "url": "http://www.nytimes.com/2016/02/11/us/politics/carbon-emissions-paris-climate-accord.html?ref=earth&_r=0",
+		"date": "02/10/2016"
+	},
+	{
+		"title": "EPA accuses VW of cheating on emission rules",
+	    "description": "Diesel cars from Volkswagen and Audi cheated on clean air rules by including software that made the cars' emissions look cleaner than they actually were",
+	    "url": "http://money.cnn.com/2015/09/18/autos/epa-cheating-vw/index.html",
+		"date": "09/22/2015"
+	},
+	{	
+	    "title": "Cars, wood-fired pizza ovens restricted as Italy fights pollution",
+	    "description": "Rome and Milan have imposed bans on cars, with one small town near Naples prohibiting wood-fired pizza ovens, as Italian authorities seek to combat air-pollution",
+	    "url": "http://www.chicagotribune.com/news/nationworld/ct-italy-pollution-car-ban-20151228-story.html",
+		"date": "12/28/2015"
+	},
+	{	
+	    "title": "Study: Lawn mowing equals car trip",
+	    "description": "Spending an hour behind a roaring lawn mower can spew nearly the same amount of oily pollution into the air as a 100-mile car trip",
+	    "url": "http://abcnews.go.com/Technology/story?id=98532",
+		"date": "05/31/2015"
+	},
+	{	
+	    "title": "The dirty truth about clean diesel",
+	    "description": "Volkswagen persuaded consumers it had created a new generation of so-called clean diesel cars — until investigators discovered that defeat devices were concealing the fact that its vehicles emitted up to 40 times the permitted levels of pollutants during regular use",
+	    "url": "http://www.nytimes.com/2016/01/03/opinion/sunday/the-dirty-truth-about-clean-diesel.html",
+		"date": "01/02/2016"
+	},
+	{	
+	    "title": "Cars, trucks, and air pollution",
+	    "description": "In 2013, transportation contributed more than half of the carbon monoxide and nitrogen oxides, and almost a quarter of the hydrocarbons emitted into our air",
+	    "url": "http://www.ucsusa.org/clean-vehicles/vehicles-air-pollution-and-human-health/cars-trucks-air-pollution",
+		"date": "12/05/2014"
+	},
+	{
+		"title": "Dirty downside to driverless cars revealed in study",
+	    "description": "Driverless cars better be able to refuel themselves. They’ll consume more energy than cars with drivers",
+	    "url": "http://www.bloomberg.com/news/articles/2015-03-11/dirty-downside-to-driverless-cars-revealed-in-study",
+		"date": "03/11/2015"
+	},
+	{	
+	    "title": "Study: Most car related air pollution comes from only 25% of cars",
+	    "description": "A recent study conducted by University of Toronto researchers found that just 25 percent of cars they measured produced about 90 percent of the total traffic-related air pollution",
+	    "url": "http://www.boston.com/cars/news-and-reviews/2015/05/14/study-most-car-related-air-pollution-comes-from-only-cars/VKpC0ppQdBRTppWB40ghqO/story.html",
+		"date": "05/14/2015"
+	},
+	{	
+	    "title": "Germany seeks more e-car usage",
+	    "description": "Electric cars are to be used by parliamentarians in Berlin next year in a move billed as part of Germany's switch to climate-friendly mobility",
+	    "url": "http://www.dw.com/en/germany-seeks-more-e-car-usage/a-19013933",
+		"date": "01/31/2016"
+	},
+	{	
+	    "title": "Are Uber and Lyft helping or hurting the environment?",
+	    "description": "Berkeley researchers will get unprecedented access to data from both companies and riders to analyze if on-demand ride services are climate friends or foes",
+	    "url": "http://www.theguardian.com/environment/2016/jan/21/uber-lyft-helping-hurting-environment-climate-change",
+		"date": "01/02/2016"
+	}
+	
+	
+	
+]	
+}

@@ -1,0 +1,66 @@
+{	
+	"news": [
+	{	
+	    "title": "How free electricity helped dig $9 billion dollar hole in Puerto Rico",
+	    "description": "How Puerto Rico's power authority dug them into debt",
+	    "url": "http://www.nytimes.com/2016/02/02/business/dealbook/puerto-rico-power-authoritys-debt-is-rooted-in-free-electricity.html",
+		"date": "02/01/2016"
+	},
+	{
+		"title": "Chicago energy firm invenergy to provide wind power to Google",
+	    "description": "Invenergy, a Chicago-based renewable energy company, will partner with Google to harness wind power to support the tech giant’s data center operations",
+	    "url": "http://www.chicagotribune.com/bluesky/originals/ct-invenergy-wind-power-deal-google-bsi-20160128-story.html",
+		"date": "01/28/2016"
+	},
+	{	
+	    "title": "Electricity may spark medical treatment",
+	    "description": "Scientists worldwide are exploring the potential of devices dubbed electroceuticals to treat conditions from heart failure and asthma to diabetes, incontinence, and arthritis",
+	    "url": "https://www.bostonglobe.com/metro/2015/09/27/devices-spark-movement-treat-disease-with-electricity/pdVGw650XIS8aM6ZxrVquN/story.html",
+		"date": "09/28/2015"
+	},
+	{	
+	    "title": "Garbage truck hits utility pole, knocking power to nearly 1k San Jose homes",
+	    "description": "About 850 homes are without power Thursday evening in East San Jose after a garbage truck struck a utility pole",
+	    "url": "http://sanfrancisco.cbslocal.com/2015/12/24/garbage-truck-hits-utility-pole-knocking-power-to-nearly-1k-san-jose-homes/",
+		"date": "12/24/2015"
+	},
+	{	
+	    "title": "Future cities may harvest energy from human footsteps",
+	    "description": "Kinetic energy from footsteps can be harvested into other forms of energy like electricity",
+	    "url": "http://www.cnn.com/2014/12/30/tech/innovation/tomorrow-transformed-energy-harvesting/",
+		"date": "01/07/2015"
+	},
+	{	
+	    "title": "Prepare to pay more for electricity in Texas",
+	    "description": "The low electricity prices enjoyed by most Texas consumers can’t last forever",
+	    "url": "http://www.forbes.com/sites/uhenergy/2015/12/09/prepare-to-pay-more-for-electricity-in-texas/#13b59833d687",
+		"date": "12/09/2015"
+	},
+	{
+		"title": "By 2050, utilities will no longer charge for electricity",
+	    "description": "By the year 2050, electricity generating industries will no longer be charging for electricity",
+	    "url": "http://www.forbes.com/sites/jeffmcmahon/2016/01/03/by-2050-utilities-will-no-longer-charge-for-electricity-un-official/#788b5f625710",
+		"date": "01/03/2016"
+	},
+	{	
+	    "title": "The way humans get electricity is about to change forever",
+	    "description": "The renewable energy boom is here",
+	    "url": "http://www.bloomberg.com/news/articles/2015-06-23/the-way-humans-get-electricity-is-about-to-change-forever",
+		"date": "06/23/2015"
+	},
+	{	
+	    "title": "Bill Gates: World will deliver clean energy breakthrough within 15 years",
+	    "description": "Tech billionaire predicts innovation will deliver the clean energy the world desperately needs, but only if young people, businesses, and governments step up to the plate",
+	    "url": "http://www.theguardian.com/environment/2016/feb/24/bill-gates-world-will-deliver-clean-energy-breakthrough-within-15-years",
+		"date": "02/24/2016"
+	},
+	{	
+	    "title": "Nuclear Power and Global Warming",
+	    "description": "Nuclear power provides low-carbon electricity, though its long-term role in combatting climate change depends on overcoming economic and safety hurdles",
+	    "url": "http://www.ucsusa.org/nuclear-power/nuclear-power-and-global-warming",
+		"date": ""
+	}
+	
+	
+]	
+}

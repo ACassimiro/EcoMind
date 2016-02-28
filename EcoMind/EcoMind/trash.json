@@ -1,0 +1,66 @@
+{	
+	"news": [
+	{	
+	    "title": "San Francisco declares homeless tent city a health hazard",
+	    "description": "An inspection found that people in tents along Division Street are living among garbage and other unsanitary conditions",
+	    "url": "http://www.nytimes.com/aponline/2016/02/23/us/ap-us-san-francisco-tent-city.html",
+		"date": "02/23/2016"
+	},
+	{
+		"title": "International Space Station astronauts give 1.5 tons of trash the boot",
+	    "description": "A pair of NASA astronauts released a capsule loaded with 1.5 tons of trash Friday as the space station soared over Bolivia",
+	    "url": "http://www.chicagotribune.com/news/nationworld/ct-space-station-trash-release-20160219-story.html",
+		"date": "02/19/2016"
+	},
+	{	
+	    "title": "Former governor Dukakis still battling litter",
+	    "description": "Michael Dukakis, the 1988 Democratic presidential nominee is famous for picking up litter on his morning walks",
+	    "url": "https://www.bostonglobe.com/metro/2015/07/15/former-governor-dukakis-still-battling-litter/7BjbTBhXZxn8oBquuW022J/story.html",
+		"date": "07/15/2015"
+	},
+	{	
+	    "title": "Trash left by December floods still littering river city",
+	    "description": "Floodwater from the Christmas rains that drenched Washington has subsided, but it left behind trash that still litters the banks of Decatur’s parks near waterways",
+	    "url": "http://www.washingtontimes.com/news/2016/jan/21/trash-left-by-december-floods-still-littering-rive/?page=all",
+		"date": "01/21/2016"
+	},
+	{	
+	    "title": "Feds: Colorado man gets 6 months for massive littering near Telluride",
+	    "description": "Benjamin Yoho dumped the debris in the Uncompahgre National Forest",
+	    "url": "http://www.denverpost.com/news/ci_28831486/feds-colorado-man-gets-6-months-massive-littering",
+		"date": "09/17/2015"
+	},
+	{	
+	    "title": "Great Pacific Garbage Patch",
+	    "description": "The Great Pacific Garbage Patch is a collection of marine debris in the North Pacific Ocean",
+	    "url": "http://education.nationalgeographic.org/encyclopedia/great-pacific-garbage-patch/",
+		"date": ""
+	},
+	{
+		"title": "Ocean Trash: 5.25 Trillion pieces and counting, but big questions still remain",
+	    "description": "The numbers add up to trouble for the oceans, wildlife, and us, but scientists are struggling to understand how",
+	    "url": "http://news.nationalgeographic.com/news/2015/01/150109-oceans-plastic-sea-trash-science-marine-debris/",
+		"date": "01/11/2015"
+	},
+	{	
+	    "title": "Sea Turtles fight for survival in oceans of plastic trash",
+	    "description": "A risk analysis shows sea turtles off the coast of the eastern USA, Australia, and South Africa are at the highest risk of ingesting wayward plastic trash that has been dumped into the ocean",
+	    "url": "http://www.forbes.com/sites/shaenamontanari/2015/09/15/sea-turtles-fight-for-survival-in-oceans-of-plastic-trash/#6e95f99f32b2",
+		"date": "09/15/2015"
+	},
+	{	
+	    "title": "How much are we trashing our oceans?",
+	    "description": "A worldwide analysis of the way human trash affects the well-being of the ocean",
+	    "url": "http://www.cnn.com/2015/02/12/world/ocean-trash-pollution/",
+		"date": "02/12/2015"
+	},
+	{	
+	    "title": "Landfill fire threatens nuclear waste site outside St. Louis",
+	    "description": "Landfill fires are pretty common, but this one is different. It's only about a thousand feet away from nearly 9,000 tons of nuclear waste",
+	    "url": "http://www.npr.org/2015/11/03/454010066/landfill-fire-threatens-nuclear-waste-site-outside-st-louis",
+		"date": "11/03/2015"
+	}
+	
+	
+]	
+}

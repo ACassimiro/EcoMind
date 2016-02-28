@@ -1,0 +1,66 @@
+{	
+	"news": [
+	{	
+	    "title": "World leaders are fed food waste, and it's great",
+	    "description": "Two chefs prepared a meal made of food waste for dozens of world leaders at an informal working lunch on climate and sustainable development goals at the United Nations Sunday",
+	    "url": "http://www.usnews.com/news/blogs/at-the-edge/2015/09/28/food-waste-is-an-environmental-problem",
+		"date": "09/28/2015"
+	},
+	{
+		"title": "Rockefeller foundation to take food-waste fight to Davos",
+	    "description": "The Rockefeller Foundation plans to announce that it is kicking off a $130 million initiative to reduce food waste around the world",
+	    "url": "http://www.nytimes.com/2016/01/22/business/dealbook/davos-rockefeller-foundation-food-waste.html",
+		"date": "01/21/2016"
+	},
+	{	
+	    "title": "Denmark opens first food waste supermarket selling surplus produce",
+	    "description": "A charity has opened Denmark's first ever food surplus supermarket",
+	    "url": "http://www.independent.co.uk/news/world/europe/denmark-food-waste-supermarket-we-food-copenhagen-surplus-produce-a6890621.html",
+		"date": "02/23/2016"
+	},
+	{	
+	    "title": "Zero Percent turns to crowdfunding to prevent food waste",
+	    "description": "Zero Percent, a startup that coordinates excess food donations and pickups, is launching a new crowdfunding platform to raise money for nonprofits that can’t afford to pay for the gas or workers it takes to pick up food",
+	    "url": "http://www.chicagotribune.com/bluesky/originals/ct-zero-percent-launches-crowdfunding-platform-bsi-20160224-story.html",
+		"date": "02/24/2016"
+	},
+	{	
+	    "title": "One third of food is lost or wasted: What can be done",
+	    "description": "One-third of food produced for human consumption worldwide is annually lost or wasted",
+	    "url": "http://news.nationalgeographic.com/news/2014/10/141013-food-waste-national-security-environment-science-ngfood/",
+		"date": "10/13/2014"
+	},
+	{	
+	    "title": "Tossing out food in the trash? In Seattle, you'll be fined for that",
+	    "description": "In Seattle, wasting food will earn you a red tag posted on a garbage bin that tells everyone you've violated a new city law that makes it illegal to put food into trash cans",
+	    "url": "http://www.npr.org/sections/thesalt/2015/01/26/381586856/tossing-out-food-in-the-trash-in-seattle-you-ll-be-fined-for-that",
+		"date": "09/28/2015"
+	},
+	{
+		"title": "Best before dates lead to waste by consumers",
+	    "description": "Consumers are throwing away thousands of dollars and kilograms of food each year simply because they misunderstand what the best before date actually means",
+	    "url": "http://globalnews.ca/news/2288772/best-before-dates-lead-to-waste-by-consumers/",
+		"date": "10/21/2015"
+	},
+	{	
+	    "title": "Recyling the leftovers",
+	    "description": "Americans threw away more than 36 million tons of food in 2012, according to the Environmental Protection Agency",
+	    "url": "http://www.nytimes.com/2014/05/17/business/cities-and-companies-tackle-the-food-waste-problem.html",
+		"date": "05/16/2014"
+	},
+	{	
+	    "title": "I dumpster-dived with a bunch of freegans",
+	    "description": "A reporter investigates the lifestyle of freegans",
+	    "url": "http://www.vice.com/read/i-dumpster-dove-with-a-bunch-of-freegans",
+		"date": "03/25/2014"
+	},
+	{	
+	    "title": "Waste not",
+	    "description": "Local groups work to reduce, redistribute, and rescue food from loss and landfills",
+	    "url": "http://www.austinchronicle.com/news/2015-02-20/waste-not/",
+		"date": "02/20/2015"
+	}
+	
+	
+]	
+}
