@@ -449,11 +449,18 @@ function sendEmail() {
 
 }
 
-function getFansList() {
+function getFansList(type) {
+    var user = "";
+    if (type === "user") {
+        user = getCookie().client_id
+    } else {
+        user = getCookie().idol_id
+    }
+    console.log(user); 
     var socket = io.connect("/"); 
     var data = { 
         action_type: "getFansList",
-        user_id: getCookie().client_id 
+        user_id: user 
     };
 
     socket.send(JSON.stringify(data)); 
@@ -465,12 +472,11 @@ function getFansList() {
 
     });
 
-     
-
 }
 
 function displayHTMLOverlay(htmlText) {
-    $(".overlay-ecoform").html(htmlText);
+    $(".overlay-ecoform")[0].style.display= 'block';
+    $(".overlay-ecoform").append(htmlText);
 
     event.preventDefault(); 
     var docHeight = $(document).height();
@@ -479,12 +485,19 @@ function displayHTMLOverlay(htmlText) {
     $(".overlay-ecoform").show().css({'top': scrollTop+20+'px'});
 }
 
+function closeOverlay(trigger) {
+    $(".overlay-ecoform").html(trigger);
+
+    $(".overlay-ecoform")[0].style.display = "none";
+    $(".overlay-bg")[0].style.display = "none";
+}
+
 function createUsersList(users, title) {
     var usersHTML = "<div id='usersList'><h3>" + title + "</h3>";
     users.forEach(function (user) {
         usersHTML += "<div class='user'><img src='images/heloisa.png' alt='"+ user.name +"' title='" + user.name + "' width='60' height='60'" + 
             " align='left' hspace='20' onclick='viewIdolProfile(\"" + user._id +"\");'/>"+
-            "<h4>" +user.name+ "</h4> </div>";
+            "<a onclick='viewIdolProfile(\"" + user._id +"\");'>" +user.name+ "</a> </div>";
     });
 
     usersHTML += "</div>";
@@ -493,12 +506,18 @@ function createUsersList(users, title) {
     return usersHTML;
 }
 
-function getIdolsList() {
+function getIdolsList(type) {
 
+    var user = "";
+    if (type === "user") {
+        user = getCookie().client_id
+    } else {
+        user = getCookie().idol_id
+    }
     var socket = io.connect("/"); 
     var data = { 
         action_type: "getIdolsList",
-        user_id: getCookie().client_id 
+        user_id: user
     };
 
     socket.send(JSON.stringify(data)); 

@@ -10,6 +10,7 @@
     
     <link rel="icon" href="images/favicon_ecomind.ico">
     <link href="css/general.css" rel="stylesheet">
+    <link href="css/profilepage.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/navbar-static-top.css" rel="stylesheet">
 
@@ -86,12 +87,17 @@
 }
 
 
+
 </style>
 </head>
 <body onload="createUserProfile()">
     
   <div class="overlay-bg"></div>
-  <div class="overlay-ecoform"></div>
+  <div class="overlay-ecoform">
+    <a class="boxclose" id="boxclose" onclick="closeOverlay(this)"></a>
+  </div>
+
+
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -148,8 +154,8 @@
 	
 	<div id="section">
     <div id="profileButtons">
-      <button onClick="getFansList()">Fans List</button>
-      <button onClick="getIdolsList()">Idols</button>
+      <button onClick="getFansList('user')">Fans List</button>
+      <button onClick="getIdolsList('user')">Idols</button>
     </div>
     <div id="profileUserInfo"></div>
 	 <div class="title">
