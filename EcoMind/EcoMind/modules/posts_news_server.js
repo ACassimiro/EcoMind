@@ -10,7 +10,7 @@ function createUserPost(socket, req) {
         if (req.message.options !== null && req.message.options !== undefined) {
             options = req.message.options;
         }
-        database['news_posts'].add(req.message.user, req.message.type, req.message.ecological_field, req.message.title, req.message.description, options, function (err, post) {
+        database['news_posts'].add(req.message.user, req.message.type, req.message.ecological_field, req.message.title, req.message.description, options, null, null, function (err, post) {
             if (err || !post) {
                 console.error('database.add: Could not add new post. err:', err);
                 message_to_client['data'] = false;

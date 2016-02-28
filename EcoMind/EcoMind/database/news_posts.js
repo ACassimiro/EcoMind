@@ -9,18 +9,30 @@ module.exports = function () {
             console.log("database.news_posts: news_posts collection created");
         },
         // user = email
-        add: function (user, type, ecological_field, title, description, options, callback) {
+        add: function (user, type, ecological_field, title, description, options, date, url, callback) {
             var query = {
-                user: user,
                 type: type,
                 ecological_field: ecological_field,
                 title: title,
-                description: description,
-                timestamp: new Date()
-            }
+                description: description
+            };
 
             if (type === "poll") {
                 query["options"] = options;
+            }
+
+            if (user !== null && use !== undefined) {
+                query['user'] = user;
+            }
+
+            if (date !== null && date !== undefined) {
+                query['timestamp'] = date;
+            } else {
+                query['timestamp'] = new Date();
+            }
+
+            if (url !== null && url !== undefined) {
+                query['url'] = url;
             }
             
       
