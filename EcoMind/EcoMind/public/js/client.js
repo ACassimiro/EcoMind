@@ -333,7 +333,7 @@ function getUserPosts(id) {
     });
 }
 
-function getPostList(number){
+function getPostList(number, filter){
 	var cookie = getCookie();
 	var socket = io.connect("/"); 
 	
@@ -343,6 +343,7 @@ function getPostList(number){
         action_type: "getPostList",
         http_type: "GET",
         number: number,
+        filter: filter,
         user_id: undefined
     };
 

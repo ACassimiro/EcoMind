@@ -44,7 +44,7 @@ function getUserPosts(socket, req) {
 function getPostList(socket, req) {
 	var message_to_client = {};
     
-    database['news_posts'].getList({}, req.number, function (err, posts) {
+    database['news_posts'].getList(req.filter, req.number, function (err, posts) {
         if (err || !posts) {
             message_to_client['posts'] = null;
             socket.send(JSON.stringify(message_to_client));

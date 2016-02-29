@@ -18,3 +18,8 @@
 .navbar-center {
 	padding-top: 12px;
 }
+
+#postContainer {
+	width: 50vw;
+	margin: auto;
+}

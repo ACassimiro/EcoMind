@@ -17,10 +17,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
 	
     <script src="js/client.js"></script>
-    
-    <script>
-                
-        </script>
 
     <title>Ecomind</title>
   </head>
@@ -195,7 +191,7 @@
 	        	if ($('body').height() - 10 <= ($(window).height() + $(window).scrollTop())) {
 	        		//alert(number);
 	        		//alert('Bottom reached!');
-	                getPostList(number);
+	                getPostList(number, { "ecological_field" : "food_waste"});
 	                number = number + 5;
 	        	}
 	        	
