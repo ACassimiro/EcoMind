@@ -41,9 +41,8 @@ module.exports = function () {
            
         },
 
-
-        updateUser: function (email, fields) {
-            users.update({ email: email }, {$set: fields}, {safe: true}, callback);
+        updateUser: function (userId, fields, callback) {
+            users.update({_id: new mongo.ObjectID(userId)}, {$set: fields}, {safe: true}, callback);
         },
 
         getList: function (filter, callback) {

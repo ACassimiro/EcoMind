@@ -120,6 +120,36 @@ function createEditUserInfo(title) {
     return form;
 }
 
+function editUserName(trigger) {
+    var socket = io.connect("/");
+
+    var siblings = $(trigger).siblings('input');
+    var username = $(siblings[0]).val();
+    console.log(username);
+
+    var newData = {
+        action_type: "editUserName",
+        message: {
+            name: username
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Username successfully updated.");
+            $(".error").html("");
+            $(siblings[0]).val('');
+            $("#userName").html(username);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your password, try again.");
+        }
+    });
+}
+
 function editPassword(trigger) {
     $(".success").html("");
     $(".error").html("");

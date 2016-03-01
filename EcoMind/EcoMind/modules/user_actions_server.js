@@ -150,12 +150,28 @@ function editPassword(socket, req) {
             } else {
                 message_to_client['update'] = true;
             }
-            console.log(message_to_client);
+            
             socket.send(JSON.stringify(message_to_client));
 
         });
     }
     
+}
+
+function editUserName(socket, req) {
+    var message_to_client = {};
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].updateUser(req.user_id, {name: req.message.name}, function (err, user) {
+            if (err || !user) {
+                message_to_client['update'] = false;
+            } else {
+                message_to_client['update'] = true;
+            }
+            
+            socket.send(JSON.stringify(message_to_client));
+
+        });
+    }
 }
 
 function requestListener(socket, req) {
@@ -180,6 +196,9 @@ function requestListener(socket, req) {
             break;
         case 'editPassword':
             editPassword(socket, req);
+            break;
+        case 'editUserName':
+            editUserName(socket, req);
             break;
         default:
             return false;
