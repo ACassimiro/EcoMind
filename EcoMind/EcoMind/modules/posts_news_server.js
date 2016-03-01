@@ -29,7 +29,7 @@ function getUserPosts(socket, req) {
     var message_to_client = {};
         
     if (req.user_id !== null && req.user_id !== undefined) {
-        database['news_posts'].getUserPosts(req.user_id, 10, function (err, posts) {
+        database['news_posts'].getUserPosts(req.user_id, req.number, 10, function (err, posts) {
             if (err || !posts) {
                 message_to_client['posts'] = null;
                 socket.send(JSON.stringify(message_to_client));
