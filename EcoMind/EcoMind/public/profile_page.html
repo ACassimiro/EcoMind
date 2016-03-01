@@ -178,6 +178,28 @@
 		</div>
 		
 	</div>
+	
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	    	var number = 10;
+	        $(window).scroll(function() {     	
+	    		//alert($('body').height() + " : " + $(window).height() + " : " + $(window).scrollTop());
+	        	if ($("body").height() - 10<= ($(window).height() + $(window).scrollTop())) {
+	        		getUserPosts(getCookie().client_id, number);
+	                number = number + 10;
+	        	}
+	        });
+	    });      
+    
+	    $(function(){
+            $('#logoutSubmit').click(function(){ /*listening to the button click using Jquery listener*/
+            	document.cookie = "client_id=;";
+            	alert("Current user id :" + document.cookie);
+            	location.href = "login_page.html";
+            	
+            });
+        });
+     </script>
 </body>
 </html>
 

@@ -21,7 +21,7 @@ module.exports = function () {
                 query["options"] = options;
             }
 
-            if (user !== null && use !== undefined) {
+            if (user !== null && user !== undefined) {
                 query['user'] = user;
             }
 

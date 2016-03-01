@@ -32,13 +32,13 @@ function removeECookie(key) {
 
 function submitUserPost() {
     var socket = io.connect("/"); 
-  var ecological_field = [];
-  $("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
+    var ecological_field = [];
+    $("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
         ecological_field.push($(this).val());
     });   
     var type = $($("input[type='radio'][name='radio_user_post_type']:checked")[0]).val();
     var user = getCookie().client_id;
-  var message = {
+    var message = {
         user: user,
         type: type,
         ecological_field: ecological_field,
@@ -65,12 +65,11 @@ function submitUserPost() {
             alert("We were not able to create your post");
         }
         $("#home_user_post_title").val('');
-       $("#home_user_post_body").val('');
+        $("#home_user_post_body").val('');
     });
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "createPost",
-        http_type: "POST",
         message: message, 
         user_id: user           
    };
