@@ -40,13 +40,8 @@ module.exports = function () {
                 
         },
 
-        getUserPosts: function (user, limit, callback) {
-            var cursor = news_posts.find({user: user});
-                
-            if (limit !== null && limit !== undefined) {
-                cursor.limit(limit);
-            }
-
+        getUserPosts: function (user, number, limit, callback) {
+            var cursor = news_posts.find({user: user}).skip(number).limit(limit);
             cursor.toArray(callback);
         
         },

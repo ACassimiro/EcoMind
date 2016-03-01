@@ -276,7 +276,7 @@ function createUserProfile() {
         if (message.user !== null && message.user !== undefined) {
            fillUserProfile(message.user);
         } else {
-            alart("Sorry. We could not load the user. Try again.");
+            alert("Sorry. We could not load the user. Try again.");
         }
 
     });
@@ -301,20 +301,21 @@ function fillUserProfile(user) {
 
     $("#profileUserPreferences").html(userPreferences);
 
-    getUserPosts(user._id);
+    getUserPosts(user._id, 0);
 
 
 }
 
-function getUserPosts(id) {
+function getUserPosts(id, number) {
 
     var socket = io.connect("/"); 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "getUserPosts",
         http_type: "GET",
-        user_id: id
+        user_id: id,
+        number: number
     };
-
+    //alert("Getting user posts");
     socket.send(JSON.stringify(data)); 
 
     socket.on("message", function(message){  
@@ -328,7 +329,7 @@ function getUserPosts(id) {
                 '<p>' + post.description + '</p>' +
                 '</div>' 
         });
-        $("#postsArea").html(htmlposts);
+        $("#postsArea").append(htmlposts);
 
     });
 }

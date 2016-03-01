@@ -125,7 +125,7 @@
 	        	$("body").attr("height", "10dp");
 	    		//alert($('body').height() + " : " + $(window).height() + " : " + $(window).scrollTop());
 	        	
-	    		if ((flag == 1) && ($(postContainer).height() <= ($(window).height() + $(window).scrollTop()))) {
+	    		if ((flag == 1) && ($("#postContainer").height() <= ($(window).height() + $(window).scrollTop()))) {
 	        		//alert(number);
 	        		//alert('Bottom reached!');
 	                getPostList(number, filter);
