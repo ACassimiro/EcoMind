@@ -67,3 +67,8 @@ a.boxclose{
 .edituserformitem h4 {
 	color:#72716e;
 }
+
+.error {
+	float: right;
+	color: red;
+}
