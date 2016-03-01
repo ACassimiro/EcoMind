@@ -207,13 +207,14 @@ function submitEcoInfoForm() {
    socket.send(JSON.stringify(data)); 
 }
 
-function getUserPosts(id) {
+function getUserPosts(id, number) {
 
    var socket = io.connect("/"); 
    var data = { /*creating a Js ojbect to be sent to the server*/ 
        action_type: "getUserPosts",
        http_type: "GET",
-       user_id: id
+       user_id: id,
+       number: number
    };
 
    socket.send(JSON.stringify(data)); 
@@ -229,7 +230,7 @@ function getUserPosts(id) {
                '<p>' + post.description + '</p>' +
                '</div>' 
        });
-       $("#postsArea").html(htmlposts);
+       $("#postsArea").append(htmlposts);
 
    });
 }

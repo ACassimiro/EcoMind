@@ -89,7 +89,7 @@ function fillUserProfile(user) {
 
     $("#profileUserPreferences").html(userPreferences);
 
-    getUserPosts(user._id);
+    getUserPosts(user._id, 0);
 
 
 }
