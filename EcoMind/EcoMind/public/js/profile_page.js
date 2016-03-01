@@ -88,9 +88,9 @@ function fillUserProfile(user) {
     userPreferences += "</ul>"
 
     $("#profileUserPreferences").html(userPreferences);
-
+    
     getUserPosts(user._id, 0);
-
+    
 
 }
 
