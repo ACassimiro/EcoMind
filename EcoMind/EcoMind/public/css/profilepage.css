@@ -21,6 +21,11 @@
 	color: #72716e;
 }
 
+#profileUserInfo h5{
+	display: inline;
+	margin: 0 5px;
+}
+
 .overlay-ecoform {
     width: auto;
     height: auto;
@@ -71,4 +76,9 @@ a.boxclose{
 .error {
 	float: right;
 	color: red;
+}
+
+.success {
+	float: right;
+	color: green;
 }

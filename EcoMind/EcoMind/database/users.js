@@ -36,12 +36,9 @@ module.exports = function () {
             users.findOne({_id: new mongo.ObjectID(userId)}, callback);
         },
 
-        editPassword: function (email, new_pass, callback) {
-            if (typeof user === 'string' && typeof new_pass === 'string' && new_pass !== '') {
-                users.update({email: email }, {$set: { pass: new_pass }}, {safe: true}, callback);
-            } else {
-                callback(null, null);
-            }
+        editPassword: function (userId, new_pass, callback) {
+            users.update({_id: new mongo.ObjectID(userId)}, {$set: { pass: new_pass }}, {safe: true}, callback);
+           
         },
 
 

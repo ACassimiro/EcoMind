@@ -74,10 +74,10 @@ function fillUserProfile(user) {
     // Change user image
     $("#profileUserImage").html('<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>'); 
 
-    var userInfo = "<h1>" + user.name + "</h1></br>"+
-                    "<p><strong>BIRTHDATE:</strong> " + user.birthdate+ "</br>" +
-                    "<strong>GENDER:</strong> " + user.gender+"</br>" +
-                    "<strong>EMAIL:</strong> " + user.email + "</br></p>";
+    var userInfo = "<h1 id='userName'>" + user.name + "</h1></br>"+
+                    "<div id='userBirthday'><strong>BIRTHDATE:</strong><h5>" + user.birthdate+ "</h5> </div>" +
+                    "<div id='userGender'><strong>GENDER:</strong><h5>" + user.gender+"</h5></div>" +
+                    "<div id='userEmail'><strong>EMAIL:</strong><h5>" + user.email + "</h5> </div>";
     $("#profileUserInfo").html(userInfo);
 
     var userPreferences = "<ul>";
@@ -99,7 +99,7 @@ function openEditUserInfo() {
 }
 
 function createEditUserInfo(title) {
-    var form = "<div id='edituserform'><h3>Edit User Info</h3><div class='error'></div>" +
+    var form = "<div id='edituserform'><h3>Edit User Info</h3><div class='error'></div><div class='success'></div>" +
         "<div class='edituserformitem'><h4>Edit Password</h4>" +
         "<input type='password' placeholder='old password' size=30>" +
         "<input type='password' placeholder='new password' size=30>" +
@@ -121,10 +121,12 @@ function createEditUserInfo(title) {
 }
 
 function editPassword(trigger) {
+    $(".success").html("");
+    $(".error").html("");
     var socket = io.connect("/");
 
     var siblings = $(trigger).siblings('input');
-    var oldpass = $(siblings[0]).val();;
+    var oldpass = $(siblings[0]).val();
     var newpass = $(siblings[1]).val();
     var rnewpass = $(siblings[2]).val();
     
@@ -133,7 +135,53 @@ function editPassword(trigger) {
     } else if (newpass !== rnewpass) {
         $(".error").append("* the password and the repeat does not match.");
     } else {
+        var email = $("#userEmail h5").html();
+        var data = { 
+            action_type: "login",
+            message: {
+                email: email,
+                password: oldpass
+            }, 
+            user_id: getCookie().client_id
+                    
+        };
+        
+        socket.send(JSON.stringify(data)); 
 
+        socket.on("message",function(message){  
+                console.log("Aquii");
+                message = JSON.parse(message);
+                if (message.data === true) {
+                    var newData = {
+                        action_type: "editPassword",
+                        message: {
+                            password: newpass
+                        }, 
+                        user_id: getCookie().client_id
+                    };
+                    socket.send(JSON.stringify(newData));
+
+                    socket.on("message",function(message){  
+
+                        message = JSON.parse(message);
+                        if (message.update === true) {
+                            $(".success").html("* Password successfully updated.");
+                            $(".error").html("");
+                            $(siblings[0]).val('');
+                            $(siblings[1]).val('');
+                            $(siblings[2]).val('');
+
+                        } else if (message.update === false){
+                            $(".error").html("* We were not able to edit your password, try again.");
+                        }
+                    });
+
+                } else if (message.data === false){
+                    $(".error").append("* the old password does not match with your actual password.");
+                }
+
+            
+            });
     }
    
 }
