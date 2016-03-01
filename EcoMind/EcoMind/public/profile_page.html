@@ -163,6 +163,7 @@
       <h1>Action Feed</h1>
     </div>
 	<div id="postsArea" class="boxed"></div>
+	<div id="postEnd"></div>
 </div>
 	
 	<div id="objectivesAchievements">	
@@ -182,12 +183,17 @@
 	<script type="text/javascript">
 	    $(document).ready(function() {
 	    	var number = 10;
-	        $(window).scroll(function() {     	
+	    	var flag = 0;
+	    	var position;
+	    	$(window).scroll(function() { 
+	        	position = $("#postEnd").position();
 	    		//alert($('body').height() + " : " + $(window).height() + " : " + $(window).scrollTop());
-	        	if ($("body").height() - 10<= ($(window).height() + $(window).scrollTop())) {
+	        	if (flag == 1 && position.top - 10<= ($(window).height() + $(window).scrollTop())) {
+		        	//alert( position.top );
 	        		getUserPosts(getCookie().client_id, number);
 	                number = number + 10;
 	        	}
+	        	flag = 1;
 	        });
 	    });      
     
