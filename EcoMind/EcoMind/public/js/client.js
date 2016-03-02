@@ -225,7 +225,7 @@ function getUserPosts(id, number) {
        console.log(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-       htmlposts += '<div class="postbox">' +
+       htmlposts += '<div class="postbox" id"' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>' +
                '</div>' 
@@ -255,7 +255,7 @@ function getPostList(number, filter){
        message = JSON.parse(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-       htmlposts += '<div class="postbox">' +
+       htmlposts += '<div class="postbox" id"' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>';
             if (post.url !== null && post.url !== undefined) {
