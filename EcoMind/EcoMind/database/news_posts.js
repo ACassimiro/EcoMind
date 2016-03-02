@@ -1,4 +1,4 @@
-//var async = require('async');
+var mongo = require('mongodb');
 
 module.exports = function () {
 
@@ -66,6 +66,14 @@ module.exports = function () {
 
         findByType: function(type) {
             news_posts.find({type: type}).toArray(callback);
+        },
+
+        addComment: function(id, newComment, callback) {
+            news_posts.update({_id: new mongo.ObjectID(id)}, {'$push': {comments: newComment}}, {safe: true}, callback);
+        },
+
+        incLike: function(id, callback) {
+            news_posts.update({_id: new mongo.ObjectID(id)}, {'$inc': {likes: 1}}, {safe: true}, callback);
         }
 
 
