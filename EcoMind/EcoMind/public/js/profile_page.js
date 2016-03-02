@@ -72,8 +72,18 @@ function createUserProfile() {
 
 function fillUserProfile(user) {
     // Change user image
-    $("#profileUserImage").html('<img src="images/spock.jpg" alt="user image" width="220" height="300" style="float:left" border=3px>'); 
+    console.log(user);
+    var image = '<figure><img src="images/spock.jpg" alt="user image" width="220" height="300">';
+         
 
+    if (user._id === getCookie().client_id) {
+        image += '<figcaption><img src="images/config.png" width="10" height="10" onclick=' +
+                                '"openEditUserInfo();" /><a onclick="openEditUserInfo();">edit</a></figcaption></figure>';
+    } 
+
+    image += '</figure>';
+
+    $("#profileUserImage").html(image);
     var userInfo = "<h1 id='userName'>" + user.name + "</h1></br>"+
                     "<div id='userBirthday'><strong>BIRTHDATE:</strong><h5>" + user.birthdate+ "</h5> </div>" +
                     "<div id='userGender'><strong>GENDER:</strong><h5>" + user.gender+"</h5></div>" +
