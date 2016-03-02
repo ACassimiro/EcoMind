@@ -100,6 +100,7 @@
 	<div id="postContainer">
 	
 	</div>
+	<div id="postEnd"></div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -112,9 +113,11 @@
     <script type="text/javascript">
 	    $(document).ready(function() {
 	    	var number = -5;
+	    	var position;
+	    	window.scrollTo(0, 10);
 	        $(window).scroll(function() {     	
-	    		//alert($('body').height() + " : " + $(window).height() + " : " + $(window).scrollTop());
-	        	if ($('body').height() - 10 <= ($(window).height() + $(window).scrollTop())) {
+	        	position = $("#postEnd").position();
+				if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
 	        		//alert(number);
 	        		//alert('Bottom reached!');
 	                getPostList(number, { "ecological_field" : "food_waste"});
