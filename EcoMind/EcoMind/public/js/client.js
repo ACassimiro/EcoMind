@@ -225,10 +225,14 @@ function getUserPosts(id, number) {
        console.log(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-       htmlposts += '<div class="postbox" id"' + post._id +'">' +
+       htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>' +
-               '</div>' 
+               '<button type="button" onclick="like()" id="' + post._id +'" class="like">' + 'Like</button>' +
+               '<button type="button" onclick="comment()" id="' + post._id +'" class="comment">' + 'Comment</button>' +
+               
+               //'<button type="button id="' + post._id +'" class="comment">' + 'Comment</button>' +
+               '</div>' ;
        });
        $("#postsArea").append(htmlposts);
 
@@ -257,12 +261,14 @@ function getPostList(number, filter){
        message.posts.forEach(function(post) {
        htmlposts += '<div class="postbox" id"' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
-               '<p>' + post.description + '</p>';
+               '<p>' + post.description + '</p>'
+               '<button type="button" onclick="like()" id="' + post._id +'" class="like">' + 'Like</button>' +
+               '<button type="button" onclick="comment()" id="' + post._id +'" class="comment">' + 'Comment</button>'
             if (post.url !== null && post.url !== undefined) {
                 htmlposts += "<a href='" + post.url + "' target='_blank'> Read more...</a>";
             }
 
-               htmlposts +='</div>' 
+               htmlposts +='</div>' ;
        });
        $("#postContainer").append(htmlposts);
 

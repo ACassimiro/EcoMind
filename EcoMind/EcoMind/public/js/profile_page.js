@@ -376,3 +376,12 @@ function viewIdolProfile(id) {
     location.href = 'profile_page_idol.html';
     
 }
+
+function like(){
+		alert("Liking post: " + event.target.id);
+}
+
+function comment(){
+	alert("Commenting on post: " + event.target.id);
+}
+
