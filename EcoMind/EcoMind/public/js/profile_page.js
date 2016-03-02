@@ -120,12 +120,44 @@ function createEditUserInfo(title) {
     return form;
 }
 
+function editUserPreferences(trigger) {
+    var socket = io.connect("/");
+    var preferences = [];
+    var htmlPreferences = "<ul>";
+    $("input[type='checkbox'][name='userPrefencesCheckbox']:checked").each (function () {
+        var e = $(this).val()
+        preferences.push(e);
+        htmlPreferences += "<li>" + e + "</li>";
+    });  
+    htmlPreferences += "</ul>";
+    
+    var newData = {
+        action_type: "editUserPreferences",
+        message: {
+            preferences: preferences
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Preferences successfully updated.");
+            $(".error").html("");
+            $("input[type='checkbox'][name='userPrefencesCheckbox']:checked").attr('checked', false);
+            $("#profileUserPreferences").html(htmlPreferences);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your password, try again.");
+        }
+    });
+}
+
 function editUserName(trigger) {
     var socket = io.connect("/");
-
     var siblings = $(trigger).siblings('input');
     var username = $(siblings[0]).val();
-    console.log(username);
 
     var newData = {
         action_type: "editUserName",

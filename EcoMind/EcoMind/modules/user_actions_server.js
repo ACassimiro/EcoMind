@@ -174,6 +174,22 @@ function editUserName(socket, req) {
     }
 }
 
+function editUserPreferences(socket, req) {
+    var message_to_client = {};
+    if (req.message !== null && req.message !== undefined) {
+        database['users'].updateUser(req.user_id, {preferences: req.message.preferences}, function (err, user) {
+            if (err || !user) {
+                message_to_client['update'] = false;
+            } else {
+                message_to_client['update'] = true;
+            }
+            
+            socket.send(JSON.stringify(message_to_client));
+
+        });
+    }
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'becomeAFan':
@@ -199,6 +215,9 @@ function requestListener(socket, req) {
             break;
         case 'editUserName':
             editUserName(socket, req);
+            break;
+        case 'editUserPreferences':
+            editUserPreferences(socket, req);
             break;
         default:
             return false;

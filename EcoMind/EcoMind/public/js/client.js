@@ -66,6 +66,7 @@ function submitUserPost() {
         }
         $("#home_user_post_title").val('');
         $("#home_user_post_body").val('');
+        $("input[type='checkbox'][name='home_ecological_field']:checked").attr('checked', false);
     });
 
     var data = { /*creating a Js ojbect to be sent to the server*/ 
