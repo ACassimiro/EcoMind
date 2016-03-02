@@ -253,13 +253,16 @@ function getPostList(number, filter){
    
    socket.on("message", function(message){
        message = JSON.parse(message);
-       console.log(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-       htmlposts += '<div class="jumbotron">' +
+       htmlposts += '<div class="postbox">' +
                '<h3>' + post.title + '</h3>' +
-               '<p>' + post.description + '</p>' +
-               '</div>' 
+               '<p>' + post.description + '</p>';
+            if (post.url !== null && post.url !== undefined) {
+                htmlposts += "<a href='" + post.url + "' target='_blank'> Read more...</a>";
+            }
+
+               htmlposts +='</div>' 
        });
        $("#postContainer").append(htmlposts);
 
