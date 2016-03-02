@@ -225,7 +225,7 @@ function getUserPosts(id, number) {
        console.log(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-       htmlposts += '<div class="userPost">' +
+       htmlposts += '<div class="postbox">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>' +
                '</div>' 
