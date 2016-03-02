@@ -8,6 +8,10 @@
 	color:#72716e;
 }
 
+#userName {
+	text-shadow: 2px 2px rgba(27, 78, 18, 0.6);
+}
+
 .user {
 	float: left;
 	height: 50px;
