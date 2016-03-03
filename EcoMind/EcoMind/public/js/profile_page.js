@@ -371,14 +371,51 @@ function checkIdol() {
 }
 
 function viewIdolProfile(id) {
-    removeECookie("idol_id");
-    document.cookie+=(",idol_id=").concat(id);
-    location.href = 'profile_page_idol.html';
+	var socket = io.connect("/"); 
+    //var userId = document.cookie.split("=")[1]; //get idol id
+    var userId = getCookie().idol_id;
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.user !== null && message.user !== undefined) {
+            var idol = checkIdol();
+            fillUserProfile(message.user);
+        } else {
+            alert("Sorry. We could not load the user. Try again.");
+        }
+
+    });
     
 }
 
 function like(){
-		alert("Liking post: " + event.target.id);
+
+		var socket = io.connect("/"); 
+	    //var userId = document.cookie.split("=")[1]; //get idol id
+	    var data = { /*creating a Js ojbect to be sent to the server*/ 
+	        action_type: "likePost",
+	        http_type: "GET",
+	        post_id: event.target.id
+	    };
+
+	    jID = "#" + event.target.id;
+	    likeNum = $(jID).find("#likeNum").html();
+	    likeNum++;
+	    $(jID).find("#likeNum").replaceWith("<a>" + likeNum + "</a>");
+	    
+	    socket.send(JSON.stringify(data)); 
+
+
+
 }
 
 function comment(){
