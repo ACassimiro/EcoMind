@@ -413,9 +413,6 @@ function like(){
 	    $(jID).find("#likeNum").replaceWith("<a>" + likeNum + "</a>");
 	    
 	    socket.send(JSON.stringify(data)); 
-
-
-
 }
 
 function comment(){
