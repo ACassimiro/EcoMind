@@ -128,15 +128,36 @@ a.boxclose{
     padding:5px;
 }
 
-#nav {
+#nav, #objectivesAchievements{
     background-color:#aeaeae;
     height:auto;
-    width:2400px0px;
-    float:left;
-    padding:5px;   
-    margin-left: 5px;
-    border-radius: 10px;
+    padding:10px;   
+    border-radius: 6px;
 	box-shadow: 2px 2px 4px rgba(27, 78, 18, 0.6);
+}
+
+#nav {
+	float:left;	
+	width:2400px0px;
+	margin-left: 5px;
+	
+}
+
+#objectivesAchievements {
+    float:right;     
+    width:260px;  
+    margin-right: 10px;
+}
+
+#objectivesAchievements div a {
+	margin: 10px;
+	color: #eee;
+	text-decoration: none;
+	text-align: center;
+}
+
+#objectivesAchievements div a:hover {
+	color: #1b4e12;
 }
 
 #section {
@@ -150,14 +171,7 @@ a.boxclose{
   float:right;
 }
 
-#objectivesAchievements {
-    background-color:#aeaeae;
-    height:auto;
-    width: 250px;
-    float:right;
-    padding:5px;	
-    margin:5px;      
-}
+
 
 #footer {
     background-color:black;

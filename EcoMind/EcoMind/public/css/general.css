@@ -2,6 +2,16 @@ body {
 	font-family: Verdana, sans-serif;
 }
 
+.error {
+	float: right;
+	color: red;
+}
+
+.success {
+	float: right;
+	color: green;
+}
+
 .box {
 	position: fixed;
 	margin-top: 15vh;
@@ -80,4 +90,25 @@ body {
     z-index: 10001;
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0,0,0,0.9);
+}
+
+a.boxclose{
+    float:right;
+    margin-top:-30px;
+    margin-right:-30px;
+    cursor:pointer;
+    color: #fff;
+    border: 1px solid #AEAEAE;
+    border-radius: 30px;
+    background: #605F61;
+    font-size: 31px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 11px 3px;       
+}
+
+.boxclose:before {
+    content: "×";
+
 }

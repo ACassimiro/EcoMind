@@ -103,6 +103,10 @@ function addPollPostOption(trigger) {
 }
 
 function initEcoInfoForm(userID) {
+    if (userID === null || userID === undefined || userID === "") {
+        userID = getCookie().client_id;
+        console.log("Aqui");
+    } 
    var socket = io.connect("/"); 
    var data = { /*creating a Js ojbect to be sent to the server*/ 
        action_type: "getEcoInformationQuestions",
@@ -115,7 +119,7 @@ function initEcoInfoForm(userID) {
 
        message = JSON.parse(message);
        if (message.data) {
-          createEcoInformationForm(message.data, userID);
+            displayHTMLOverlay(createEcoInformationForm(message.data, userID));
        } else {
            alert("We had a problem, please reload the page.");
        }
@@ -146,7 +150,7 @@ function showEcoFormPopUp(userID) {
 */
 function createEcoInformationForm(info, userID) {
    var formHTML = "Your account was succesfully created. Please, fill the Eco-Information Form.<br/>" +
-       "<button onclick='location.href = \"login_page.html\"';>Cancel</button><br/><form>" +
+       "<button onclick='location.href = \"login_page.html\"';>Cancel</button><div class='error'></div><div class='success'></div><br/><form>" +
        "<div id='userID' style='display: none;'>" + userID + "</div>";
 
 
@@ -165,7 +169,8 @@ function createEcoInformationForm(info, userID) {
 
    formHTML += "</form><button onclick=\"submitEcoInfoForm()\">Submit</button>";   
 
-   $(".overlay-ecoform").html(formHTML);
+   return formHTML;
+   
 
 }
 
@@ -184,17 +189,14 @@ function submitEcoInfoForm() {
    };
 
    socket.on("message",function(response){  
-       var formHTML = "";
 
        response = JSON.parse(response);
        if (response.data) {
-           formHTML += "<p>Your Eco-Information was succesfully saved</p><button onclick=\"location.href = 'login_page.html';\">OK</button>";   
+            $(".success").html("Your Eco-Information was succesfully saved");   
        } else {
-           formHTML += "<p>We were not able to save your Eco-Information. Try it later</p><button onclick=\"location.href = 'login_page.html';\">OK</button>";   
-           alert("We were not able to create your post");
+            $(".error").html("We were not able to save your Eco-Information. Try it later");
+           
        }
-
-       $("#overlay-ecoform").html(formHTML);
    });
 
    var data = { /*creating a Js ojbect to be sent to the server*/ 
