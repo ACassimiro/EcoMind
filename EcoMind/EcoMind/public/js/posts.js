@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 function like(){
 		var socket = io.connect("/"); 
@@ -15,6 +12,7 @@ function like(){
 	    likeNum = $(jID).parent().find("#likeNum").html();
 	    likeNum++;;
 	    //likeNum++;
+	    //$(jID).parent().find("#likeNum").replaceWith("<a>" + likeNum + "</a>");
 	    $(jID).parent().find("#likeNum").replaceWith("<a>" + likeNum + "</a>");
 	    socket.send(JSON.stringify(data)); 
 }

@@ -286,7 +286,7 @@ function getPostList(number, filter){
                '<a id="likeNum">' + likes +'</a>' +
                '<hr class="featurette-divider">' +
                '<button type="button" onclick="like()" id="' + post._id +'" class="btn btn-lg btn-default"data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
-               '<button type="button" onclick="comment()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
+               '<button type="button" onclick="openUserCommentBlock()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
                '<hr class="featurette-divider">' + '</div>' ;
        });
        $("#postContainer").append(htmlposts);
@@ -371,6 +371,18 @@ function openUserPostBlock() {
 
         $("#formplace").html(html);
         $("#openPostArea").attr('onclick', 'closeUserPostBlock()')
+}
+
+function openUserCommentBlock() {
+    var html = '<form>' +
+          '<div id="userCommentArea" class="' + event.target.id +'" >' +
+          '<textarea id="home_user_comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
+          '</div>' +
+          '<button type="button" class="btn btn-lg btn-default" onclick="submitUserPost()">Post it</button>' +
+        '</form>'; 
+    
+    	jID = "#" + event.target.id + "";
+    	$(jID).parent().append(html);
 }
 
 function closeUserPostBlock() {
