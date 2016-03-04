@@ -383,6 +383,7 @@ function openUserCommentBlock() {
     
     	jID = "#" + event.target.id + "";
     	$(jID).parent().append(html);
+    	//$(jID).attr('onclick', 'comment()');
 }
 
 function closeUserPostBlock() {
