@@ -103,7 +103,8 @@
 	    	var number = -5;
 	    	var position;
 	    	window.scrollTo(0, 10);
-	        $(window).scroll(function() {     	
+	    	window.scrollTo(0, 0);
+	    	$(window).scroll(function() {     	
 	        	position = $("#postEnd").position();
 				if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
 	        		//alert(number);
