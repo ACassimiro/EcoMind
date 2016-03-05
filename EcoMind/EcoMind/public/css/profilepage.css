@@ -194,4 +194,16 @@ a.boxclose{
   margin:20px 70px
 }
 
+#objectives .boxed {
+	float: left;
+	margin:0;
+	padding: 0;
 
+}
+
+#objectives .boxed ul{
+	float: left;
+	margin:0;
+	padding: 15px;
+
+}

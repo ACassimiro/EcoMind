@@ -101,8 +101,34 @@ function fillUserProfile(user) {
     $("#profileUserPreferences").html(userPreferences);
     
     getUserPosts(user._id, 0);
+
+    getObjectivesAchievements(user._id);
     
 
+}
+
+function getObjectivesAchievements(id) {
+    var socket = io.connect("/");
+    var htmlObj = "<ul>";
+    var data = { 
+       action_type: "getObjectives",
+       http_type: "GET"
+   };
+
+   socket.send(JSON.stringify(data)); 
+
+   socket.on("message", function(message){  
+
+       message = JSON.parse(message);
+       if (message.data) {
+            message.data.forEach(function(obj) {
+                htmlObj += "<li>" + obj.title + "</li>";
+            });
+            htmlObj += "</ul>";
+            $("#objectives .boxed").html(htmlObj);
+       }
+
+   });
 }
 
 function openEditUserInfo() {

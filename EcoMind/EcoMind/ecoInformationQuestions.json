@@ -3,7 +3,7 @@
 	{
 		"question":"Amount of Water wasted in a month:",
      	"type": "number",
-     	"unit": "galons",
+     	"unit": "gallons",
      	"ecological_field": "water" ,
         "flag": "question1"
     },
