@@ -240,8 +240,8 @@ function getUserPosts(id, number) {
        htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>' +
-               '<a><b> Number of likes: </b></a>' + 
-               '<a id="likeNum">' + likes +'</a>' +
+               '<b> Number of likes: </b>' + 
+               '<p id="likeNum">' + likes +'</p>' +
                '<hr class="featurette-divider">' +
                '<button type="button" onclick="like()" id="' + post._id +'" class="btn btn-lg btn-default"data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
                '<button type="button" onclick="comment()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
