@@ -12,7 +12,7 @@ function registerUser() {
 	            email: $('#reg_email').val(),
 	            password: pass,
 	            name: $('#reg_name').val(),
-	            birthdate: $('#reg_dob').val(),
+	            birthdate: $("#reg_dob").val(),
 	            gender: $("#reg_gender option:selected").val()
 	        }, 
 	        user_id: undefined      
