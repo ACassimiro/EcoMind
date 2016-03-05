@@ -47,6 +47,7 @@ function removeIdol(){
 
 function createUserProfile() {
 
+
     var userId = getCookie().client_id;
 
     var socket = io.connect("/"); 
@@ -371,29 +372,9 @@ function checkIdol() {
 }
 
 function viewIdolProfile(id) {
-	var socket = io.connect("/"); 
-    //var userId = document.cookie.split("=")[1]; //get idol id
-    var userId = getCookie().idol_id;
-    var data = { /*creating a Js ojbect to be sent to the server*/ 
-        action_type: "getUserInfo",
-        http_type: "GET",
-        user_id: userId
-    };
-
-    socket.send(JSON.stringify(data)); 
-
-    socket.on("message", function(message){  
-
-        message = JSON.parse(message);
-        console.log(message); /*converting the data into JS object */
-        if (message.user !== null && message.user !== undefined) {
-            var idol = checkIdol();
-            fillUserProfile(message.user);
-        } else {
-            alert("Sorry. We could not load the user. Try again.");
-        }
-
-    });
+    console.log("CARALHO");
+    document.cookie=("idol_id=").concat(id);
+    location.href = "profile_page_idol.html";
     
 }
 

@@ -1,12 +1,11 @@
 function getCookie() {
      var obj = {};
      var str = document.cookie;
-         str = str.split(',');
+         str = str.split(';');
      for (var i = 0; i < str.length; i++) {
          var tmp = str[i].split('=');
-         obj[tmp[0]] = tmp[1];
+         obj[tmp[0].replace(/ /g,'')] = tmp[1];
      }
-
     return obj;
 
 }
@@ -19,7 +18,7 @@ function removeECookie(key) {
     keys.forEach(function (k) {
         if (k !== key) {
             if (count > 0) {
-                newCookie += ","
+                newCookie += ";"
              }
             newCookie += k + "=" + obj[k];
             count++;
@@ -243,8 +242,9 @@ function getUserPosts(id, number) {
                '<p>' + post.description + '</p>';
             if (post.type === "poll") {
                 post.options.forEach(function(opt) {
-                    htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '<br/>';
+                    htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
                 });
+                htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'
                
             }
 
@@ -261,6 +261,10 @@ function getUserPosts(id, number) {
         });
         $("#postsArea").append(htmlposts);
    });
+}
+
+function pollVote(trigger) {
+    console.log("Not implemented yet");
 }
 
 function getPostList(number, filter){
