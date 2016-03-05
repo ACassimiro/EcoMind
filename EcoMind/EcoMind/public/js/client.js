@@ -232,25 +232,34 @@ function getUserPosts(id, number) {
        console.log(message);
        var htmlposts = "";
        message.posts.forEach(function(post) {
-    	   if(post.likes == null){
+    	    if(post.likes == null){
     		   likes = 0;
-    	   } else {
+    	    } else {
     		   likes = post.likes;
-    	   }
-       htmlposts += '<div class="postbox" id="' + post._id +'">' +
+    	    }
+
+            htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
-               '<p>' + post.description + '</p>' +
-               '<b> Number of likes: </b>' + 
-               '<p id="likeNum">' + likes +'</p>' +
-               '<hr class="featurette-divider">' +
-               '<button type="button" onclick="like()" id="' + post._id +'" class="btn btn-lg btn-default"data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
-               '<button type="button" onclick="comment()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
-               '<hr class="featurette-divider">' +
+               '<p>' + post.description + '</p>';
+            if (post.type === "poll") {
+                post.options.forEach(function(opt) {
+                    htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '<br/>';
+                });
+               
+            }
+
+            htmlposts += '<b> Number of likes: </b>' + 
+                    '<p id="likeNum">' + likes +'</p>' +
+                    '<hr class="featurette-divider">' +
+                    '<button type="button" onclick="like()" id="' + post._id +'" class="btn btn-lg btn-default"data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
+                    '<button type="button" onclick="comment()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
+                    '<hr class="featurette-divider">' +
                //'<button type="button id="' + post._id +'" class="comment">' + 'Comment</button>' +
                '</div>' ;
-       });
-       $("#postsArea").append(htmlposts);
-
+       
+            
+        });
+        $("#postsArea").append(htmlposts);
    });
 }
 
