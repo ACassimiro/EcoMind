@@ -43,6 +43,7 @@ body {
 .regform {
 	text-align: justify;
 	margin-top: 5vh;
+	width:1000px;
 }
 
 #header {
