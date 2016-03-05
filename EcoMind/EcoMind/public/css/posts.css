@@ -37,3 +37,7 @@
 	color: #1b4e12;
 	text-decoration: none;
 }
+
+#likeNum {
+	display: inline;
+}

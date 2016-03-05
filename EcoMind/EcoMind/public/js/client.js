@@ -299,9 +299,17 @@ function getPostList(number, filter){
                 htmlposts += "<a href='" + post.url + "' target='_blank'> Read more...</a>";
                }
 
+                if (post.type === "poll") {
+                    post.options.forEach(function(opt) {
+                        htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
+                    });
+                    htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'
+                   
+                }
+
                htmlposts += '<br>' + 
-               '<a><b> Number of likes: </b></a>' + 
-               '<a id="likeNum">' + likes +'</a>' +
+               '<b> Number of likes: </b>' + 
+               '<p id="likeNum">' + likes +'</p>' +
                '<hr class="featurette-divider">' +
                '<button type="button" onclick="like()" id="' + post._id +'" class="btn btn-lg btn-default"data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
                '<button type="button" onclick="openUserCommentBlock()" id="' + post._id +'" class="btn btn-lg btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
