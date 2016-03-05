@@ -102,7 +102,7 @@ function addPollPostOption(trigger) {
 
 }
 
-function initEcoInfoForm(userID) {
+function initEcoInfoForm(registration, userID) {
     if (userID === null || userID === undefined || userID === "") {
         userID = getCookie().client_id;
         console.log("Aqui");
@@ -119,7 +119,7 @@ function initEcoInfoForm(userID) {
 
        message = JSON.parse(message);
        if (message.data) {
-            displayHTMLOverlay(createEcoInformationForm(message.data, userID));
+            displayHTMLOverlay(createEcoInformationForm(registration, message.data, userID));
        } else {
            alert("We had a problem, please reload the page.");
        }
@@ -128,7 +128,7 @@ function initEcoInfoForm(userID) {
 }
 
 function showEcoFormPopUp(userID) {
-   initEcoInfoForm(userID);
+   initEcoInfoForm(true, userID);
    event.preventDefault(); // disable normal link function so that it doesn't refresh the page
    var docHeight = $(document).height(); //grab the height of the page
    var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
@@ -148,9 +148,14 @@ function showEcoFormPopUp(userID) {
 }]
 
 */
-function createEcoInformationForm(info, userID) {
-   var formHTML = "Your account was succesfully created. Please, fill the Eco-Information Form.<br/>" +
-       "<button onclick='location.href = \"login_page.html\"';>Cancel</button><div class='error'></div><div class='success'></div><br/><form>" +
+function createEcoInformationForm(registration, info, userID) {
+    var formHTML = "";
+    if (registration) {
+        formHTML += "Your account was succesfully created. Please, fill the Eco-Information Form.<br/>" +
+       "<button onclick='location.href = \"login_page.html\"';>Cancel</button>";
+    }
+
+    formHTML += "<div class='error'></div><div class='success'></div><br/><form>" +
        "<div id='userID' style='display: none;'>" + userID + "</div>";
 
 
