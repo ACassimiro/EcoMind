@@ -1,0 +1,23 @@
+{
+	"objectives": [
+		{
+			"title": "Reduce in 5 gallons",
+			"description": "You need to reduce the usage of water in 5 galons to gain a star.",
+			"ecological_field": "water",
+			"value": 5
+		},
+		{
+			"title": "Reduce in 5% the car usage",
+			"description": "You need to reduce the usage of car in 5% in the week.",
+			"ecological_field": "car usage",
+			"value": "5%"
+		},
+		{
+			"title": "Reduce in 3 Pounds the food loss ",
+			"description": "You need to reduce the food loss in 3 pounds.",
+			"ecological_field": "food waste",
+			"value": 5
+		}
+
+	]
+}
