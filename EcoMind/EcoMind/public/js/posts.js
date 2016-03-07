@@ -35,20 +35,6 @@ function showComment(){
 }
 
 
-function openUserCommentBlock() {
-    var html = '<div id="userCommentArea" class="' + event.target.id +'" >' +
-    	'<form>' +
-          '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
-          '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
-        '</form>' +
-        '</div>'; 
-    
-   		divPost = $(event.target).parent();
-    	
-    	divPost.append(html);
-    	divPost.find("#comment").attr('onclick', 'hideComment()');
-}
-
 function submitCommentPost(){
 	var socket = io.connect("/"); 
 	divPost = $(event.target).parent();

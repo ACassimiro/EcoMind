@@ -237,6 +237,12 @@ function getUserPosts(id, number) {
     		   likes = post.likes;
     	    }
 
+    	    if(post.comments == null){
+     		   comments = "No comments";
+     	    } else {
+     		   comments = post.comments;
+     	    }
+    	    
             htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>';
@@ -248,14 +254,21 @@ function getUserPosts(id, number) {
                
             }
 
-            htmlposts += '<b> Number of likes: </b>' + 
-                    '<p id="likeNum">' + likes +'</p>' +
-                    '<hr class="featurette-divider">' +
-                    '<button type="button" onclick="like()" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
-                    '<button type="button" onclick="openUserCommentBlock()" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
-                    '<hr class="featurette-divider">' +
-               //'<button type="button id="' + post._id +'" class="comment">' + 'Comment</button>' +
-               '</div>' ;
+            htmlposts += '<br>' + 
+            '<b> Number of likes: </b>' + 
+            '<p id="likeNum">' + likes +'</p>' +
+            '<hr class="featurette-divider">' +
+            '<button type="button" onclick="like()" id="like" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
+            '<button type="button" onclick="showComment()" id="comment" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
+            '<hr class="featurette-divider">' + 
+            '<div id="userCommentArea" style="display: none" class="' + event.target.id +'" >' +
+            '<form>' +
+            '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
+            '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
+            '</form>' +
+            '<p>' + comments + '</p>' +            
+            '</div>' + 
+            '</div>' ;
        
             
         });
@@ -292,6 +305,13 @@ function getPostList(number, filter){
     	   } else {
     		   likes = post.likes;
     	   }
+    	   
+    	   if(post.comments == null){
+     		   comments = "No comments";
+     	    } else {
+     		   comments = post.comments;
+     	    }
+    	   
        htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>'  
@@ -307,13 +327,21 @@ function getPostList(number, filter){
                    
                 }
 
-               htmlposts += '<br>' + 
-               '<b> Number of likes: </b>' + 
-               '<p id="likeNum">' + likes +'</p>' +
-               '<hr class="featurette-divider">' +
-               '<button type="button" onclick="like()" id="like" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
-               '<button type="button" onclick="openUserCommentBlock()" id="comment" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
-               '<hr class="featurette-divider">' + '</div>' ;
+                htmlposts += '<br>' + 
+                '<b> Number of likes: </b>' + 
+                '<p id="likeNum">' + likes +'</p>' +
+                '<hr class="featurette-divider">' +
+                '<button type="button" onclick="like()" id="like" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
+                '<button type="button" onclick="showComment()" id="comment" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
+                '<hr class="featurette-divider">' + 
+                '<div id="userCommentArea" style="display: none" class="' + event.target.id +'" >' +
+                '<form>' +
+                '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
+                '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
+                '</form>' +
+                '<p>' + comments + '</p>' +            
+                '</div>' + 
+                '</div>' ;
        });
        $("#postContainer").append(htmlposts);
 
