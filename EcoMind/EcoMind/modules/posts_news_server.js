@@ -69,6 +69,20 @@ function likePost(socket, req) {
     });
 }
 
+function commentOnPost(socket, req){
+	var message_to_client = {};
+    
+    database['news_posts'].addComment(req.post_id, req.comment, function (err, posts) {
+        if (err || !posts) {
+            message_to_client['posts'] = null;
+            socket.send(JSON.stringify(message_to_client));
+        } else {
+            message_to_client['posts'] = posts;
+            socket.send(JSON.stringify(message_to_client));
+        }
+    });
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'createPost':
@@ -82,6 +96,9 @@ function requestListener(socket, req) {
             break;
         case 'likePost':
         	likePost(socket, req);
+        	break;
+        case 'commentOnPost':
+        	commentOnPost(socket, req);
         	break;
         default:
             return false;
