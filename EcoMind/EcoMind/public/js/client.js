@@ -292,7 +292,7 @@ function getPostList(number, filter){
     	   } else {
     		   likes = post.likes;
     	   }
-       htmlposts += '<div class="postbox" id"' + post._id +'">' +
+       htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
                '<p>' + post.description + '</p>'  
                if (post.url !== null && post.url !== undefined) {
