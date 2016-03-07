@@ -4,7 +4,7 @@ function like(){
 		divPost = $(event.target).parent();
 		
 		id = divPost.attr('id');
-		alert(id);
+		//alert(id);
 	    //var userId = document.cookie.split("=")[1]; //get idol id
 	    var data = { /*creating a Js ojbect to be sent to the server*/ 
 	        action_type: "likePost",
