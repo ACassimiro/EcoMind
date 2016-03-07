@@ -21,22 +21,31 @@ function like(){
 	    socket.send(JSON.stringify(data)); 
 }
 
-function comment(){
-	alert("Commenting on post");
+function hideComment(){
+	divPost = $(event.target).parent();
+	divPost.find('#userCommentArea').hide();
+	
+	divPost.find("#comment").attr('onclick', 'showComment()');
+}
+
+function showComment(){
+	divPost = $(event.target).parent();
+	divPost.find('#userCommentArea').show();
+	
+	divPost.find("#comment").attr('onclick', 'hideComment()');
 }
 
 
 function openUserCommentBlock() {
-    var html = '<form>' +
-          '<div id="userCommentArea" class="' + event.target.id +'" >' +
+    var html = '<div id="userCommentArea" class="' + event.target.id +'" >' +
+    	'<form>' +
           '<textarea id="home_user_comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
-          '</div>' +
           '<button type="button" class="btn btn-lg btn-default" onclick="submitUserPost()">Post it</button>' +
-        '</form>'; 
+        '</form>' +
+        '</div>'; 
     
    		divPost = $(event.target).parent();
     	
     	divPost.append(html);
-    	alert(divPost.find("#comment").html());
-    	divPost.find("#comment").attr('onclick', 'comment()');
+    	divPost.find("#comment").attr('onclick', 'hideComment()');
 }
