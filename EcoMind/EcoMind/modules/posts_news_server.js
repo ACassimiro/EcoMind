@@ -70,10 +70,12 @@ function likePost(socket, req) {
 }
 
 function commentOnPost(socket, req){
+	
 	var message_to_client = {};
-    
+    console.log(req.post_id);
     database['news_posts'].addComment(req.post_id, req.comment, function (err, posts) {
         if (err || !posts) {
+        	
             message_to_client['posts'] = null;
             socket.send(JSON.stringify(message_to_client));
         } else {

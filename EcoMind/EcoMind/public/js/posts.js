@@ -53,8 +53,9 @@ function submitCommentPost(){
 	var socket = io.connect("/"); 
 	divPost = $(event.target).parent();
 	comment = divPost.find('#comment_body').val();
-	id = divPost.parent().attr('id');
-	alert(comment);
+	
+	id = divPost.parent().parent().attr('id');
+	
 	
 	var data = { /*creating a Js ojbect to be sent to the server*/ 
         action_type: "commentOnPost",
@@ -66,5 +67,10 @@ function submitCommentPost(){
 	divPost.find('#comment_body').val("");
     socket.send(JSON.stringify(data)); 
     
-	
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        // Do the return of sendEmail
+
+    });
 }
