@@ -51,12 +51,30 @@
                         <input type="checkbox" name="electricity"/>Electricity<br/>
                         <input type="checkbox" name="food waste"/>Food waste<br/>
                         <input type="checkbox" name="trash"/>Trash<br/>
-                        <input type="checkbox" name="car usage"/>Car usage<br/>
-                    </div>
+                        <input type="checkbox" name="car usage"/>Car usage<br/>	
+					</div>	
+					<p id="demo" style="color:red"></p>
+					<script>
+					function myFunction() {
+						var name, l;
+
+						//Get the value of the input field with id="numb"
+						name = document.getElementById("reg_name").value;
+						l = name.length;
+						// If the length of the name is too long
+						if (l > 25) {
+							text = "Name too long";
+						} else {
+							text = "OK";
+						}
+						document.getElementById("demo").innerHTML = text;
+					}
+					</script>
                 </div>
             </form>
-            <button onclick="registerUser()">Submit</button><br/><br/><br/>
+            <button onclick="myFunction();registerUser()">Submit</button><br/><br/><br/>
             <button onclick="location.href = 'login_page.html';">Back to Login</button>
+			
         </div>
         
         <div class="overlay-bg"></div>
