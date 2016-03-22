@@ -16,17 +16,17 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
-	
+  
     <script src="js/client.js"></script>
     <script src="js/search.js"></script>
-	<script src="js/posts.js"></script>
+  <script src="js/posts.js"></script>
     
     <title>Ecomind</title>
   </head>
 
   <body>
 
-	<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
+  <!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
     <div id="userEmailID" style="display: none;">admin@gmail.com</div>
 
 
@@ -70,26 +70,15 @@
       </div>
     </nav>
 
-    <div class="container">
-
-      <!-- Functionality to User be able to Post -->
-      <!-- As we do not have the user login yet, I cant put the user name dynamically, so the userid it is hardcoded for a while -->
-    <div class="container">
-        <div class="userpostbox">
-        <h1 id="openPostArea" onclick='openUserPostBlock()'>What are you going to share now?</h1>
-        <div id="formplace">
-        
-        </div>
-      </div>
-    </div>
-
   <hr class="featurette-divider">
 
 
-	<div id="postContainer">
-	
-	</div>
-	<div id="postEnd"></div>
+  <div id="userContainer">
+  </div>
+  <div id="postContainer">
+  
+  </div>
+  <div id="postEnd"></div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -100,30 +89,41 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
-	    $(document).ready(function() {
-	    	var number = -5;
-	    	var position;
-	    	window.scrollTo(0, 10);
-	    	window.scrollTo(0, 0);
-	    	$(window).scroll(function() {     	
-	        	position = $("#postEnd").position();
-				if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
-	        		//alert(number);
-	        		//alert('Bottom reached!');
-	                getPostList(number, { "ecological_field" : "food_waste"});
-	                number = number + 5;
-	        	}
-	        	
-	        	
-	        });
-	    });      
+      $(document).ready(function() {
+        $.urlParam = function(name){
+          var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+          if (results==null){
+             return null;
+          }
+          else{
+             return results[1] || 0;
+          }
+        } 
+        var number = -5;
+        var position;
+        window.scrollTo(0, 10);
+        window.scrollTo(0, 0);
+        var query = $.urlParam('search');
+        $(window).scroll(function() {       
+            position = $("#postEnd").position();
+            if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
+                  // getPostList(number, { "title" : {'$regex' : '.*' + query + '.*'}});
+                  getUserList(number, "");
+                  // getPostList(number, { "description" : {'$regex' : '.*' + query + '.*'}});
+                  // getPostList(number, { "url" : {'$regex' : '.*' + query + '.*'}});
+                  number = number + 5;
+            }
+            
+            
+          });
+      });      
     
-	    $(function(){
+      $(function(){
             $('#logoutSubmit').click(function(){ /*listening to the button click using Jquery listener*/
-            	document.cookie = "client_id=;";
-            	alert("Current user id :" + document.cookie);
-            	location.href = "login_page.html";
-            	
+              document.cookie = "client_id=;";
+              alert("Current user id :" + document.cookie);
+              location.href = "login_page.html";
+              
             });
         });
 

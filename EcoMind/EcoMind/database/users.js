@@ -36,6 +36,15 @@ module.exports = function () {
             users.findOne({_id: new mongo.ObjectID(userId)}, callback);
         },
 
+        getUserList: function (filter, number, callback) {
+            users.find().skip(number + 5).limit(5).toArray(callback);
+        },
+
+        getUserIdServer: function (comId, user) {
+            user = users.findOne({_id: new mongo.ObjectID(comId)});
+            return user;
+        },
+
         editPassword: function (userId, new_pass, callback) {
             users.update({_id: new mongo.ObjectID(userId)}, {$set: { pass: new_pass }}, {safe: true}, callback);
            

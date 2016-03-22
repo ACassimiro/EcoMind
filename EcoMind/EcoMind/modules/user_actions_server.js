@@ -190,6 +190,25 @@ function editUserPreferences(socket, req) {
     }
 }
 
+function getUserList(socket, req) {
+    var message_to_client = {};
+        console.log(JSON.stringify(req));
+    // if (req.message !== null && req.message !== undefined) {
+        database['users'].getUserList(req.filter, req.number, function (err, users) {
+                if (err || !users) {
+                    message_to_client['users'] = null;
+                    socket.send(JSON.stringify(message_to_client));
+                } else {
+                    message_to_client['users'] = users;
+                    socket.send(JSON.stringify(message_to_client));
+                }
+        });
+    // } else {
+    //     console.log("Something went wrong");    
+    // }
+    
+}
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'becomeAFan':
@@ -209,6 +228,9 @@ function requestListener(socket, req) {
             break;
         case 'getIdolsList':
             getIdolsList(socket, req);
+            break;
+        case 'getUserList':
+            getUserList(socket, req);
             break;
         case 'editPassword':
             editPassword(socket, req);

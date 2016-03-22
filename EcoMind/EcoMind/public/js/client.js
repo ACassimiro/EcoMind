@@ -297,20 +297,20 @@ function getPostList(number, filter){
    socket.send(JSON.stringify(data)); 
    
    socket.on("message", function(message){
-       message = JSON.parse(message);
-       var htmlposts = "";
-       message.posts.forEach(function(post) {
-    	   if(post.likes == null){
-    		   likes = 0;
-    	   } else {
-    		   likes = post.likes;
-    	   }
+         message = JSON.parse(message);
+         var htmlposts = "";
+         message.posts.forEach(function(post) {
+      	   if(post.likes == null){
+      		   likes = 0;
+      	   } else {
+      		   likes = post.likes;
+      	   }
     	   
     	   if(post.comments == null){
      		   comments = "No comments";
-     	    } else {
+     	   } else {
      		   comments = post.comments;
-     	    }
+     	   }
     	   
        htmlposts += '<div class="postbox" id="' + post._id +'">' +
                '<h3>' + post.title + '</h3>' +
@@ -326,6 +326,8 @@ function getPostList(number, filter){
                     htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'
                    
                 }
+                // alert(comments);
+                // alert(message.user);
 
                 htmlposts += '<br>' + 
                 '<b> Number of likes: </b>' + 
@@ -338,8 +340,7 @@ function getPostList(number, filter){
                 '<form>' +
                 '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
                 '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
-                '</form>' +
-                '<p>' + comments + '</p>' +            
+                '</form>' + '<p>' + comments + '</p>' +            
                 '</div>' + 
                 '</div>' ;
        });

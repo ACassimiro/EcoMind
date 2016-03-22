@@ -36,14 +36,18 @@ function showComment(){
 
 
 function submitCommentPost(){
+
 	var socket = io.connect("/"); 
 	divPost = $(event.target).parent();
-	comment = divPost.find('#comment_body').val();
+	comment = encodeURIComponent(divPost.find('#comment_body').val());
 	
 	id = divPost.parent().parent().attr('id');
 	
-	
-	var data = { /*creating a Js ojbect to be sent to the server*/ 
+	var userId = getCookie().client_id;
+	comment = userId + "," + comment;
+	alert(userId);
+
+	var data = {  
         action_type: "commentOnPost",
         http_type: "GET",
         post_id: id,
@@ -58,5 +62,6 @@ function submitCommentPost(){
         message = JSON.parse(message);
         // Do the return of sendEmail
 
-    });
+    }); 
+    /**/
 }
