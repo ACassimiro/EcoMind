@@ -109,8 +109,12 @@
             position = $("#postEnd").position();
             if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
                   // getPostList(number, { "title" : {'$regex' : '.*' + query + '.*'}});
-                  getUserList(number, "");
-                  // getPostList(number, { "description" : {'$regex' : '.*' + query + '.*'}});
+                  alert(('.*' + query + '.*').replace(/['"]+/g, ''));
+                  query = ('.*' + query + '.*').replace(/^"(.*)"$/, '$1');
+                  getUserList(number, { "name" : {'$regex' : query}});
+                  // getUserList(number, { "name" : "John"});
+                  getPostList(number, { "description" : {'$regex' : '/^' + query +'/i'}});
+                  // getPostList(number, { "description" : {'$regex' : '.*' + '/^' + query +'/i' + '.*'}});
                   // getPostList(number, { "url" : {'$regex' : '.*' + query + '.*'}});
                   number = number + 5;
             }

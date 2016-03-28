@@ -31,34 +31,12 @@ function getUserList(number, filter){
    });
 
    //("' + user._id + '")
-
-   var data = { /*creating a Js ojbect to be sent to the server*/ 
-       action_type: "getPostList",
-       http_type: "GET",
-       number: number,
-       filter: filter
-   };
-
-   socket.send(JSON.stringify(data)); 
-   // alert("message sent");
-
-   socket.on("message", function(message){
-         message = JSON.parse(message);
-         var htmlposts = "";
-         console.log(message);
-         message.users.forEach(function(user) {
-       htmlposts += '<div class="postbox" id="' + user.name +'">' +
-               '<h3>' + user.name + '</h3>' +
-                '</div>';  
-       });
-       $("#postContainer").append(htmlposts);
-
-   });
+  
 }
 
 function accessUserProfile(){
 	var id = $(event.target).attr('id');
-
+	document.cookie=("idol_id=").concat(id);
 	alert(document.cookie);
     location.href = "profile_page_idol.html";
 }

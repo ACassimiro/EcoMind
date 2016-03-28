@@ -37,7 +37,7 @@ module.exports = function () {
         },
 
         getUserList: function (filter, number, callback) {
-            users.find().skip(number + 5).limit(5).toArray(callback);
+            users.find(filter).skip(number + 5).limit(5).toArray(callback);
         },
 
         getUserIdServer: function (comId, user) {

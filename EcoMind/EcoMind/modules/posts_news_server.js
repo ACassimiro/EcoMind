@@ -44,6 +44,7 @@ function getUserPosts(socket, req) {
 function getPostList(socket, req) {
     var message_to_client = {};
     var message = {};
+    var async = require('async');
     
     database['news_posts'].getList(req.filter, req.number, function (err, posts) {
 
@@ -67,21 +68,40 @@ function getPostList(socket, req) {
 
 
                     //TODO: USE ASYNC EACH (ASYNC BLOCKS)
-                    // async.each()
                     comments = post.comments + '';
                     commentsArray = comments.split(",");
+                    var commentsIDs = [];
+
+                    for(var i = 0; i<commentsArray.length; i+=2){
+                        commentsIDs.push(commentsArray[i]);
+                    }
+
+                    async.each(commentsIDs,
+                        function(commentID, callback){
+                            database['users'].getUserId(commentID, function (err, users) {
+                                    if (err || !users) {
+                                        commentID = null;
+
+                                    } else {
+                                        commentID = users.name;
+                                    }
+                            });
+                        }
+                    );
                     var comId;
                     var userInfo;
                     for(var i = 0; i<commentsArray.length; i+=2){
+                        commentsArray[i] = commentsIDs[i/2];
+
+                        /*
                         comId = commentsArray[i];
-
-                        // database['users'].findOne({_id: new mongo.ObjectID(comId)}, );
-                        // database['users'].findOne({_id: new mongo.ObjectID(comId)} );
-
-                        // message_to_client = JSON.parse(message_to_client);
+                        database['users'].findOne({_id: new mongo.ObjectID(comId)}, );
+                        database['users'].findOne({_id: new mongo.ObjectID(comId)} );
+                        message_to_client = JSON.parse(message_to_client);
                         commentsArray[i] = JSON.stringify(user) ;
-                        // commentsArray[i] = comId;
-                        // commentsArray[i+1] = comId;
+                        commentsArray[i] = comId;
+                        commentsArray[i+1] = comId;
+                        */
                     }
                     comments = commentsArray.join();
                     post.comments = comments;
