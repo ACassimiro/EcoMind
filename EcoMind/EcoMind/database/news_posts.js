@@ -1,4 +1,5 @@
 var mongo = require('mongodb');
+var createTokens = require('../modules/createTokens.js');
 
 module.exports = function () {
 
@@ -10,11 +11,16 @@ module.exports = function () {
         },
         // user = email
         add: function (user, type, ecological_field, title, description, options, date, url, callback) {
+            var tokens = createTokens.extractTokens(title);
+            tokens = createTokens.removeDuplicatedWords(tokens.concat(ecological_field));
+            console.log(tokens);
+
             var query = {
                 type: type,
                 ecological_field: ecological_field,
                 title: title,
-                description: description
+                description: description,
+                tokens: tokens
             };
 
             if (type === "poll") {
