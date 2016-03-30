@@ -68,8 +68,8 @@ module.exports = function () {
             news_posts.find({type: type}).toArray(callback);
         },
 
-        addComment: function(id, newComment, callback) {
-            news_posts.update({_id: new mongo.ObjectID(id)}, {'$push': {comments: newComment}}, {safe: true}, callback);
+        addComment: function(id, userId, newComment, callback) {
+            news_posts.update({_id: new mongo.ObjectID(id)}, {'$push': {comments: {comment: newComment, id: userId}}}, {safe: true}, callback);
         },
 
         incLike: function(id, callback) {

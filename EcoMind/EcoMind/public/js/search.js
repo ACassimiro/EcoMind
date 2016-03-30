@@ -17,7 +17,7 @@ function getUserList(number, filter){
          var htmlposts = "";
          console.log(message);
          message.users.forEach(function(user) {
-         	//style="display:inline; margin-right:5px; margin-left: 5px; width: 5000px; heigh: 5000px">
+         	//style="display:inline; margin-right:5px; margin-left: 5px; width: 500px; heigh: 5000px">
        htmlposts += '<div class="postbox" id="' + user.name +'" ' +
                '<h3>' + user.name + '</h3>' +
                '<br>' +
@@ -37,6 +37,5 @@ function getUserList(number, filter){
 function accessUserProfile(){
 	var id = $(event.target).attr('id');
 	document.cookie=("idol_id=").concat(id);
-	alert(document.cookie);
     location.href = "profile_page_idol.html";
 }

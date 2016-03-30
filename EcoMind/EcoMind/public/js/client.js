@@ -296,56 +296,68 @@ function getPostList(number, filter){
 
    socket.send(JSON.stringify(data)); 
    
-   socket.on("message", function(message){
-         message = JSON.parse(message);
-         var htmlposts = "";
-         message.posts.forEach(function(post) {
-      	   if(post.likes == null){
-      		   likes = 0;
-      	   } else {
-      		   likes = post.likes;
-      	   }
-    	   
-    	   if(post.comments == null){
-     		   comments = "No comments";
-     	   } else {
-     		   comments = post.comments;
-     	   }
-    	   
-       htmlposts += '<div class="postbox" id="' + post._id +'">' +
-               '<h3>' + post.title + '</h3>' +
-               '<p>' + post.description + '</p>'  
-               if (post.url !== null && post.url !== undefined) {
-                htmlposts += "<a href='" + post.url + "' target='_blank'> Read more...</a>";
-               }
+   socket.on("message", 
+      function(message){
+          message = JSON.parse(message);
+          var htmlposts = "";
 
-                if (post.type === "poll") {
-                    post.options.forEach(function(opt) {
-                        htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
-                    });
-                    htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'
-                   
-                }
-                // alert(comments);
+          console.log("Server side message:");
+          console.log(message);
+ 
+          message.posts.forEach(function(post){
+      	    if(post.likes == null){
+      		    likes = 0;
+      	    } else {
+      		    likes = post.likes;
+      	    }
+    	   
+      	    if(post.comments == null){
+       		    comments = "No comments";
+       	    } else {
+       		    comments = post.comments;
+       	    }
+      	   
+            console.log("recebi");
+
+            htmlposts += '<div class="postbox" id="' + post._id +'">' +
+                         '<h3>' + post.title + '</h3>' +
+                         '<p>' + post.description + '</p>'  
+            if (post.url !== null && post.url !== undefined) {
+              htmlposts += "<a href='" + post.url + "' target='_blank'> Read more...</a>";
+            }
+
+            if (post.type === "poll") {
+              post.options.forEach(function(opt) {
+                htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
+              });
+              htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'          
+            }
+                alert(JSON.stringify(comments));
                 // alert(message.user);
 
-                htmlposts += '<br>' + 
-                '<b> Number of likes: </b>' + 
-                '<p id="likeNum">' + likes +'</p>' +
-                '<hr class="featurette-divider">' +
-                '<button type="button" onclick="like()" id="like" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
-                '<button type="button" onclick="showComment()" id="comment" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
-                '<hr class="featurette-divider">' + 
-                '<div id="userCommentArea" style="display: none" class="' + event.target.id +'" >' +
-                '<form>' +
-                '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
-                '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
-                '</form>' + '<p>' + comments + '</p>' +            
-                '</div>' + 
-                '</div>' ;
-       });
-       $("#postContainer").append(htmlposts);
+            htmlposts += '<br>' + 
+                        '<b> Number of likes: </b>' + 
+                        '<p id="likeNum">' + likes +'</p>' +
+                        '<hr class="featurette-divider">' +
+                        '<button type="button" onclick="like()" id="like" class="btn btn-lg btn-default ' + post._id +'""data-toggle="button" aria-pressed="false" autocomplete="off">Like</button>' +
+                        '<button type="button" onclick="showComment()" id="comment" class="btn btn-lg btn-default ' + post._id +'"" data-toggle="button" aria-pressed="false" autocomplete="off">Comment</button>' +
+                        '<hr class="featurette-divider">' + 
+                        '<div id="userCommentArea" style="display: none" class="' + event.target.id +'" >' +
+                        '<form>' +
+                        '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
+                        '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
+                        '</form>';
 
+            var i = 0;
+            for(i = 0; i < comments.length; i++){
+              htmlposts += '<p><b>' + comments[i].name + '</b>:' + comments[i].comment  + '</p><br>';           
+            }
+            
+            htmlposts += '</div>' + 
+            '</div>' ;
+      });
+      $("#postContainer").append(htmlposts);
+   
    });
 }
 
