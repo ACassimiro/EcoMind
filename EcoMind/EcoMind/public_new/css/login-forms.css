@@ -41,10 +41,30 @@ body {
 	color: #717171;
 }
 
-.login button {
+.login .buttons {
 	display: block;
 	margin: 30px 0;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.login button {
+	float: left;
+	margin: 10px 30px;	
 	color: #717171;
+}
+
+.login button:hover {
+	color: #005D51;
+ 	box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+.login .signup:hover {
+	color: rgba(255, 255, 255, 1);
+}
+
+.login .signup {
+	background-color: #005D51;
 }
 
 .logo img {
