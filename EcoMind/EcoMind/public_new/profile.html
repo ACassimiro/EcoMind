@@ -10,6 +10,8 @@
 	
 	<script src="libs/jquery-2.2.2.js"></script>
 	<script src="js/profile.js"></script>
+	<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
 <body>
@@ -53,12 +55,49 @@
 		</div>
 	</header>
 
-	<section id="userInformation">
+	<section class="userInformation">
 		<div class="userBox">
-			
+			<h1 id="username">Heloisa Carbone</h1>
+			<div id="photo"><img src="images/woman1.png"></div>
+			<button><span class="glyphicon glyphicon-star"></span> Fans</button>
+			<button><span class="glyphicon glyphicon-user"></span> Idols</button>
+		</div>
+		<div class="profileUserInfo">
+			<h2>Date of Birth</h2>
+			<div class="birthdate">03/03/1994</div>
+			<h2>Email</h2>
+			<div class="email">hbrunoca@syr.edu</div>
+			<h2>Preferences</h2>
+			<div class="preferences">
+				<ul>
+					<li>Water</li>
+					<li>Electricity</li>
+				</ul>
+			</div>
 		</div>
 
+		<div class="tabs">
+		    <ul class="tab-links">
+		        <li class="active"><a href="#tab1">Evolution</a></li>
+		        <li><a href="#tab2">Objectives and Achievements</a></li>
+		    </ul>
+		 
+		    <div class="tab-content">
+		        <div id="tab1" class="tab active">
+		            <div id="chartContainer"></div>
+		        </div>
+		 
+		        <div id="tab2" class="tab">
+		            <ul>
+		            	<li>Reduce in 5 gallons</li>
+		            	<li>Reduce in 5% the car usage</li>
+		            	<li>Reduce in 3 Pounds the food loss</li>
+		            </ul>
+		        </div>
+		 
+		    </div>
 		</div>
+
 	</section>
 </body>
 </html>

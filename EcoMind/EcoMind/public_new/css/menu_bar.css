@@ -5,6 +5,7 @@ header {
 	right: 0;
 	height: 50px;
 	background-color: #005D51;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 	color:#F4F4F4;
 	text-shadow:1px 1px 2px rgba(0,0,0,0.8);
 	z-index: 200;
