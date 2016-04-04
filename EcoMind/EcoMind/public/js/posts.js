@@ -44,13 +44,14 @@ function submitCommentPost(){
 	id = divPost.parent().parent().attr('id');
 	
 	var userId = getCookie().client_id;
-	comment = userId + "," + comment;
+	// comment = userId + "," + comment;
 	alert(userId);
 
 	var data = {  
         action_type: "commentOnPost",
         http_type: "GET",
         post_id: id,
+        userId: userId,
         comment: comment
     };
 	

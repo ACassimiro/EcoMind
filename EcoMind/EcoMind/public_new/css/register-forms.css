@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,300,700);
+
+body {
+	height: 100vh; /*Fully view heigh fill all the screen*/
+	background-image: url("../images/simplebackground.png");
+	background-size: cover; /*grow or shrink the image*/
+	background-position: center center;
+}
+
+.content {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1200px;
+}
+
+.content .sup {
+	margin: 10px;
+	height: 80px;
+}
+
+.content .sup button {
+	margin: 30px 120px;
+	background-color: #005D51;
+	color: #F4F4F4;
+}
+
+.content .sup button:hover {
+	color: #717171;
+ 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.register {
+	float: left;
+	width: 250px;
+	margin: 20px;
+	padding:10px 45px;
+	background-color: #005D51;
+	color:#F4F4F4;
+	border-radius: 10px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+	
+}
+
+.register h3 {
+	font-size: 20px;
+	font-weight: 100;
+	margin-bottom: 5px; 	
+	margin-top: 10px;	
+}
+
+.register h4 {
+	font-size: 15px;
+	display: inline;
+	font-weight: 100;
+	margin: 5px 10px;
+}
+
+.register input {
+	color: #717171;
+}
+
+.register button {
+	float: right;
+	height: 60px;
+	width: 60px;
+	font-size: 15px;
+	margin: 5px;
+	border-radius: 100%;
+	background-color: #005D51;
+	color:#F4F4F4;
+}
+
+.register button:hover {
+	background-color: rgba(255, 255, 255, 0.4);
+ 	box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+} 

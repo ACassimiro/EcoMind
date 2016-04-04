@@ -1,0 +1,109 @@
+header {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 50px;
+	background-color: #005D51;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	color:#F4F4F4;
+	text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+	z-index: 200;
+}
+
+header #logo {
+	float: left;
+	margin-left: 250px;
+}
+
+header #logo h1 {
+	font-size: 30px;
+	font-weight: 100;
+	margin: 0 20px;	
+	line-height: 45px;
+}
+
+header #nav {
+	float: left;
+	margin-left: 100px;
+	line-height: 45px;
+}
+
+header #nav > div {
+	position: relative;
+	float: left;
+	margin: 0 4px;
+	padding: 0 12px; 
+}
+
+header #nav > div:hover {
+	background-color: rgba(255, 255, 255, 0.3);	
+	
+}
+
+header #nav > div a:hover {
+	color:#F4F4F4;
+	text-decoration: none;
+}
+
+header #nav > div > div {
+	position: absolute;
+	left: 0;
+	background-color: #005D51;
+	white-space: nowrap;
+	line-height: 30px;	
+	display: none;
+
+}
+
+header #nav > div:hover > div{
+	display: block;
+}
+
+header #nav > div > div > div {
+	padding: 0 12px;
+	border-top: 1px solid #F4F4F4;
+}
+
+header #nav > div > div > div:hover {
+	background-color: rgba(255, 255, 255, 0.3);	
+}
+
+header #nav input {
+	height: 35px;
+	line-height: 25px;	
+	background-color: #F4F4F4;
+	color: #717171;
+	margin-left: 70px;
+	padding: 0 5px;
+}
+
+header #nav button {
+	height: 37px;
+	line-height: 25px;	
+	background-color: #F4F4F4;
+	color: #717171;
+	margin-left: -6px;
+}
+
+header a {
+	color: inherit;
+	text-decoration: none;
+}
+
+header .active {
+	color:#717171;
+
+}
+
+header #logout {
+	float: right;
+	margin-right: 200px;
+	line-height: 45px;
+}
+
+header #logout a:hover {
+	color: #717171;
+	text-decoration: none;
+
+}

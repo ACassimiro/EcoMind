@@ -73,12 +73,13 @@
 
   <hr class="featurette-divider">
 
+  <div style="width: 90vw; margin-left: auto; margin-right:auto">
+    <div id="userContainer" style=" float:left; margin: 2vw; width: 40vw">
+    </div>
+    <div id="postContainer" style=" float:left; margin: 2vw; width: 40vw">     
+    </div> 
+  </div>
 
-  <div id="userContainer" style="display:inline; margin-right:5px; margin-left: 5px; width: 50px">
-  </div>
-  <div id="postContainer" style="display:inline; margin-right:5px; margin-left: 5px;width: 50px">
-  
-  </div>
   <div id="postEnd"></div>
 
     <!-- Bootstrap core JavaScript
@@ -109,11 +110,18 @@
             position = $("#postEnd").position();
             if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
                   // getPostList(number, { "title" : {'$regex' : '.*' + query + '.*'}});
-                  alert(('.*' + query + '.*').replace(/['"]+/g, ''));
-                  query = ('.*' + query + '.*').replace(/^"(.*)"$/, '$1');
-                  getUserList(number, { "name" : {'$regex' : query}});
+                  // alert(('.*' + query + '.*').replace(/['"]+/g, ''));
+                  // query = ('.*' + query + '.*').replace(/^"(.*)"$/, '$1');
+                  
+
+
+                  // getUserList(number, { "name" : {'$regex' : query}});
+                  getUserList(number, {});
+                  // getPostList(number, { "description" : {'$regex' : '/^' + query +'/i'}});
+                  getPostList(number, {});
+                  
+
                   // getUserList(number, { "name" : "John"});
-                  getPostList(number, { "description" : {'$regex' : '/^' + query +'/i'}});
                   // getPostList(number, { "description" : {'$regex' : '.*' + '/^' + query +'/i' + '.*'}});
                   // getPostList(number, { "url" : {'$regex' : '.*' + query + '.*'}});
                   number = number + 5;

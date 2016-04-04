@@ -1,0 +1,224 @@
+section.userInformation {
+	position: relative;
+	top:30px;
+	height: 70vh;
+	background-color:#A9A9A9;
+	color:#F4F4F4;
+	text-shadow:1px 1px 2px rgba(0,0,0,1);
+	width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 15px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+section.userInformation .userBox {
+	position: absolute;
+	top: 30px;
+	left:70px;
+
+}
+
+section.userInformation .userBox h1 {
+	font-size: 30px;
+}
+
+section.userInformation .userBox img {
+	width:200px;
+	height: 250px;
+}
+
+section.userInformation .userBox button {
+	color:#717171;
+}
+
+section.userInformation .userBox button:hover {
+	color: #005D51;
+}
+
+section.userInformation .userBox #buttons {
+	margin: 10px 35px;
+}
+
+section.userInformation .profileUserInfo {
+	position: absolute;
+	top: 70px;
+	left:320px;
+	width: 150px;
+}
+
+section.userInformation .profileUserInfo div {
+	background-color: rgba(255,255,255,0.5);
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	padding: 5px;
+	text-align: center;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	color:#717171;
+}
+
+section.userInformation .profileUserInfo h2{
+	font-weight: 100;
+	font-size: 20px;
+}
+
+section.userInformation .profileUserInfo ul {
+    list-style-type: none;
+}
+
+section.userInformation .profileUserInfo .preferences {
+	text-align: justify;
+	padding: 5px 0;	 
+}
+
+section.userInformation .tabs {
+	position: absolute;
+	top: 70px;
+	left: 510px;
+	display:inline-block;
+
+}
+
+section.userInformation .tabs .tab-links:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+section.userInformation .tabs .tab-links li {
+    margin:0px 5px;
+    float:left;
+    list-style:none;
+}
+
+    .tab-links a {
+        padding:9px 15px;
+        display:inline-block;
+        border-radius:3px 3px 0px 0px;
+        background:rgba(0, 93, 81, 0.5);
+        font-size:16px;
+        font-weight:600;
+        color:#4c4c4c;
+        text-shadow:1px 1px 2px rgba(0,0,0,0.1);
+        transition:all linear 0.15s;
+    }
+
+    .tab-links a:hover {
+        background:rgba(0, 93, 81, 0.3);
+        text-decoration:none;
+        color:#4c4c4c;
+    }
+
+li.active a, li.active a:hover {
+    background:#fff;
+    color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding:15px;
+    border-radius:3px;
+    box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+    background:#fff;
+}
+
+    .tab {
+        display:none;
+    	height: 300px; 
+		width: 600px;   
+		text-shadow: none; 
+		color:#717171;
+		font-size: 16px;
+		overflow-x:auto;
+    }
+
+
+    #tab2 li{
+    	width: 500px;
+    	margin: 5px 10px;
+    	border-bottom: 1px solid rgba(0,0,0,0.5);
+    }
+
+    .tab ul {
+    	list-style-type: none;
+    }
+    .tab.active {
+        display:block;
+    }
+
+.chartContainer {
+	height: 250px; 
+	width: 500px;
+}
+
+section.posts {
+	position: relative;
+	top:50px;
+	width: 1140px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+
+section.posts .post {
+	float: left;
+	width: 550px;
+	margin:10px;
+	color:#717171;
+	background-color: rgba(255,255,255,0.5);
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+	padding: 5px;
+}
+
+section.overlay .userList {
+	position: relative;
+	top: 80px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 500px;
+	max-height: 600px;
+	background-color:#A9A9A9;
+	color:#F4F4F4;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+	overflow-x:auto;
+
+}
+
+section.overlay .userList h1 {
+	text-shadow:1px 1px 2px rgba(0,0,0,1);
+	margin: 10px 30px;
+}
+
+section.overlay .userList .list > div {
+	height: 80px;
+	background-color: #fff;
+}
+
+section.overlay .userList .list > div:hover {
+	box-shadow: 2px 2px 4px rgba(0,93,81,0.7);
+	text-shadow: 2px 2px 4px rgba(0,93,81,0.7);
+}
+
+section.overlay .userList .list > div h2 {
+	float: left;
+	margin: 10px;
+	font-size: 20px;
+	line-height: 60px;
+	color: #005D51;
+}
+
+section.overlay .userList .list > div img {
+	float: left;
+	margin: 10px;
+	width: 50px;
+	height: 60px;
+}
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
+}

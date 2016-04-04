@@ -1,0 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+
+html,
+body {
+	margin:0;
+	padding: 0;
+	font-family:  "open sans", sans-serif;
+}
+
+section.overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0, 0, 0, 0.75);
+    z-index:9999;
+    color:white;
+    visibility: hidden;
+}

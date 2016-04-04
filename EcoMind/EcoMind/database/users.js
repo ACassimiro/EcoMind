@@ -1,4 +1,6 @@
 var mongo = require('mongodb');
+var createTokens = require('../modules/createTokens.js');
+
 module.exports = function () {
 
     return {
@@ -15,7 +17,8 @@ module.exports = function () {
                 if (err) {
                     callback(err, undefined);
                 } else if (!obj) {
-                    users.insert({email: email, pass: pass, name: name, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
+                    var tokens = createTokens.extractTokens(name);
+                    users.insert({email: email, pass: pass, name: name, tokens: tokens, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
                 } else {
                     callback({err: 'User email already in use'}, undefined);
                 }

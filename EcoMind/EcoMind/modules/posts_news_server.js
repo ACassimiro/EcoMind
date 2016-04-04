@@ -54,66 +54,66 @@ function getPostList(socket, req) {
                 message_to_client['user'] = null;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-
+                var postContent = [];
                 posts.forEach(function(post) {
-                if(post.likes == null){
-                   likes = 0;
-                } else {
-                   likes = post.likes;
-                }
-               
-                if(post.comments == null){
-                    comments = "No comments";
-                } else {
-
-
-                    //TODO: USE ASYNC EACH (ASYNC BLOCKS)
-                    comments = post.comments + '';
-                    commentsArray = comments.split(",");
-                    var commentsIDs = [];
-
-                    for(var i = 0; i<commentsArray.length; i+=2){
-                        commentsIDs.push(commentsArray[i]);
+                    if(post.likes == null){
+                       likes = 0;
+                    } else {
+                       likes = post.likes;
                     }
+                   
+                    if(post.comments == null){
+                        comments = "No comments";
+                        postContent.push(post);
+                    } else {
 
-                    async.each(commentsIDs,
-                        function(commentID, callback){
-                            database['users'].getUserId(commentID, function (err, users) {
-                                    if (err || !users) {
-                                        commentID = null;
 
-                                    } else {
-                                        commentID = users.name;
-                                    }
-                            });
+                        //TODO: USE ASYNC EACH (ASYNC BLOCKS)
+                        comments = post.comments + '';
+                        var commentsIDs = [];
+
+                        for(var i = 0; i<comments.length; i+=2){
+                            commentsIDs.push(comments[i]);
                         }
-                    );
-                    var comId;
-                    var userInfo;
-                    for(var i = 0; i<commentsArray.length; i+=2){
-                        commentsArray[i] = commentsIDs[i/2];
 
-                        /*
-                        comId = commentsArray[i];
-                        database['users'].findOne({_id: new mongo.ObjectID(comId)}, );
-                        database['users'].findOne({_id: new mongo.ObjectID(comId)} );
-                        message_to_client = JSON.parse(message_to_client);
-                        commentsArray[i] = JSON.stringify(user) ;
-                        commentsArray[i] = comId;
-                        commentsArray[i+1] = comId;
-                        */
-                    }
-                    comments = commentsArray.join();
-                    post.comments = comments;
-                 }
-            });
+                        // console.log(post.comments);
 
+                        var a = [];
+                        var flags = 0;
+                        async.each(post.comments,
+                            function(commentID, callback){
+                                // console.log(commentID);
+                                database['users'].getUserId(commentID.id, function (err, users) {
+                                        if (err || !users) {
+                                            commentID = null;
 
-    
-            message_to_client['posts'] = posts;
-            message_to_client['user'] = user;
-            socket.send(JSON.stringify(message_to_client));
-        }
+                                        } else {
+                                            a.push({name: users.name, comment: commentID.comment});
+
+                                        }
+                                        // console.log(a.length, "-", post.comments.length);
+                                        if(a.length == post.comments.length){
+                                            post.comments = a;
+                                            postContent.push(post);
+                                            flags++;
+                                            console.log(postContent);
+                                        }
+
+                                        console.log(postContent.length, posts.length);
+                                        
+                                        if(postContent.length == posts.length){
+                                            message_to_client['posts'] = posts;
+                                            message_to_client['user'] = user;
+                                            socket.send(JSON.stringify(message_to_client));
+                                        }
+
+                                }); //End of database callback
+                        }); //End of async
+                    } // end of post.comments == null else
+                    
+
+                }); // end of posts.forEach
+            }
     });
 }
 
@@ -135,7 +135,7 @@ function commentOnPost(socket, req){
     
     var message_to_client = {};
     console.log(req.post_id);
-    database['news_posts'].addComment(req.post_id, req.comment, function (err, posts) {
+    database['news_posts'].addComment(req.post_id, req.userId, req.comment, function (err, posts) {
         if (err || !posts) {
             
             message_to_client['posts'] = null;
