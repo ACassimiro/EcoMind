@@ -1,3 +1,11 @@
+function closeOverlay() {
+	$(".overlay").css("visibility", "hidden");
+}
+
+function getFansList(s) {
+	$(".overlay").css("visibility", "visible");
+}
+
 jQuery(document).ready(function() {
     jQuery('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = jQuery(this).attr('href');
@@ -73,3 +81,7 @@ window.onload = function () {
 	});
 	chart.render();
 }
+
+$(window).on("scroll", function() {
+	$("body").toggleClass("scrolled", $(window).scrollTop() > 0);
+});
