@@ -124,9 +124,23 @@ li.active a, li.active a:hover {
     .tab {
         display:none;
     	height: 300px; 
-		width: 600px;    
+		width: 600px;   
+		text-shadow: none; 
+		color:#717171;
+		font-size: 16px;
+		overflow-x:auto;
     }
 
+
+    #tab2 li{
+    	width: 500px;
+    	margin: 5px 10px;
+    	border-bottom: 1px solid rgba(0,0,0,0.5);
+    }
+
+    .tab ul {
+    	list-style-type: none;
+    }
     .tab.active {
         display:block;
     }
@@ -161,11 +175,13 @@ section.overlay .userList {
 	margin-right: auto;
 	margin-left: auto;
 	width: 500px;
+	max-height: 600px;
 	background-color:#A9A9A9;
 	color:#F4F4F4;
 	border-radius: 5px;
 	padding: 10px;
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+	overflow-x:auto;
 
 }
 
@@ -197,4 +213,12 @@ section.overlay .userList .list > div img {
 	margin: 10px;
 	width: 50px;
 	height: 60px;
+}
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
 }
