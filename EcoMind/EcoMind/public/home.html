@@ -102,19 +102,23 @@
     <script type="text/javascript">
 	    $(document).ready(function() {
 	    	var number = -5;
+        var flag = 1;
 	    	var position;
 	    	window.scrollTo(0, 10);
 	    	window.scrollTo(0, 0);
 	    	$(window).scroll(function() {     	
 	        	position = $("#postEnd").position();
-				if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
-	        		//alert(number);
-	        		//alert('Bottom reached!');
-	                getPostList(number, { "ecological_field" : "food_waste"});
-	                number = number + 5;
-	        	}
-	        	
-	        	
+            if(flag == 1){
+                if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
+                      flag = 0;
+                      //alert(number);
+                      console.log('Bottom reached!');
+                      getPostList(number, {});
+                      number = number + 5;
+                      flag = 1;
+                }
+
+             }
 	        });
 	    });      
     

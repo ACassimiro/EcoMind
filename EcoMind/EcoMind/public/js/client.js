@@ -295,13 +295,14 @@ function getPostList(number, filter){
    };
 
    socket.send(JSON.stringify(data)); 
+   console.log("Sent");
    
    socket.on("message", 
       function(message){
+          console.log("Server side message:");
           message = JSON.parse(message);
           var htmlposts = "";
 
-          console.log("Server side message:");
           console.log(message);
  
           message.posts.forEach(function(post){
@@ -317,7 +318,7 @@ function getPostList(number, filter){
        		    comments = post.comments;
        	    }
       	   
-            console.log("recebi");
+            console.log("Received");
 
             htmlposts += '<div class="postbox" id="' + post._id +'">' +
                          '<h3>' + post.title + '</h3>' +
@@ -332,7 +333,7 @@ function getPostList(number, filter){
               });
               htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'          
             }
-                alert(JSON.stringify(comments));
+                // alert(JSON.stringify(comments));
                 // alert(message.user);
 
             htmlposts += '<br>' + 
@@ -348,7 +349,7 @@ function getPostList(number, filter){
                         '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
                         '</form>';
 
-            var i = 0;
+            var  i = 0;
             for(i = 0; i < comments.length; i++){
               htmlposts += '<p><b>' + comments[i].name + '</b>:' + comments[i].comment  + '</p><br>';           
             }
