@@ -281,10 +281,10 @@ function pollVote(trigger) {
 }
 
 function getPostList(number, filter){
- var cookie = getCookie();
- var socket = io.connect("/"); 
+   var cookie = getCookie();
+   var socket = io.connect("/"); 
  
- //alert("Inside the function");
+   //alert("Inside the function");
  
    var data = { /*creating a Js ojbect to be sent to the server*/ 
        action_type: "getPostList",
@@ -311,8 +311,10 @@ function getPostList(number, filter){
       	    } else {
       		    likes = post.likes;
       	    }
-    	   
-      	    if(post.comments == null){
+    	     
+            // alert(JSON.stringify(post.comments.length));
+
+            if(post.comments == null){
        		    comments = "No comments";
        	    } else {
        		    comments = post.comments;
@@ -348,12 +350,14 @@ function getPostList(number, filter){
                         '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
                         '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
                         '</form>';
-
-            var  i = 0;
-            for(i = 0; i < comments.length; i++){
-              htmlposts += '<p><b>' + comments[i].name + '</b>:' + comments[i].comment  + '</p><br>';           
+            if(post.comments != null){
+              var  i = 0;
+              for(i = 0; i < comments.length; i++){
+                htmlposts += '<p><b>' + comments[i].name + '</b>:' + decodeURIComponent(comments[i].comment)  + '</p><br>';           
+              }
+            } else {
+                htmlposts += '<p><b>' + "This post has no comments" + '</b></p><br>'; 
             }
-            
             htmlposts += '</div>' + 
             '</div>' ;
       });
