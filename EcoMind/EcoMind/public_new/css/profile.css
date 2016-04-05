@@ -159,10 +159,15 @@ section.posts {
 	text-align: center;
 }
 
-section.posts .post {
+section.posts .column1,
+section.posts .column2 {
 	float: left;
 	width: 550px;
 	margin:10px;
+}
+
+section.posts .post {
+	margin: 20px 0;
 	color:#717171;
 	background-color: rgba(255,255,255,0.5);
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
