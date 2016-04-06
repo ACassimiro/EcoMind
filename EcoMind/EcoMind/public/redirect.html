@@ -101,41 +101,12 @@
              return results[1] || 0;
           }
         } 
-        var number = -5;
-        var position;
-        window.scrollTo(0, 10);
-        window.scrollTo(0, 0);
-        var query = $.urlParam('search');
-        $(window).scroll(function() {       
-            position = $("#postEnd").position();
-            if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
-                  // getPostList(number, { "title" : {'$regex' : '.*' + query + '.*'}});
-                  // alert(('.*' + query + '.*').replace(/['"]+/g, ''));
-                  // query = ('.*' + query + '.*').replace(/^"(.*)"$/, '$1');
-                  // getUserList(number, { "name" : {'$regex' : query}});
-                  // getPostList(number, { "description" : {'$regex' : '/^' + query +'/i'}});
-                  // getUserList(number, { "name" : "John"});
-                  // getPostList(number, { "description" : {'$regex' : '.*' + '/^' + query +'/i' + '.*'}});
-                  // getPostList(number, { "url" : {'$regex' : '.*' + query + '.*'}});
+        
+        var id = $.urlParam('id');
+        document.cookie=("idol_id=").concat(id);
+        location.href = "profile_page_idol.html";
 
-                  getUserList(number, {"tokens" : query});
-                  getPostList(number, {"tokens" : query});
-                  number = number + 5;
-            }
-            
-            
-          });
-      });      
-    
-      $(function(){
-            $('#logoutSubmit').click(function(){ /*listening to the button click using Jquery listener*/
-              document.cookie = "client_id=;";
-              alert("Current user id :" + document.cookie);
-              location.href = "login_page.html";
-              
-            });
-        });
-
+      });     
      </script>
     </script>
   </body>

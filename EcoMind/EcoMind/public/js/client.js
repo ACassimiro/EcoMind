@@ -352,8 +352,10 @@ function getPostList(number, filter){
                         '</form>';
             if(post.comments != null){
               var  i = 0;
+
               for(i = 0; i < comments.length; i++){
-                htmlposts += '<p><b>' + comments[i].name + '</b>:' + decodeURIComponent(comments[i].comment)  + '</p><br>';           
+                // alert(comments[i].id);
+                htmlposts += '<p><a href="http://localhost:8080/redirect.html?id='+comments[i].id+'"><b>' + comments[i].name + '</b></a>:' + decodeURIComponent(comments[i].comment)  + '</p><br>';           
               }
             } else {
                 htmlposts += '<p><b>' + "This post has no comments" + '</b></p><br>'; 

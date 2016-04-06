@@ -98,7 +98,7 @@ function getPostList(socket, req) {
                                             commentID = null;
                                             console.log("Error message");
                                         } else {
-                                            a.push({name: users.name, comment: commentID.comment});
+                                            a.push({name: users.name, comment: commentID.comment, id: commentID.id});
                                             console.log(a.name, a.comment);
                                         }
                                         // console.log(a.length, "-", post.comments.length);
@@ -109,7 +109,7 @@ function getPostList(socket, req) {
                                             // console.log(postContent);
                                         }
 
-                                        // console.log(postContent.length, posts.length);
+                                        // console.log(commentID.id);
                                         
                                         if(postContent.length == posts.length){
                                             message_to_client['posts'] = posts;
