@@ -32,6 +32,61 @@ section.posting-area:hover {
 section.posting-area .posting-input {
 	margin-right: auto;
 	margin-left: auto;
-	transition: 500ms ease all; 
+	transition: 100ms ease all; 
 
 }
+
+section.posting-area .posting-input h2{
+	display: inline;
+	font-size: 20px;
+	margin: 5px 10px;
+	font-family: inherit;
+	font-weight: 100;
+}
+
+section.posting-area .posting-input input,
+section.posting-area .posting-input textarea {
+	color: #A9A9A9;
+}
+
+section.posting-area .posting-input .checkbox, 
+section.posting-area .posting-input .radio {
+	display: inline;
+	margin: 10px;
+}
+
+section.posting-area .posting-input label {
+	font-weight: 100;
+	font-size: 15px;
+}
+
+section.posting-area .posting-input .text {
+	margin: 10px 0;
+}
+
+section.posting-area .posting-input .addbutton {
+	float: left;
+	height: 25px;
+	width: 60px;
+	border-radius: 0;
+	background-color: #fff;
+	color: #A9A9A9;
+	margin: 0 10px;
+}
+
+section.posting-area .posting-input button {
+	float: right;
+	height: 60px;
+	width: 60px;
+	font-size: 15px;
+	margin: 5px;
+	border-radius: 100%;
+	background-color: #005D51;
+	color:#F4F4F4;
+	font-family: inherit;
+}
+
+section.posting-area .posting-input button:hover {
+	background-color: rgba(0, 91, 83, 0.4);
+ 	box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+ }
