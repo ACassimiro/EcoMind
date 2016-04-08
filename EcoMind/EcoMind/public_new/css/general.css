@@ -19,6 +19,18 @@ section.overlay {
     visibility: hidden;
 }
 
+.tags {
+    width: 100%;
+    height: 10px;
+    margin: 5px 0;
+}
+
+.tags > div {
+    float: left;
+    width: 20%;
+    height: 10px;
+}
+
 .water {
     background-color: rgba(59, 136, 245, 1);
     color: #fff;
