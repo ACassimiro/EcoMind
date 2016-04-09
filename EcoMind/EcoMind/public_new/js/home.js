@@ -31,7 +31,6 @@ $("section.posting-area").hover(
 	}
 );
 
-
 function createPostsHome() {
  var posthtml = '<h2>Title: </h2>'+
 	            '<input class="title" id="home_user_post_title" type="text" style="width:440px" /><br/>'+
