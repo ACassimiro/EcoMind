@@ -59,7 +59,7 @@ body {
 	color: #717171;
 }
 
-.register button {
+.circlebutton {
 	float: right;
 	height: 60px;
 	width: 60px;
@@ -70,7 +70,80 @@ body {
 	color:#F4F4F4;
 }
 
-.register button:hover {
+.circlebutton:hover {
 	background-color: rgba(255, 255, 255, 0.4);
  	box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
 } 
+
+section.overlay .ecoForm {
+	position: relative;
+	top: 80px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 700px;
+	background-color:#005D51;
+	color:#F4F4F4;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+section.overlay .ecoForm .login {
+	position: absolute;
+	top: 40px;
+	right: 100px;
+	height: 30px;
+	width:100px;
+	border-radius: 0;
+	border: 0;
+	box-shadow: none;
+}
+
+section.overlay .ecoForm .login:hover {
+	color: #717171;
+}
+
+section.overlay .ecoForm .login span {
+	margin: 0 10px;
+}
+
+section.overlay .ecoForm h1 {
+	
+	font-weight: 100;
+
+}
+
+section.overlay .ecoForm .form {
+	width: 600px;
+	height: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow-x: auto;
+}
+
+section.overlay .ecoForm .form h3 {
+	font-weight: 100;
+	font-size: 15px;
+	margin: 10px;
+}
+
+section.overlay .ecoForm .form h4 {
+	font-weight: 100;
+	font-size: 15px;
+}
+
+section.overlay .ecoForm .form input {
+	float: left;
+	width: 150px;
+	color: #717171;
+	margin: 0 10px;
+}
+
+section.overlay .ecoForm .form .radio {
+	width: 10px;
+}
+
+section.overlay .button-area {
+	margin: 10px;
+	height: 60px;
+}

@@ -22,14 +22,14 @@ section.overlay {
 /* Ecological tags */
 .tags {
     width: 100%;
-    height: 10px;
+    height: 5px;
     margin: 5px 0;
 }
 
 .tags > div {
     float: left;
     width: 20%;
-    height: 10px;
+    height: 5px;
 }
 
 .water {
