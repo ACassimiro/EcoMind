@@ -32,6 +32,26 @@ section.overlay {
     height: 5px;
 }
 
+.tags .tag100 {
+    width: 100%;
+}
+
+.tags .tag50 {
+    width: 50%;
+}
+
+.tags .tag34 {
+    width: 33.33%;
+}
+
+.tags .tag25 {
+    width: 25%;
+}
+
+.tags .tag20 {
+    width: 20%;
+}
+
 .water {
     background-color: rgba(59, 136, 245, 1);
     color: #fff;
