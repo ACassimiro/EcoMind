@@ -1,9 +1,144 @@
+function createUserProfile() {
+	console.log("dasdsadasdas");
+    var userId = getCookie().client_id;
+
+    var socket = io.connect("/"); 
+    
+    var data = { 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.user !== null && message.user !== undefined) {
+           fillUserProfile(message.user);
+        } else {
+            alart("Sorry. We could not load the user. Try again.");
+        }
+
+    });
+}
+
+function fillUserProfile(user) {
+	if (user.gender === "female") {
+		$(".userInformation .userBox #photo").html('<img src="images/woman1.png">');
+	} else {
+		$(".userInformation .userBox #photo").html('<img src="images/man1.png">');
+	}
+
+    $(".userInformation .userBox #username").html(user.name);
+    $(".userInformation .profileUserInfo #birthdate").html(user.birthdate);
+    $(".userInformation .profileUserInfo #email").html(user.email);
+
+    
+         
+
+    /*if (user._id === getCookie().client_id) {
+        image += '<figcaption><img src="images/config.png" width="10" height="10" onclick=' +
+                                '"openEditUserInfo();" /><a onclick="openEditUserInfo();">edit</a></figcaption></figure>';
+    } */
+
+    
+    var userPreferences = "<ul>";
+    user.preferences.forEach(function (preference) {
+    	$(".userInformation .profileUserInfo #preferences ul").append('<li class="'+formatEcoTags(preference)+'">'+preference+'</li>');
+    });
+
+    
+    //getUserPosts(user._id, 0);
+
+    //getObjectivesAchievements(user._id);
+    
+
+}
+
 function closeOverlay() {
 	$(".overlay").css("visibility", "hidden");
 }
 
-function getFansList(s) {
+function openOverlay() {
 	$(".overlay").css("visibility", "visible");
+}
+
+function getFansList(type) {
+    var user = "";
+    if (type === "user") {
+        user = getCookie().client_id
+    } else {
+        user = getCookie().idol_id
+    }
+    
+    var socket = io.connect("/"); 
+    
+    var data = { 
+        action_type: "getFansList",
+        user_id: user 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+
+        $(".overlay .userList h1").html("Fans List");
+        createUsersList(message.fans);
+
+    });
+
+}
+
+function getIdolsList(type) {
+
+    var user = "";
+    if (type === "user") {
+        user = getCookie().client_id
+    } else {
+        user = getCookie().idol_id
+    }
+    var socket = io.connect("/"); 
+    var data = { 
+        action_type: "getIdolsList",
+        user_id: user
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+
+        $(".overlay .userList h1").html("Idols List");
+        createUsersList(message.idols);
+
+    });
+
+}
+
+function createUsersList(users) {
+	$(".overlay .userList .list").html("");
+   	users.forEach(function (user) {
+ 		
+ 		var htmluser = "<div onclick='viewIdolProfile(\"" + user._id +"\");'>";
+ 		
+ 		if(user.gender==="female") {
+ 			htmluser += '<img src="images/woman1.png">';
+ 		} else {
+ 			htmluser += '<img src="images/man1.png">';
+ 		}
+		
+		htmluser += '<h2>' + user.name +'</h2></div>';
+					
+		$(".overlay .userList .list").append(htmluser);	
+ 		
+   });
+
+   openOverlay();
 }
 
 jQuery(document).ready(function() {

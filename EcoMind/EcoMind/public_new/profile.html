@@ -10,18 +10,20 @@
 	
 	<script src="libs/jquery-2.2.2.js"></script>
 	<script src="js/profile.js"></script>
+	<script src="js/general-function.js"></script>
 	<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script> 
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
-<body>
+<body onload="createUserProfile()">
 	<header>
 		<div class="row">
 			<div id="logo">
 				<h1>EcoMind</h1>
 			</div>
 			<div id="logout">
-				<a href="#">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
+				<a href="#" onClick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
 			</div>
 			<div id="nav">
 				<div>
@@ -59,27 +61,13 @@
 		<div class="userList">
 			<div class="close" onClick="closeOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
 			<h1>Fans List</h1>
-			<div class="list">
-				<div>
-					<img src="images/man1.png">
-					<h2>Aellison</h2>
-				</div>
-				<div>
-					<img src="images/woman1.png">
-					<h2>Betsy</h2>
-				</div>
-				<div>
-					<img src="images/man1.png">
-					<h2>Jay</h2>
-				</div>
-
-			</div>
+			<div class="list"></div>
 		</div>
 	</section>
 
 	<section class="userInformation">
 		<div class="userBox">
-			<h1 id="username">Heloisa Carbone</h1>
+			<h1 id="username"></h1>
 			<div id="photo"><img src="images/woman1.png"></div>
 			<div id="buttons">
 				<button onClick="getFansList('user')"><span class="glyphicon glyphicon-star"></span> Fans</button>
@@ -88,14 +76,12 @@
 		</div>
 		<div class="profileUserInfo">
 			<h2>Date of Birth</h2>
-			<div class="birthdate">03/03/1994</div>
+			<div id="birthdate"></div>
 			<h2>Email</h2>
-			<div class="email">hbrunoca@syr.edu</div>
+			<div id="email"></div>
 			<h2>Preferences</h2>
-			<div class="preferences">
+			<div id="preferences">
 				<ul>
-					<li class="water">Water</li>
-					<li class="electricity">Electricity</li>
 				</ul>
 			</div>
 		</div>
