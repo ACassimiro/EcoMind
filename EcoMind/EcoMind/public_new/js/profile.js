@@ -1,5 +1,4 @@
 function createUserProfile() {
-	console.log("dasdsadasdas");
     var userId = getCookie().client_id;
 
     var socket = io.connect("/"); 
@@ -34,17 +33,7 @@ function fillUserProfile(user) {
     $(".userInformation .userBox #username").html(user.name);
     $(".userInformation .profileUserInfo #birthdate").html(user.birthdate);
     $(".userInformation .profileUserInfo #email").html(user.email);
-
     
-         
-
-    /*if (user._id === getCookie().client_id) {
-        image += '<figcaption><img src="images/config.png" width="10" height="10" onclick=' +
-                                '"openEditUserInfo();" /><a onclick="openEditUserInfo();">edit</a></figcaption></figure>';
-    } */
-
-    
-    var userPreferences = "<ul>";
     user.preferences.forEach(function (preference) {
     	$(".userInformation .profileUserInfo #preferences ul").append('<li class="'+formatEcoTags(preference)+'">'+preference+'</li>');
     });
@@ -57,12 +46,10 @@ function fillUserProfile(user) {
 
 }
 
-function closeOverlay() {
+function closeProfileOverlay() {
+	$(".overlay .userList .list").html("");
+	$(".overlay .userList .edituser").html("");
 	$(".overlay").css("visibility", "hidden");
-}
-
-function openOverlay() {
-	$(".overlay").css("visibility", "visible");
 }
 
 function getFansList(type) {
@@ -139,6 +126,154 @@ function createUsersList(users) {
    });
 
    openOverlay();
+}
+
+function openEditUserInfo() {
+	$(".overlay .userList h1").html("Edit User Info");
+    var form = "<div id='edituserform'><div class='error'></div><div class='success'></div>" +
+        "<div class='edituserformitem'><h4>Edit Password</h4>" +
+        "<input type='password' placeholder='old password' size=30>" +
+        "<input type='password' placeholder='new password' size=30>" +
+        "<input type='password' placeholder='repeat new password' size=30>" +
+        "<button onclick='editPassword(this);'>Edit</button></div>"+
+        "<div class='edituserformitem'><h4>Edit Name</h4>" +
+        "<input type='text' placeholder='new name' size=93>" +
+        "<button onclick='editUserName(this);'>Edit</button></div>" +
+        "<div class='edituserformitem'><h4>Edit Preferences (Choose all the ones you want to see)</h4>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='water'> Water<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='electricity'> Electricity<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
+        "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
+         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
+        "</div>";
+       $(".overlay .userList .edituser").html(form);
+       openOverlay();
+}
+
+function editPassword(trigger) {
+    $(".success").html("");
+    $(".error").html("");
+    var socket = io.connect("/");
+
+    var siblings = $(trigger).siblings('input');
+    var oldpass = $(siblings[0]).val();
+    var newpass = $(siblings[1]).val();
+    var rnewpass = $(siblings[2]).val();
+    
+    if (newpass === "") {
+        $(".error").append("* there is no new password.");
+    } else if (newpass !== rnewpass) {
+        $(".error").append("* the password and the repeat does not match.");
+    } else {
+        var email = $(".userInformation .profileUserInfo #email").html();
+        var data = { 
+            action_type: "login",
+            message: {
+                email: email,
+                password: oldpass
+            }, 
+            user_id: getCookie().client_id
+                    
+        };
+        
+        socket.send(JSON.stringify(data)); 
+
+        socket.on("message",function(message){  
+            message = JSON.parse(message);
+            if (message.data === true) {
+                var newData = {
+                    action_type: "editPassword",
+                    message: {
+                        password: newpass
+                    }, 
+                    user_id: getCookie().client_id
+                };
+                socket.send(JSON.stringify(newData));
+
+                socket.on("message",function(message){  
+
+                    message = JSON.parse(message);
+                    if (message.update === true) {
+                        $(".success").html("* Password successfully updated.");
+                        $(".error").html("");
+                        $(siblings[0]).val('');
+                        $(siblings[1]).val('');
+                        $(siblings[2]).val('');
+
+                    } else if (message.update === false){
+                        $(".error").html("* We were not able to edit your password, try again.");
+                    }
+                });
+
+            } else if (message.data === false){
+                $(".error").append("* the old password does not match with your actual password.");
+            }
+
+        });
+    }
+   
+}
+
+function editUserName(trigger) {
+    var socket = io.connect("/");
+    var siblings = $(trigger).siblings('input');
+    var username = $(siblings[0]).val();
+
+    var newData = {
+        action_type: "editUserName",
+        message: {
+            name: username
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Username successfully updated.");
+            $(".error").html("");
+            $(siblings[0]).val('');
+            $(".userInformation .userBox #username").html(username);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your password, try again.");
+        }
+    });
+}
+
+function editUserPreferences(trigger) {
+    var socket = io.connect("/");
+    var preferences = [];
+    var htmlPreferences="";
+    $("input[type='checkbox'][name='userPrefencesCheckbox']:checked").each (function () {
+        var e = $(this).val()
+        preferences.push(e);
+        htmlPreferences += '<li class="'+formatEcoTags(e)+'">'+e+'</li>';
+    });  
+    
+    var newData = {
+        action_type: "editUserPreferences",
+        message: {
+            preferences: preferences
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Preferences successfully updated.");
+            $(".error").html("");
+            $("input[type='checkbox'][name='userPrefencesCheckbox']:checked").attr('checked', false);
+            $(".userInformation .profileUserInfo #preferences ul").html(htmlPreferences);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your password, try again.");
+        }
+    });
 }
 
 jQuery(document).ready(function() {

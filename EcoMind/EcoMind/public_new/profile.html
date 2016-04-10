@@ -59,15 +59,17 @@
 
 	<section class="overlay">
 		<div class="userList">
-			<div class="close" onClick="closeOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
-			<h1>Fans List</h1>
+			<div class="close" onClick="closeProfileOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
+			<h1></h1>
 			<div class="list"></div>
+			<div class="edituser"></div>
 		</div>
 	</section>
 
 	<section class="userInformation">
 		<div class="userBox">
 			<h1 id="username"></h1>
+			<a class="edit" onClick="openEditUserInfo()"><span class="glyphicon glyphicon-cog"></span> edit</a>
 			<div id="photo"><img src="images/woman1.png"></div>
 			<div id="buttons">
 				<button onClick="getFansList('user')"><span class="glyphicon glyphicon-star"></span> Fans</button>

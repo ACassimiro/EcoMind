@@ -1,3 +1,11 @@
+function closeOverlay() {
+	$(".overlay").css("visibility", "hidden");
+}
+
+function openOverlay() {
+	$(".overlay").css("visibility", "visible");
+}
+
 function openInput(trigger) {
 	$(trigger).siblings(".comment-input").html("<input type='text' placeholder='type your text here and enter...'>");
 	$(trigger).attr("onclick","closeInput(this)");
