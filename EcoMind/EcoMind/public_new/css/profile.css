@@ -12,6 +12,18 @@ section.userInformation {
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
+section.userInformation .userBox .edit {
+	
+	color: #474747;
+	text-shadow:none;
+	margin-bottom: 10px;
+	text-decoration: none;
+}
+
+section.userInformation .userBox .edit:hover {
+	color: #005D51;
+}
+
 section.userInformation .userBox {
 	position: absolute;
 	top: 30px;
@@ -51,9 +63,10 @@ section.userInformation .profileUserInfo div {
 	background-color: rgba(255,255,255,0.5);
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 	padding: 5px;
-	text-align: center;
 	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 	color:#717171;
+	text-align: center;
+	overflow: auto;
 }
 
 section.userInformation .profileUserInfo h2{
@@ -63,6 +76,12 @@ section.userInformation .profileUserInfo h2{
 
 section.userInformation .profileUserInfo ul {
     list-style-type: none;
+}
+
+section.userInformation .profileUserInfo li {
+	margin: 5px 10px;
+	padding: 0 5px;
+	margin-left: -30px;
 }
 
 section.userInformation .profileUserInfo .preferences {
@@ -159,10 +178,15 @@ section.posts {
 	text-align: center;
 }
 
-section.posts .post {
+section.posts .column1,
+section.posts .column2 {
 	float: left;
 	width: 550px;
 	margin:10px;
+}
+
+section.posts .post {
+	margin: 20px 0;
 	color:#717171;
 	background-color: rgba(255,255,255,0.5);
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -213,6 +237,18 @@ section.overlay .userList .list > div img {
 	margin: 10px;
 	width: 50px;
 	height: 60px;
+}
+
+section.overlay .userList .edituser button {
+	color:#717171;
+}
+
+section.overlay .userList .edituser button:hover {
+	color: #005D51;
+}
+
+section.overlay .userList .edituser input {
+	color:#717171;
 }
 
 .positive {

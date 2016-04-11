@@ -6,10 +6,11 @@
 
 	<link rel="stylesheet" href="css/general.css">
 	<link rel="stylesheet" href="css/menu_bar.css">
-	<link rel="stylesheet" href="css/profile.css">
+	<link rel="stylesheet" href="css/home.css">
 	
 	<script src="libs/jquery-2.2.2.js"></script>
-	<script src="js/profile.js"></script>
+	<script src="js/general-function.js"></script>
+	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
 <body>
@@ -19,7 +20,7 @@
 				<h1>EcoMind</h1>
 			</div>
 			<div id="logout">
-				<a href="#">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
+				<a href="#" onClick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
 			</div>
 			<div id="nav">
 				<div class="active">
@@ -35,23 +36,214 @@
 					<a href="community.html"> Community</a> 
 					<div>
 						<div>
-							<a href="#aboutus"> About us</a> 
+							<a href="community.html#aboutus"> About us</a> 
 						</div>
 						<div>
-							<a href="#guidelines"> Guidelines</a> 
+							<a href="community.html#guidelines"> Guidelines</a> 
 						</div>
 						<div>
-							<a href="#contactus"> Contact us</a> 
+							<a href="community.html#contactus"> Contact us</a> 
 						</div>
 					</div>
 				</div>
 				
 				<input type="text" placeholder="Search..." required> <button>&#128270;</button>
-
 			</div>
-			
 		</div>
 	</header>
+	
+	<section class="posting-area">
+		<h1>What are you going to share now? <span class="glyphicon glyphicon-pencil"></span></h1>
+		<div class="posting-input">
+		</div>
+	</section>
 
+	<section class="preferences">
+		<div class="user-preferences">
+			<h2 class="water">water<span class="glyphicon glyphicon-tag"></span></h2>
+			<h2 class="electricity">electricity<span class="glyphicon glyphicon-tag"></span></h2>
+			<h2 class="trash">trash<span class="glyphicon glyphicon-tag"></span></h2>
+			<h2 class="food-waste">food waste<span class="glyphicon glyphicon-tag"></span></h2>
+			<h2 class="car-usage">car usage<span class="glyphicon glyphicon-tag"></span></h2>
+		</div>
+	</section>
+
+	
+	<section class="news">
+		<div class="fixed-name-news">
+			N <br/>
+			E <br/>
+			W <br/>
+			S <br/>
+		</div>
+		<div class="list">
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<div class="content">
+					<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.</p>
+				</div>
+				<hr>
+				<div class="social-media-buttons">
+					<button onClick="like(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button><div id="numlikes" class="likes">3</div>
+					<button onClick="openInput(this);"><span class="glyphicon glyphicon-comment"></span> Comment</button><div id="numcomments" class="likes">4</div><div class="comment-input"></div>
+				</div>
+				<hr>
+				<div class="comments">
+					<div class="comment">
+						<h5>1</h5>
+						<h4>Aellison</h4>
+						<p>Pretty Nice!!</p>
+					</div>
+					<div class="comment">
+						<h5>2</h5>
+						<h4>Aellison</h4>
+						<p>Pretty Nice!!</p>
+					</div>
+					<div class="comment">
+						<h5>3</h5>
+						<h4>Aellison</h4>
+						<p>Pretty Nice!!</p>
+					</div>
+					<div class="comment">
+						<h5>4</h5>
+						<h4>Aellison</h4>
+						<p>Pretty Nice!!</p>
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="posts">
+		<div class="fixed-name-posts">
+			P <br/>
+			O <br/>
+			S <br/>
+			T <br/>
+			S <br/>
+		</div>
+		<div class="list">
+			<div class="post">
+				<h2>Title</h2>
+				<div class="tags">
+					<div class="water"></div>
+					<div class="electricity"></div>
+					<div class="trash"></div>
+					<div class="food-waste"></div>
+					<div class="car-usage"></div>
+				</div>
+				<p>Global warming is defined by the American Heritage Dictionary of Science as “an increase in the average temperature of the Earth’s atmosphere,” either by “human industry and agriculture” or by natural causes like the Earth has “experienced numerous” times “through its history.”</p>
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<script src="js/home.js"></script>
+	<script src="js/general-event.js"></script>
 </body>
 </html>

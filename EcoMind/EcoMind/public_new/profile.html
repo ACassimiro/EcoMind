@@ -10,18 +10,20 @@
 	
 	<script src="libs/jquery-2.2.2.js"></script>
 	<script src="js/profile.js"></script>
+	<script src="js/general-function.js"></script>
 	<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script> 
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
-<body>
+<body onload="createUserProfile()">
 	<header>
 		<div class="row">
 			<div id="logo">
 				<h1>EcoMind</h1>
 			</div>
 			<div id="logout">
-				<a href="#">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
+				<a href="#" onClick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
 			</div>
 			<div id="nav">
 				<div>
@@ -37,13 +39,13 @@
 					<a href="community.html"> Community</a> 
 					<div>
 						<div>
-							<a href="#aboutus"> About us</a> 
+							<a href="community.html#aboutus"> About us</a> 
 						</div>
 						<div>
-							<a href="#guidelines"> Guidelines</a> 
+							<a href="community.html#guidelines"> Guidelines</a> 
 						</div>
 						<div>
-							<a href="#contactus"> Contact us</a> 
+							<a href="community.html#contactus"> Contact us</a> 
 						</div>
 					</div>
 				</div>
@@ -57,29 +59,17 @@
 
 	<section class="overlay">
 		<div class="userList">
-			<div class="close" onClick="closeOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
-			<h1>Fans List</h1>
-			<div class="list">
-				<div>
-					<img src="images/man1.png">
-					<h2>Aellison</h2>
-				</div>
-				<div>
-					<img src="images/woman1.png">
-					<h2>Betsy</h2>
-				</div>
-				<div>
-					<img src="images/man1.png">
-					<h2>Jay</h2>
-				</div>
-				
-			</div>
+			<div class="close" onClick="closeProfileOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
+			<h1></h1>
+			<div class="list"></div>
+			<div class="edituser"></div>
 		</div>
 	</section>
 
 	<section class="userInformation">
 		<div class="userBox">
-			<h1 id="username">Heloisa Carbone</h1>
+			<h1 id="username"></h1>
+			<a class="edit" onClick="openEditUserInfo()"><span class="glyphicon glyphicon-cog"></span> edit</a>
 			<div id="photo"><img src="images/woman1.png"></div>
 			<div id="buttons">
 				<button onClick="getFansList('user')"><span class="glyphicon glyphicon-star"></span> Fans</button>
@@ -88,14 +78,12 @@
 		</div>
 		<div class="profileUserInfo">
 			<h2>Date of Birth</h2>
-			<div class="birthdate">03/03/1994</div>
+			<div id="birthdate"></div>
 			<h2>Email</h2>
-			<div class="email">hbrunoca@syr.edu</div>
+			<div id="email"></div>
 			<h2>Preferences</h2>
-			<div class="preferences">
+			<div id="preferences">
 				<ul>
-					<li>Water</li>
-					<li>Electricity</li>
 				</ul>
 			</div>
 		</div>
@@ -104,6 +92,7 @@
 		    <ul class="tab-links">
 		        <li class="active"><a href="#tab1">Evolution</a></li>
 		        <li><a href="#tab2">Objectives and Achievements</a></li>
+		        <li><a href="#tab3"><span class="glyphicon glyphicon-cog"></span> Eco-Information Form</a></li>
 		    </ul>
 		 
 		    <div class="tab-content">
@@ -130,6 +119,10 @@
 		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
 		            </ul>
 		        </div>
+
+		        <div id="tab3" class="tab">
+
+		        </div>
 		 
 		    </div>
 		</div>
@@ -137,25 +130,11 @@
 	</section>
 
 	<section class="posts">
-		<div class="post">
-			<h2>TEST</h2>
-			<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by</p>
+		<div class="column1">
+			
 		</div>
-		<div class="post">
-			<h2>TEST 2</h2>
-			<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by</p>
-		</div>
-		<div class="post">
-			<h2>TEST3</h2>
-			<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making </p>
-		</div>
-		<div class="post">
-			<h2>TEST 4</h2>
-			<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by</p>
-		</div>
-		<div class="post">
-			<h2>TEST 5</h2>
-			<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by</p>
+		<div class="column2">
+			
 		</div>
 	</section>
 </body>

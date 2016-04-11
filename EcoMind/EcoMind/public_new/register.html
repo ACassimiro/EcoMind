@@ -4,13 +4,17 @@
 	<title>EcoMind</title>
 	<link rel="icon" href="images/favicon_ecomind.ico">
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 	<link rel="stylesheet" href="css/general.css">
 	<link rel="stylesheet" href="css/login-forms.css">
 	<link rel="stylesheet" href="css/register-forms.css">
 	
 	<script src="libs/jquery-2.2.2.js"></script>
-	<script src="js/profile.js"></script>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+    <script src="js/registration_login.js"></script>
+    <script src="js/registerVerify.js"></script>
 </head>	
 <body>
 	
@@ -21,7 +25,7 @@
 			<button onclick="location.href = 'index.html';">Login</button>
 		</div>
 		<div class="register">
-			<div class="error"></div>
+			<p id="notice" style="color:red"></p>
                 
             <h3>Email *</h3> 
             <input type="email" id="reg_email" />
@@ -53,9 +57,24 @@
                 <input type="checkbox" name="car usage" id="c5"/><h4>Car usage</h4><br/>	
 			</div>	
 					
-            <button onclick="registerUser()">Sign Up</button>
+            <button class="circlebutton" onclick="registerUser()">Sign Up</button>
 			
         </div>
 	</div>
+
+    <section class="overlay">
+        <div class="ecoForm">
+            <div class="close" onClick="closeOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
+            <button class="login" onclick="location.href = 'index.html';"><span class="glyphicon glyphicon-log-in"></span>Log In</button>
+            <h1>Eco-Information Form</h1>
+            <p id="error" style="color:red"></p>
+            <p id="success" style="color:red"></p>
+            <p>Your account was succesfully created</p>
+            <div class="form"></div>
+            <div class="button-area">
+                <button class="circlebutton" onclick="submitEcoInfoForm()">Submit</button>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

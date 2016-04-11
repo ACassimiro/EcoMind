@@ -112,18 +112,14 @@
                   // getPostList(number, { "title" : {'$regex' : '.*' + query + '.*'}});
                   // alert(('.*' + query + '.*').replace(/['"]+/g, ''));
                   // query = ('.*' + query + '.*').replace(/^"(.*)"$/, '$1');
-                  
-
-
                   // getUserList(number, { "name" : {'$regex' : query}});
-                  getUserList(number, {});
                   // getPostList(number, { "description" : {'$regex' : '/^' + query +'/i'}});
-                  getPostList(number, {});
-                  
-
                   // getUserList(number, { "name" : "John"});
                   // getPostList(number, { "description" : {'$regex' : '.*' + '/^' + query +'/i' + '.*'}});
                   // getPostList(number, { "url" : {'$regex' : '.*' + query + '.*'}});
+
+                  getUserList(number, {"tokens" : query});
+                  getPostList(number, {"tokens" : query});
                   number = number + 5;
             }
             

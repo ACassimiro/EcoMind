@@ -281,10 +281,10 @@ function pollVote(trigger) {
 }
 
 function getPostList(number, filter){
- var cookie = getCookie();
- var socket = io.connect("/"); 
+   var cookie = getCookie();
+   var socket = io.connect("/"); 
  
- //alert("Inside the function");
+   //alert("Inside the function");
  
    var data = { /*creating a Js ojbect to be sent to the server*/ 
        action_type: "getPostList",
@@ -295,13 +295,14 @@ function getPostList(number, filter){
    };
 
    socket.send(JSON.stringify(data)); 
+   console.log("Sent");
    
    socket.on("message", 
       function(message){
+          console.log("Server side message:");
           message = JSON.parse(message);
           var htmlposts = "";
 
-          console.log("Server side message:");
           console.log(message);
  
           message.posts.forEach(function(post){
@@ -310,14 +311,16 @@ function getPostList(number, filter){
       	    } else {
       		    likes = post.likes;
       	    }
-    	   
-      	    if(post.comments == null){
+    	     
+            // alert(JSON.stringify(post.comments.length));
+
+            if(post.comments == null){
        		    comments = "No comments";
        	    } else {
        		    comments = post.comments;
        	    }
       	   
-            console.log("recebi");
+            console.log("Received");
 
             htmlposts += '<div class="postbox" id="' + post._id +'">' +
                          '<h3>' + post.title + '</h3>' +
@@ -332,7 +335,7 @@ function getPostList(number, filter){
               });
               htmlposts += '</br><button onclick="pollVote(this)">Vote</button></br></br></br>'          
             }
-                alert(JSON.stringify(comments));
+                // alert(JSON.stringify(comments));
                 // alert(message.user);
 
             htmlposts += '<br>' + 
@@ -347,12 +350,16 @@ function getPostList(number, filter){
                         '<textarea id="comment_body" cols="100" rows="4" placeholder="Type your text here..."></textarea>'+
                         '<button type="button" class="btn btn-lg btn-default" id="postComment" onclick="submitCommentPost()">Post it</button>' +
                         '</form>';
+            if(post.comments != null){
+              var  i = 0;
 
-            var i = 0;
-            for(i = 0; i < comments.length; i++){
-              htmlposts += '<p><b>' + comments[i].name + '</b>:' + comments[i].comment  + '</p><br>';           
+              for(i = 0; i < comments.length; i++){
+                // alert(comments[i].id);
+                htmlposts += '<p><a href="http://localhost:8080/redirect.html?id='+comments[i].id+'"><b>' + comments[i].name + '</b></a>:' + decodeURIComponent(comments[i].comment)  + '</p><br>';           
+              }
+            } else {
+                htmlposts += '<p><b>' + "This post has no comments" + '</b></p><br>'; 
             }
-            
             htmlposts += '</div>' + 
             '</div>' ;
       });

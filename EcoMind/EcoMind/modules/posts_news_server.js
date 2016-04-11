@@ -45,29 +45,39 @@ function getPostList(socket, req) {
     var message_to_client = {};
     var message = {};
     var async = require('async');
-    
     database['news_posts'].getList(req.filter, req.number, function (err, posts) {
-
+            console.log("Received the request");
             var user;
             if (err || !posts) {
                 message_to_client['posts'] = null;
                 message_to_client['user'] = null;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-                var postContent = [];
+                // console.log(JSON.stringify(posts));
+                var postContent = [];  
+                
+                 
                 posts.forEach(function(post) {
                     if(post.likes == null){
                        likes = 0;
                     } else {
                        likes = post.likes;
                     }
+
+                    // console.log(post.comments.length);
                    
                     if(post.comments == null){
                         comments = "No comments";
                         postContent.push(post);
+                        if(postContent.length == posts.length){
+                            message_to_client['posts'] = posts;
+                            message_to_client['user'] = user;
+                            console.log("Sending with 0 comment post")
+                            socket.send(JSON.stringify(message_to_client));
+                        }
                     } else {
 
-
+                        console.log(posts, "and", post.comments);
                         //TODO: USE ASYNC EACH (ASYNC BLOCKS)
                         comments = post.comments + '';
                         var commentsIDs = [];
@@ -86,24 +96,25 @@ function getPostList(socket, req) {
                                 database['users'].getUserId(commentID.id, function (err, users) {
                                         if (err || !users) {
                                             commentID = null;
-
+                                            console.log("Error message");
                                         } else {
-                                            a.push({name: users.name, comment: commentID.comment});
-
+                                            a.push({name: users.name, comment: commentID.comment, id: commentID.id});
+                                            console.log(a.name, a.comment);
                                         }
                                         // console.log(a.length, "-", post.comments.length);
                                         if(a.length == post.comments.length){
                                             post.comments = a;
                                             postContent.push(post);
                                             flags++;
-                                            console.log(postContent);
+                                            // console.log(postContent);
                                         }
 
-                                        console.log(postContent.length, posts.length);
+                                        // console.log(commentID.id);
                                         
                                         if(postContent.length == posts.length){
                                             message_to_client['posts'] = posts;
                                             message_to_client['user'] = user;
+                                            console.log("Sending with commented post");
                                             socket.send(JSON.stringify(message_to_client));
                                         }
 
