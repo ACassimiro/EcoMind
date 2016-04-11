@@ -27,7 +27,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<script src="js/client.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -135,11 +136,7 @@
         $.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
         if(data=="sent")
         {
-            $("#message").empty().html("
-
-Email is been sent at "+to+" . Please check inbox !
-
-");
+            $("#message").empty().html("Email is been sent at "+to+" . Please check inbox !");
         }
 
 });
@@ -175,7 +172,7 @@ Email is been sent at "+to+" . Please check inbox !
 					</div>
 					<div class="form-group">
 						<div class="col-sm-10 col-sm-offset-2">
-						<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+						<!--<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">-->
 						<!--<button class="btn btn-primary" id="send_email" onclick="sendEmail()">Send</button>-->
 						</div>
  
@@ -187,6 +184,7 @@ Email is been sent at "+to+" . Please check inbox !
 					
 					</div>
 				</form>
+				<button class="btn btn-primary" id="send_email" onclick="sendEmail()">Send</button>
 			</div>
 
 
