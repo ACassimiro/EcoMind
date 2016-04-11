@@ -119,6 +119,10 @@ section.overlay {
     margin: 0 5px;
 }
 
+.post .social-media-buttons .cliked {
+    color: #005D51;
+}
+
 .post .social-media-buttons .comment-input input {
     margin: 0 10px;
     width: 300px;

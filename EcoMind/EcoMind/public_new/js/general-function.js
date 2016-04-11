@@ -20,13 +20,36 @@ function closeInput(trigger) {
 
 function like(trigger) {
 	var numlikes = Number($(trigger).siblings("#numlikes").html());
-	$(trigger).siblings("#numlikes").html(numlikes+1);
-	$(trigger).attr("onclick","unlike(this)");
-	$(trigger).css("color", "#005D51");
+	
+    var socket = io.connect("/"); 
+
+    var id = $(trigger).parent().parent().attr("id")
+    
+    var data = { 
+        action_type: "likePost",
+        http_type: "GET",
+        post_id: id,
+        user_id: getCookie().client_id
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+        if (message.data) {
+            $(trigger).siblings("#numlikes").html(numlikes+1);
+            $(trigger).attr("onclick","dislike(this)");
+            $(trigger).css("color", "#005D51");
+        }
+
+    });
+
+    
 	//TODO: Add function to add in database
 }
 
-function unlike(trigger) {
+function dislike(trigger) {
 	var numlikes = Number($(trigger).siblings("#numlikes").html());
 	$(trigger).siblings("#numlikes").html(numlikes-1);
 	$(trigger).attr("onclick","like(this)");

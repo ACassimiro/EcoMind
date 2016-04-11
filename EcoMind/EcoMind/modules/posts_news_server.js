@@ -122,7 +122,6 @@ function getPostList(socket, req) {
                         }); //End of async
                     } // end of post.comments == null else
                     
-
                 }); // end of posts.forEach
             }
     });
@@ -131,12 +130,26 @@ function getPostList(socket, req) {
 function likePost(socket, req) {
     var message_to_client = {};
     
-    database['news_posts'].incLike(req.post_id, function (err, posts) {
+    database['news_posts'].incLike(req.post_id, req.user_id, function (err, posts) {
         if (err || !posts) {
-            message_to_client['posts'] = null;
+            message_to_client['data'] = false;
             socket.send(JSON.stringify(message_to_client));
         } else {
-            message_to_client['posts'] = posts;
+            message_to_client['data'] = true;
+            socket.send(JSON.stringify(message_to_client));
+        }
+    });
+}
+
+function dislikePost(socket, req) {
+    var message_to_client = {};
+    
+    database['news_posts'].disLike(req.post_id, req.user_id, function (err, posts) {
+        if (err || !posts) {
+            message_to_client['data'] = false;
+            socket.send(JSON.stringify(message_to_client));
+        } else {
+            message_to_client['data'] = true;
             socket.send(JSON.stringify(message_to_client));
         }
     });
@@ -171,6 +184,9 @@ function requestListener(socket, req) {
             break;
         case 'likePost':
             likePost(socket, req);
+            break;
+        case 'dislikePost':
+            dislikePost(socket, req);
             break;
         case 'commentOnPost':
             commentOnPost(socket, req);

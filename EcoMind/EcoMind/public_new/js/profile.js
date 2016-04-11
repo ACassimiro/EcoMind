@@ -104,9 +104,15 @@ function getUserPosts(id, number) {
      	    
 			htmlposts += '</div>'+
 				'<hr>' +
-				'<div class="social-media-buttons">' +
-				'<button onClick="like(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button><div id="numlikes" class="likes">' + likes + '</div>' +
-				'<button onClick="openInput(this);"><span class="glyphicon glyphicon-comment"></span> Comment</button><div id="numcomments" class="likes">' + comments.length + '</div><div class="comment-input"></div>' +
+				'<div class="social-media-buttons">';
+
+			if ($.inArray(id, post.likesIds) === -1) {
+				htmlposts += '<button onClick="like(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button><div id="numlikes" class="likes">' + likes + '</div>';
+			} else {
+				htmlposts += '<button class="cliked" onClick="dislike(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Dislike</button><div id="numlikes" class="likes">' + likes + '</div>';
+			}
+
+			htmlposts += '<button onClick="openInput(this);"><span class="glyphicon glyphicon-comment"></span> Comment</button><div id="numcomments" class="likes">' + comments.length + '</div><div class="comment-input"></div>' +
 				'</div>' +
 				'<hr>' +
 				'<div class="comments">'; 
@@ -132,9 +138,9 @@ function getUserPosts(id, number) {
 			}
 				
     	    //submitCommentPost
-        
-            
+                    
         });
+
         $(".posts .column1").append(htmlpostsleft);
         $(".posts .column2").append(htmlpostsright);
    });

@@ -78,8 +78,12 @@ module.exports = function () {
             news_posts.update({_id: new mongo.ObjectID(id)}, {'$push': {comments: {comment: newComment, id: userId}}}, {safe: true}, callback);
         },
 
-        incLike: function(id, callback) {
-            news_posts.update({_id: new mongo.ObjectID(id)}, {'$inc': {likes: 1}}, {safe: true}, callback);
+        incLike: function(id, userId, callback) {
+            news_posts.update({_id: new mongo.ObjectID(id)}, {'$inc': {likes: 1}, '$push': {likesIds: userId}}, {safe: true}, callback);
+        },
+
+        disLike: function(id, userId, callback) {
+            news_posts.update({_id: new mongo.ObjectID(id)}, {'$inc': {likes: -1}, '$pull': {likesIds: userId}}, {safe: true}, callback);
         }
 
 
