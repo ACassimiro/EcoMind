@@ -66,70 +66,9 @@ function getUserPosts(id, number) {
         var htmlpostsright = "";
      	
         var count = 0;
-        message.posts.forEach(function(post) {
+        message.posts.forEach(function(p) {
         	count = count + 1;
-        	var htmlposts = "";
-    	    if(post.likes == null){
-    		   likes = 0;
-    	    } else {
-    		   likes = post.likes;
-    	    }
-
-    	    if(post.comments == null){
-     		   comments = [];
-     	    } else {
-     		   comments = post.comments;
-     	    }
-
-     	    htmlposts += '<div class="post" id="' + post._id +'">' +
-               '<h2>' + post.title + '</h2>' +
-               '<div class="tags">';
-
-            var tagsize = 100/post.ecological_field.length;
-            post.ecological_field.forEach(function(tag) {
-            	htmlposts += '<div class="' + formatEcoTags(tag) + ' tag'+Math.ceil(tagsize)+'"></div>';
-            });   
-
-            htmlposts += '</div>' +
-            	'<div class="content">' +
-            	'<p>' + post.description + '</p></br>';
-
-            if (post.type === "poll") {
-                post.options.forEach(function(opt) {
-                    htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
-                });
-                htmlposts += '</br><button onclick="pollVote(this)">Vote</button>'
-               
-            }
-     	    
-			htmlposts += '</div>'+
-				'<hr>' +
-				'<div class="social-media-buttons">';
-
-			if ($.inArray(id, post.likesIds) === -1) {
-				htmlposts += '<button onClick="like(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button><div id="numlikes" class="likes">' + likes + '</div>';
-			} else {
-				htmlposts += '<button class="cliked" onClick="dislike(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Dislike</button><div id="numlikes" class="likes">' + likes + '</div>';
-			}
-
-			htmlposts += '<button onClick="openInput(this);"><span class="glyphicon glyphicon-comment"></span> Comment</button><div id="numcomments" class="likes">' + comments.length + '</div><div class="comment-input"></div>' +
-				'</div>' +
-				'<hr>' +
-				'<div class="comments">'; 
-			
-			var numcom = 0;
-			comments.forEach(function(c) {
-				numcom = numcom + 1;
-
-				htmlposts += '<div class="comment">' +
-						'<h5>' +numcom + '</h5>' +
-						'<h4>' +c.name+'</h4>' +
-						'<p>'+c.comment + '</p>' +
-						'</div>';
-			});
-
-			htmlposts += "</div></div>";
-
+        	var htmlposts = createPost(id, p);
 			if ((count % 2) === 0) {
 				htmlpostsright += htmlposts;
 				
