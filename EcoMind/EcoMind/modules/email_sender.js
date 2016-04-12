@@ -20,14 +20,14 @@ function sendEmail(socket, req){
 		html: '<b>Hello world </b>' 
 	};
 
-	transporter.sendMail(mailOptions, function(error, response)){
+	transporter.sendMail(mailOptions, function(error, response){
 		if (error){
 			console.log(error);
 		} else{
 			console.log("Message sent");
 		}
 	
-	}
+	});
 }
 
 function requestListener(socket, req) {

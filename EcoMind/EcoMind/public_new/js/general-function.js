@@ -27,7 +27,6 @@ function like(trigger) {
     
     var data = { 
         action_type: "likePost",
-        http_type: "GET",
         post_id: id,
         user_id: getCookie().client_id
     };
@@ -39,6 +38,7 @@ function like(trigger) {
         message = JSON.parse(message);
         if (message.data) {
             $(trigger).siblings("#numlikes").html(numlikes+1);
+            $(trigger).html('<span class="glyphicon glyphicon-thumbs-up"></span> Dislike');
             $(trigger).attr("onclick","dislike(this)");
             $(trigger).css("color", "#005D51");
         }
@@ -50,11 +50,32 @@ function like(trigger) {
 }
 
 function dislike(trigger) {
-	var numlikes = Number($(trigger).siblings("#numlikes").html());
-	$(trigger).siblings("#numlikes").html(numlikes-1);
-	$(trigger).attr("onclick","like(this)");
-	$(trigger).css("color", "#717171");
-	//TODO: Add function to add in database
+    
+    var numlikes = Number($(trigger).siblings("#numlikes").html());
+    
+    var socket = io.connect("/"); 
+
+    var id = $(trigger).parent().parent().attr("id")
+    
+    var data = { 
+        action_type: "dislikePost",
+        post_id: id,
+        user_id: getCookie().client_id
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message) {  
+
+        message = JSON.parse(message);
+        if (message.data) {
+            $(trigger).siblings("#numlikes").html(numlikes-1);
+            $(trigger).html('<span class="glyphicon glyphicon-thumbs-up"></span> Like');
+            $(trigger).attr("onclick","like(this)");
+            $(trigger).css("color", "#717171");
+        }
+
+    });
 }
 
 function logout() {
