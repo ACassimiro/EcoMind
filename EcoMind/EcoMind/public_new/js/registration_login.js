@@ -148,7 +148,6 @@ function submitEcoInfoForm() {
             $(".success").html("Your Eco-Information was succesfully saved");   
        } else {
             $(".error").html("We were not able to save your Eco-Information. Try it later");
-           
        }
        
        $("#question1").val("");

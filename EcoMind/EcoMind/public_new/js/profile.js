@@ -1,3 +1,21 @@
+function openRedoEcoForm() {
+    var id = getCookie().client_id;
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getEcoInformationQuestions",
+        http_type: "GET"
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){ 
+        message = JSON.parse(message);
+        var formhtml = createEcoInformationForm(message.data, id);
+        $("#tab3").html(formhtml);
+        $("#tab3").append("<button onClick='submitEcoInfoForm()'>Submit</button>")
+    });
+}
+
 function createUserProfile() {
     var userId = getCookie().client_id;
 
