@@ -1,3 +1,35 @@
+function loadhome() {
+	setPreferences();
+}
+
+function setPreferences() {
+	var userId = getCookie().client_id;
+
+    var socket = io.connect("/"); 
+    
+    var data = { 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.user !== null && message.user !== undefined) {
+        	var htmlpref = "";
+        	message.user.preferences.forEach(function(p) {
+        		htmlpref += '<h2 class="'+ formatEcoTags(p) +'">'+p+'<span class="glyphicon glyphicon-tag"></span></h2>'
+        	});
+           
+           $('.preferences .user-preferences').html(htmlpref);
+        } 
+
+    });
+}
+
 $("section.posting-area").hover(
 	function(){
 
