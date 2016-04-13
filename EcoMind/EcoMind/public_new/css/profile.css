@@ -52,6 +52,17 @@ section.userInformation .userBox #buttons {
 	margin: 10px 35px;
 }
 
+#becomeFanButton {
+	margin-top: 10px;
+	background-color: #005D51;
+	color:#F4F4F4;
+	text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+}
+
+#becomeFanButton:hover {
+	opacity: 0.7;
+}
+
 section.userInformation .profileUserInfo {
 	position: absolute;
 	top: 70px;

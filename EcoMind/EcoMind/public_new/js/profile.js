@@ -42,7 +42,7 @@ function createUserProfile() {
 }
 
 function fillUserProfile(user) {
-    // alert(user.image);
+    
     if(user.image === null || user.image === undefined){
         if (user.gender === "female") {
             $(".userInformation .userBox #photo").html('<img src="images/woman1.png" id="userImg">');
@@ -67,6 +67,114 @@ function fillUserProfile(user) {
     //getObjectivesAchievements(user._id);
     
 
+}
+
+function viewIdolProfile(id) {
+    document.cookie=("idol_id=").concat(id);
+    location.href = "profile_idol.html";
+}
+
+
+function createIdolProfile() {
+    var socket = io.connect("/"); 
+    //var userId = document.cookie.split("=")[1]; //get idol id
+    var userId = getCookie().idol_id;
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.user !== null && message.user !== undefined) {
+            checkIdol();
+            fillUserProfile(message.user);
+        } else {
+            alart("Sorry. We could not load the user. Try again.");
+        }
+
+    });
+}
+
+function checkIdol() {
+
+    var socket = io.connect("/"); 
+
+    var data = { 
+        action_type: "findIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+
+        if (message.data) {
+            $("#becomeFanButton").html("IDOL");
+            $("#becomeFanButton").attr("onclick","removeIdol()");
+        } else {
+            $("#becomeFanButton").html("Become a fan");
+            $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        }
+
+    });
+
+    
+}
+
+function becomeFanOfOtherUser(){
+    
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "becomeAFan",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.data) {
+           $("#becomeFanButton").html("IDOL");
+           $("#becomeFanButton").attr("onclick","removeIdol()");
+        } 
+
+    });
+}
+
+function removeIdol(){
+    
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "removeIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.data) {
+           $("#becomeFanButton").html("Become a fan");
+           $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        } 
+
+    });
 }
 
 function getUserPosts(id, number) {

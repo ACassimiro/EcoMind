@@ -398,8 +398,6 @@ function checkIdol() {
 }
 
 function viewIdolProfile(id) {
-    console.log("CARALHO");
     document.cookie=("idol_id=").concat(id);
     location.href = "profile_page_idol.html";
-    
 }
