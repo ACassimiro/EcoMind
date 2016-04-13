@@ -38,7 +38,11 @@ body {
 	color:#F4F4F4;
 	border-radius: 10px;
 	box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-	
+	overflow-y: auto;
+}
+
+.register img {
+	margin-bottom: 10px;	
 }
 
 .register h3 {
