@@ -162,10 +162,10 @@ function commentOnPost(socket, req){
     database['news_posts'].addComment(req.post_id, req.userId, req.comment, function (err, posts) {
         if (err || !posts) {
             
-            message_to_client['posts'] = null;
+            message_to_client['data'] = false;
             socket.send(JSON.stringify(message_to_client));
         } else {
-            message_to_client['posts'] = posts;
+            message_to_client['data'] = true;
             socket.send(JSON.stringify(message_to_client));
         }
     });

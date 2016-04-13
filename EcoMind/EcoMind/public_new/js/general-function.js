@@ -7,7 +7,7 @@ function openOverlay() {
 }
 
 function openInput(trigger) {
-	$(trigger).siblings(".comment-input").html("<input type='text' placeholder='type your text here and enter...'>");
+	$(trigger).siblings(".comment-input").html("<input type='text' placeholder='type your text here and enter...'><button onclick='sendComment(this)'>ok</button>");
 	$(trigger).attr("onclick","closeInput(this)");
 	$(trigger).css("color", "#005D51");
 }
@@ -141,6 +141,42 @@ function dislike(trigger) {
         }
 
     });
+}
+
+function sendComment(trigger) {
+    var socket = io.connect("/"); 
+    
+    var comment = $(trigger).siblings("input").val();
+    
+    var postid = $(trigger).parent().parent().parent().attr("id");
+
+    var userId = getCookie().client_id;
+
+    var data = {  
+        action_type: "commentOnPost",
+        post_id: postid,
+        userId: userId,
+        comment: comment
+    };
+    
+    socket.send(JSON.stringify(data)); 
+    
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message);
+        if (message.data) {
+            $(trigger).siblings("input").val("");
+            
+            var newcomment = '<div class="comment">' +
+                '<h5>NEW</h5>' +
+                '<p>'+ comment + '</p>' +
+            '</div>';
+            console.log($(trigger).parent().parent().siblings(".comments"));
+            $(trigger).parent().parent().siblings(".comments").append(newcomment);
+        }
+    });
+    
 }
 
 function logout() {

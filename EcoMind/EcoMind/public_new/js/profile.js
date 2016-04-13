@@ -221,7 +221,7 @@ function openEditUserInfo() {
 function editImage(trigger){
     var socket = io.connect("/");
 
-    alert(document.getElementById("imagePreview").src);
+    //alert(document.getElementById("imagePreview").src);
 
     var newData = {
         action_type: "editUserImage",

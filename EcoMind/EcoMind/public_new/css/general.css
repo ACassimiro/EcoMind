@@ -134,8 +134,13 @@ section.overlay {
 }
 
 .post .social-media-buttons .comment-input input {
+    float: left;
     margin: 0 10px;
-    width: 300px;
+    width: 260px;
+}
+
+.post .social-media-buttons .comment-input button {
+    float: right;
 }
 .post .comments {
     color: #A1A1A1;
