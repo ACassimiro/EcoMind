@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EcoMind</title>
+	<link rel="icon" href="images/favicon_ecomind.ico">
+
+	<link rel="stylesheet" href="css/general.css">
+	<link rel="stylesheet" href="css/menu_bar.css">
+	<link rel="stylesheet" href="css/profile.css">
+	
+	<script src="libs/jquery-2.2.2.js"></script>
+	<script src="js/profile.js"></script>
+	<script src="js/registration_login.js"></script>
+	<script src="js/general-function.js"></script>
+	<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script> 
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>	
+<body onload="createIdolProfile()">
+	<header>
+		<div class="row">
+			<div id="logo">
+				<h1>EcoMind</h1>
+			</div>
+			<div id="logout">
+				<a href="#" onClick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
+			</div>
+			<div id="nav">
+				<div>
+					<a href="home.html"> Home</a> 
+				</div>
+				<div>
+					<a href="profile.html"> Profile</a> 
+				</div>
+				<div>
+					<a href="news.html"> News</a> 
+				</div>
+				<div>
+					<a href="community.html"> Community</a> 
+					<div>
+						<div>
+							<a href="community.html#aboutus"> About us</a> 
+						</div>
+						<div>
+							<a href="community.html#guidelines"> Guidelines</a> 
+						</div>
+						<div>
+							<a href="community.html#contactus"> Contact us</a> 
+						</div>
+					</div>
+				</div>
+				
+				<input type="text" placeholder="Search..." required> <button>&#128270;</button>
+
+			</div>
+			
+		</div>
+	</header>
+
+	<section class="overlay">
+		<div class="userList">
+			<div class="close" onClick="closeProfileOverlay()"><span class="glyphicon glyphicon-remove"></span></div>
+			<h1></h1>
+			<div class="list"></div>
+			<div class="edituser"></div>
+		</div>
+	</section>
+
+	<section class="userInformation">
+		<div class="userBox">
+			<h1 id="username"></h1>
+			<div id="photo"></div>
+			<div id="buttons">
+				<button onClick="getFansList('idol')"><span class="glyphicon glyphicon-star"></span> Fans</button>
+				<button onClick="getIdolsList('idol')"><span class="glyphicon glyphicon-user"></span> Idols</button></br>
+				<button id="becomeFanButton" onClick="becomeFanOfOtherUser()">Become a fan</button>
+			</div>
+
+		</div>
+		<div class="profileUserInfo">
+			<h2>Date of Birth</h2>
+			<div id="birthdate"></div>
+			<h2>Email</h2>
+			<div id="email"></div>
+			<h2>Preferences</h2>
+			<div id="preferences">
+				<ul>
+				</ul>
+			</div>
+		</div>
+
+		<div class="tabs">
+		    <ul class="tab-links">
+		        <li class="active"><a href="#tab1">Evolution</a></li>
+		        <li><a href="#tab2">Objectives and Achievements</a></li>
+		    </ul>
+		 
+		    <div class="tab-content">
+		        <div id="tab1" class="tab active">
+		            <div id="chartContainer"></div>
+		        </div>
+		 
+		        <div id="tab2" class="tab">
+		            <ul>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 5 gallons</li>
+		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 5 gallons</li>
+		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 5 gallons</li>
+		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 5 gallons</li>
+		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 5 gallons</li>
+		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
+		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
+		            </ul>
+		        </div>
+		 
+		    </div>
+		</div>
+
+	</section>
+
+	<section class="posts">
+		<div class="column1">
+			
+		</div>
+		<div class="column2">
+			
+		</div>
+	</section>
+	<script type="text/javascript">
+	   $(document).ready(function () {
+	      $('head').append('<link href="css/general.css" rel="stylesheet" />');
+	   });
+	</script>
+</body>
+</html>

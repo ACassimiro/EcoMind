@@ -278,13 +278,8 @@ function createUsersList(users) {
 	$(".overlay .userList .list").html("");
    	users.forEach(function (user) {
  		
- 		var htmluser = "<div onclick='viewIdolProfile(\"" + user._id +"\");'>";
+ 		var htmluser = "<div onclick='viewIdolProfile(\"" + user._id +"\");'><img src='" + user.image + "'>";
  		
- 		if(user.gender==="female") {
- 			htmluser += '<img src="images/woman1.png">';
- 		} else {
- 			htmluser += '<img src="images/man1.png">';
- 		}
 		
 		htmluser += '<h2>' + user.name +'</h2></div>';
 					
