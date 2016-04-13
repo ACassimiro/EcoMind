@@ -43,7 +43,7 @@ function createUserProfile() {
 
 function fillUserProfile(user) {
     // alert(user.image);
-    if(user.image === null){
+    if(user.image === null || user.image === undefined){
         if (user.gender === "female") {
             $(".userInformation .userBox #photo").html('<img src="images/woman1.png" id="userImg">');
         } else {
@@ -192,7 +192,7 @@ function openEditUserInfo() {
     var form = "<div id='edituserform'><div class='error'></div><div class='success'></div>" +
         "<div class='edituserformitem'><h4>Edit Image</h4>" +
         "<img src='"+ document.getElementById("userImg").src + "' height='200' width = '150' id='imagePreview' alt='Image preview...'>" +
-        "<input type='file' id='imageInput' onchange='previewFile()' accept='.png, .jpeg, .jpg, .bmp'>" + 
+        "<input type='file' id='imageInput' onchange='previewFile()' accept='.png, .jpeg, .jpg, .bmp, .gif'>" + 
         "<button onclick='editImage(this);'>Edit</button>" + 
         "</div>" +
         "<div class='edituserformitem'><h4>Edit Password</h4>" +
@@ -235,7 +235,7 @@ function editImage(trigger){
             $(".success").html("* Image successfully updated.");
             document.getElementById("userImg").src = document.getElementById("imagePreview").src;
             $(".error").html("");
-            $(siblings[0]).val('');
+            // $(siblings[0]).val('');
             $(".userInformation .userBox #username").html(username);
         } else if (message.update === false){
             $(".error").html("* We were not able to edit your image, try again.");
@@ -245,7 +245,7 @@ function editImage(trigger){
 }
 
 function previewFile(){
-        
+            console.log("Test");
             var x = document.getElementById("imageInput");
             var txt = "";
             if ('files' in x) {
@@ -255,7 +255,7 @@ function previewFile(){
                     for (var i = 0; i < x.files.length; i++) {
                         var file = x.files[i];
                         if ('size' in file) {
-                            console.log("File size:", file.size);
+                            // console.log("File size:", file.size);
                             // SIZE LIMIT 2MB (Average of cellphone photo size)
                             if(file.size > 2000000) {
                                 alert("Sorry, try again with a another image smaller than 1mb.");
@@ -275,8 +275,8 @@ function previewFile(){
 
             reader.onloadend = function () {
                 preview.src = reader.result;
-                console.log("Source:", preview.src);
-                console.log(preview.src.length);
+                // console.log("Source:", preview.src);
+                // console.log(preview.src.length);
             }
 
             if (file) {
