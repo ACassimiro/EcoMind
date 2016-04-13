@@ -74,7 +74,6 @@ function getUserPosts(id, number) {
    var socket = io.connect("/"); 
    var data = {  
        action_type: "getUserPosts",
-       http_type: "GET",
        user_id: id,
        number: number
    };
@@ -98,8 +97,6 @@ function getUserPosts(id, number) {
 			} else {
 				htmlpostsleft += htmlposts;
 			}
-				
-    	    //submitCommentPost
                     
         });
 
