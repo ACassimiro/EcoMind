@@ -53,6 +53,10 @@ module.exports = function () {
            
         },
 
+        editImage: function (userId, new_image, callback) {
+            users.update({_id: new mongo.ObjectID(userId)}, {$set: { image: new_image }}, {safe: true}, callback);           
+        },
+
         updateUser: function (userId, fields, callback) {
             users.update({_id: new mongo.ObjectID(userId)}, {$set: fields}, {safe: true}, callback);
         },

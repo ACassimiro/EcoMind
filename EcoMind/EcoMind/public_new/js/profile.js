@@ -42,11 +42,16 @@ function createUserProfile() {
 }
 
 function fillUserProfile(user) {
-	if (user.gender === "female") {
-		$(".userInformation .userBox #photo").html('<img src="images/woman1.png">');
-	} else {
-		$(".userInformation .userBox #photo").html('<img src="images/man1.png">');
-	}
+    // alert(user.image);
+    if(user.image === null){
+        if (user.gender === "female") {
+            $(".userInformation .userBox #photo").html('<img src="images/woman1.png" id="userImg">');
+        } else {
+            $(".userInformation .userBox #photo").html('<img src="images/man1.png" id="userImg">');
+        }
+    } else {
+        $(".userInformation .userBox #photo").html('<img src="'+ user.image +'" id="userImg">');
+    }
 
     $(".userInformation .userBox #username").html(user.name);
     $(".userInformation .profileUserInfo #birthdate").html(user.birthdate);
@@ -188,6 +193,11 @@ function createUsersList(users) {
 function openEditUserInfo() {
 	$(".overlay .userList h1").html("Edit User Info");
     var form = "<div id='edituserform'><div class='error'></div><div class='success'></div>" +
+        "<div class='edituserformitem'><h4>Edit Image</h4>" +
+        "<img src='"+ document.getElementById("userImg").src + "' height='200' width = '150' id='imagePreview' alt='Image preview...'>" +
+        "<input type='file' id='imageInput' onchange='previewFile()' accept='.png, .jpeg, .jpg, .bmp'>" + 
+        "<button onclick='editImage(this);'>Edit</button>" + 
+        "</div>" +
         "<div class='edituserformitem'><h4>Edit Password</h4>" +
         "<input type='password' placeholder='old password' size=30>" +
         "<input type='password' placeholder='new password' size=30>" +
@@ -202,11 +212,83 @@ function openEditUserInfo() {
         "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
-         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
+        "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
         "</div>";
        $(".overlay .userList .edituser").html(form);
        openOverlay();
 }
+
+function editImage(trigger){
+    var socket = io.connect("/");
+
+    alert(document.getElementById("imagePreview").src);
+
+    var newData = {
+        action_type: "editUserImage",
+        message: {
+            image: document.getElementById("imagePreview").src
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Image successfully updated.");
+            document.getElementById("userImg").src = document.getElementById("imagePreview").src;
+            $(".error").html("");
+            $(siblings[0]).val('');
+            $(".userInformation .userBox #username").html(username);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your image, try again.");
+        }
+    });
+    
+}
+
+function previewFile(){
+        
+            var x = document.getElementById("imageInput");
+            var txt = "";
+            if ('files' in x) {
+                if (x.files.length == 0) {
+                    return;
+                } else {
+                    for (var i = 0; i < x.files.length; i++) {
+                        var file = x.files[i];
+                        if ('size' in file) {
+                            console.log("File size:", file.size);
+                            // SIZE LIMIT 2MB (Average of cellphone photo size)
+                            if(file.size > 2000000) {
+                                alert("Sorry, try again with a another image smaller than 1mb.");
+                                return;
+                            }
+                        }
+                    }
+                }
+            } 
+
+
+
+            var preview = document.querySelector('img');
+            var file = document.querySelector('input[type=file]').files[0]; 
+            var reader = new FileReader();
+
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                console.log("Source:", preview.src);
+                console.log(preview.src.length);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); //reads the data as a URL
+            } else {
+                preview.src = "";
+            }
+        }
+
 
 function editPassword(trigger) {
     $(".success").html("");

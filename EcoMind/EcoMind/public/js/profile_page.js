@@ -151,7 +151,6 @@ function createEditUserInfo(title) {
         "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
-        "<input type='file' id='imageInput' onchange='previewFile()' accept='.png, .jpeg, .jpg, .bmp'>" +
         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
         "</div>";
 
