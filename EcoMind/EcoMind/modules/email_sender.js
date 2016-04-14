@@ -4,17 +4,17 @@ var app=express();
 
 function sendEmail(socket, req){
 	var transporter = nodemailer.createTransport({
-			service: 'gmail',
+			service: "Gmail",
 			auth: {
-				user: 'ecomindsu',
-				pass: 'SumatranTiger'
+				user: "ecomindsu",
+				pass: "SumatranTiger"
 			}
 	});
 
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
-		from: 'ecomindsu@gmail.com', // sender address
-		to: 'speerbetsy@gmail.com', // list of receivers
+		from: "ecomindsu@gmail.com", // sender address
+		to: "speerbetsy@gmail.com", // list of receivers
 		subject: 'Hello ', // Subject line
 		text: 'Hello world', // plaintext body
 		html: '<b>Hello world </b>' 
