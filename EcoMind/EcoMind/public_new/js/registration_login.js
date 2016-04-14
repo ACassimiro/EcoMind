@@ -82,6 +82,15 @@ function registerUser() {
 
 	if (pass === rpass) {
 		$(".error").html("");
+
+    var profileImage = document.getElementById("profileImage").src;
+
+    if(profileImage ==  "http://www.mv.mu/en/forfait/img/point_interrogation.png"){
+      profileImage = null;
+      alert("Here");
+    }
+     
+
 		var data = { 
 	        action_type: "registration",
 	        message: {
@@ -90,7 +99,7 @@ function registerUser() {
 	            name: $('#reg_name').val(),
 	            birthdate: $("#reg_dob").val(),
 	            gender: $("#reg_gender option:selected").val(),
-              image: document.getElementById("profileImage").src
+              image: profileImage
 
 	        }, 
 	        user_id: undefined      
