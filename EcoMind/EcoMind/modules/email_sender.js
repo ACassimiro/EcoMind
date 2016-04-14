@@ -7,27 +7,27 @@ function sendEmail(socket, req){
 			service: 'gmail',
 			auth: {
 				user: 'ecomindsu',
-				pass: 'SumantranTiger'
+				pass: 'SumatranTiger'
 			}
 	});
 
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
-		from: user, // sender address
+		from: 'ecomindsu@gmail.com', // sender address
 		to: 'speerbetsy@gmail.com', // list of receivers
 		subject: 'Hello ', // Subject line
 		text: 'Hello world', // plaintext body
 		html: '<b>Hello world </b>' 
 	};
 
-	transporter.sendMail(mailOptions, function(error, response)){
+	transporter.sendMail(mailOptions, function(error, response){
 		if (error){
 			console.log(error);
 		} else{
 			console.log("Message sent");
 		}
 	
-	}
+	});
 }
 
 function requestListener(socket, req) {
