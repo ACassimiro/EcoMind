@@ -1,12 +1,14 @@
 function loadhome() {
-	setPreferences();
+	setPreferences(function(p) {
+		loadPosts(p);
+	});
 }
 
-function setPreferences() {
+function setPreferences(callback) {
 	var userId = getCookie().client_id;
 
     var socket = io.connect("/"); 
-    
+    var preferences = [];
     var data = { 
         action_type: "getUserInfo",
         http_type: "GET",
@@ -21,13 +23,55 @@ function setPreferences() {
         if (message.user !== null && message.user !== undefined) {
         	var htmlpref = "";
         	message.user.preferences.forEach(function(p) {
-        		htmlpref += '<h2 class="'+ formatEcoTags(p) +'">'+p+'<span class="glyphicon glyphicon-tag"></span></h2>'
+        		htmlpref += '<h2 class="'+ formatEcoTags(p) +'">'+p+'<span class="glyphicon glyphicon-tag"></span></h2>';
+        		preferences.push(p);
         	});
            
            $('.preferences .user-preferences').html(htmlpref);
+           callback(preferences);
         } 
 
     });
+}
+
+function loadPosts(preferences) {
+	
+	var filter = [];
+	preferences.forEach(function(p) {
+		filter.push({"ecological_field": {"$in": [p]}});
+	});
+	
+	getPostList(-5, filter);
+}
+
+function getPostList(number, filter){
+    var cookie = getCookie();
+    var socket = io.connect("/"); 
+ 	filter.forEach(function(f){
+ 		console.log(f);
+ 		var data = { 
+	       action_type: "getPostList",
+	       number: number,
+	       filter: f,
+	       user_id: undefined
+	   };
+
+	   socket.send(JSON.stringify(data)); 
+	   
+	   socket.on("message", function(message) {
+	          
+	        message = JSON.parse(message);
+	        var htmlposts = "";
+	        if (message.posts !== null && message.posts !== undefined) {
+	        	message.posts.forEach(function(post) {
+	        		htmlposts += createPost(getCookie().client_id, post);
+	        	});
+	        	$(".news .list").append(htmlposts);
+	        }
+	       
+	   });
+ 	});
+   
 }
 
 $("section.posting-area").hover(

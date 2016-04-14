@@ -42,7 +42,7 @@ function getUserPosts(socket, req) {
 
 function getPostList(socket, req) {
     
-    var message = {};
+    var message_to_client = {};
     database['news_posts'].getList(req.filter, req.number, function (err, posts) {
         console.log("Received the request");
         
