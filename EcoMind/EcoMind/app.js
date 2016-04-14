@@ -16,7 +16,7 @@ var io;
  */
 function initializeServer() {
 	var app = express();
-	app.use(express.static('./public'));
+	app.use(express.static('./public_new'));
 	 
 	var server = http.createServer(app).listen(config.server.httpServerPort, function(){
 		console.log('app.js @', config.server.httpServerPort);
