@@ -41,14 +41,14 @@ function loadPosts(preferences) {
 		filter.push({"ecological_field": {"$in": [p]}});
 	});
 	
-	getPostList(-5, filter);
+	getNewsList(-5, filter);
+	getPostList(0, filter);
 }
 
-function getPostList(number, filter){
+function getNewsList(number, filter){
     var cookie = getCookie();
     var socket = io.connect("/"); 
  	filter.forEach(function(f){
- 		console.log(f);
  		var data = { 
 	       action_type: "getPostList",
 	       number: number,
@@ -70,6 +70,55 @@ function getPostList(number, filter){
 	        }
 	       
 	   });
+ 	});
+   
+}
+
+function getPostList(number){
+    var cookie = getCookie();
+    var socket = io.connect("/");
+    var socket2 = io.connect("/"); 
+ 	
+	var data = { 
+	   action_type: "getIdolsIds",
+	   user_id: getCookie().client_id
+	};
+	
+	socket.send(JSON.stringify(data)); 
+
+   	socket.on("message", function(message) {
+          
+        message = JSON.parse(message);
+        
+        if (message.idols) {
+        	$(".posts .list").html();
+		    message.idols.forEach(function(idol) {
+		
+		    	var data2 = { 
+			       action_type: "getUserPosts",
+			       number: number,
+			       user_id: idol.idol
+			    };
+		    
+			    console.log(idol.idol);
+			    socket2.send(JSON.stringify(data2)); 
+
+	   			socket2.on("message", function(message2) {
+
+	   				message2 = JSON.parse(message2);
+	   				console.log(message2);
+				    var htmlposts = "";
+			        if (message2.posts !== null && message2.posts !== undefined) {
+			        	message2.posts.forEach(function(post) {
+			        		htmlposts += createPost(getCookie().client_id, post);
+			        	});
+			        	$(".posts .list").append(htmlposts);
+			        }
+	        	});
+	        });
+	   	} else {
+	   		$(".posts .list").html("No Posts from idols");
+	   	}
  	});
    
 }

@@ -141,6 +141,23 @@ function getIdolsList(socket, req) {
     }
 }
 
+function getIdolsIds(socket, req) {
+    var message_to_client = {};
+        
+    if (req.user_id !== null && req.user_id !== undefined) {
+        database['users'].findIdolsList(req.user_id, function (err, idols) {
+            if (err || !idols) {
+                message_to_client['idols'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                message_to_client['idols'] = idols;
+                socket.send(JSON.stringify(message_to_client));
+            }
+            
+        });
+    }
+}
+
 function editPassword(socket, req) {
     var message_to_client = {};
     if (req.message !== null && req.message !== undefined) {
@@ -263,6 +280,10 @@ function requestListener(socket, req) {
             break;
         case 'editUserImage':
             editUserImage(socket, req);
+            break;
+        case 'getIdolsIds':
+            getIdolsIds(socket, req);
+            break;
         default:
             return false;
     }

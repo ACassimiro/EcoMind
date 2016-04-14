@@ -46,6 +46,10 @@ function createPost(id, post) {
         '<div class="content">' +
         '<p>' + post.description + '</p></br>';
 
+    if (post.type === "news" && post.url !== null && post.url !== undefined && post.url !== "") {
+        htmlposts += '<a href="'+post.url+'" target="_blank">Read more</a>';
+    }    
+
     if (post.type === "poll") {
         post.options.forEach(function(opt) {
             htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
