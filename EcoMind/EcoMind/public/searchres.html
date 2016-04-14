@@ -106,6 +106,8 @@
         window.scrollTo(0, 10);
         window.scrollTo(0, 0);
         var query = $.urlParam('search');
+        
+        
         $(window).scroll(function() {       
             position = $("#postEnd").position();
             if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {

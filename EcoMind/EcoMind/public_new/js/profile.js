@@ -1,3 +1,21 @@
+function openRedoEcoForm() {
+    var id = getCookie().client_id;
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getEcoInformationQuestions",
+        http_type: "GET"
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){ 
+        message = JSON.parse(message);
+        var formhtml = createEcoInformationForm(message.data, id);
+        $("#tab3").html(formhtml);
+        $("#tab3").append("<button onClick='submitEcoInfoForm()'>Submit</button>")
+    });
+}
+
 function createUserProfile() {
     var userId = getCookie().client_id;
 
@@ -24,11 +42,16 @@ function createUserProfile() {
 }
 
 function fillUserProfile(user) {
-	if (user.gender === "female") {
-		$(".userInformation .userBox #photo").html('<img src="images/woman1.png">');
-	} else {
-		$(".userInformation .userBox #photo").html('<img src="images/man1.png">');
-	}
+    
+    if(user.image === null || user.image === undefined){
+        if (user.gender === "female") {
+            $(".userInformation .userBox #photo").html('<img src="images/woman1.png" id="userImg">');
+        } else {
+            $(".userInformation .userBox #photo").html('<img src="images/man1.png" id="userImg">');
+        }
+    } else {
+        $(".userInformation .userBox #photo").html('<img src="'+ user.image +'" id="userImg">');
+    }
 
     $(".userInformation .userBox #username").html(user.name);
     $(".userInformation .profileUserInfo #birthdate").html(user.birthdate);
@@ -46,12 +69,119 @@ function fillUserProfile(user) {
 
 }
 
+function viewIdolProfile(id) {
+    document.cookie=("idol_id=").concat(id);
+    location.href = "profile_idol.html";
+}
+
+
+function createIdolProfile() {
+    var socket = io.connect("/"); 
+    //var userId = document.cookie.split("=")[1]; //get idol id
+    var userId = getCookie().idol_id;
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        console.log(message); /*converting the data into JS object */
+        if (message.user !== null && message.user !== undefined) {
+            checkIdol();
+            fillUserProfile(message.user);
+        } else {
+            alart("Sorry. We could not load the user. Try again.");
+        }
+
+    });
+}
+
+function checkIdol() {
+
+    var socket = io.connect("/"); 
+
+    var data = { 
+        action_type: "findIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+
+        if (message.data) {
+            $("#becomeFanButton").html("IDOL");
+            $("#becomeFanButton").attr("onclick","removeIdol()");
+        } else {
+            $("#becomeFanButton").html("Become a fan");
+            $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        }
+
+    });
+
+    
+}
+
+function becomeFanOfOtherUser(){
+    
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "becomeAFan",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.data) {
+           $("#becomeFanButton").html("IDOL");
+           $("#becomeFanButton").attr("onclick","removeIdol()");
+        } 
+
+    });
+}
+
+function removeIdol(){
+    
+    var socket = io.connect("/"); 
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "removeIdol",
+        http_type: "POST",
+        message: {idol: getCookie().idol_id}, 
+        user_id: getCookie().client_id 
+    };
+
+    socket.send(JSON.stringify(data)); 
+
+    socket.on("message", function(message){  
+
+        message = JSON.parse(message);
+        if (message.data) {
+           $("#becomeFanButton").html("Become a fan");
+           $("#becomeFanButton").attr("onclick","becomeFanOfOtherUser()");
+        } 
+
+    });
+}
+
 function getUserPosts(id, number) {
 
    var socket = io.connect("/"); 
    var data = {  
        action_type: "getUserPosts",
-       http_type: "GET",
        user_id: id,
        number: number
    };
@@ -66,75 +196,18 @@ function getUserPosts(id, number) {
         var htmlpostsright = "";
      	
         var count = 0;
-        message.posts.forEach(function(post) {
+        message.posts.forEach(function(p) {
         	count = count + 1;
-        	var htmlposts = "";
-    	    if(post.likes == null){
-    		   likes = 0;
-    	    } else {
-    		   likes = post.likes;
-    	    }
-
-    	    if(post.comments == null){
-     		   comments = [];
-     	    } else {
-     		   comments = post.comments;
-     	    }
-
-     	    htmlposts += '<div class="post" id="' + post._id +'">' +
-               '<h2>' + post.title + '</h2>' +
-               '<div class="tags">';
-
-            var tagsize = 100/post.ecological_field.length;
-            post.ecological_field.forEach(function(tag) {
-            	htmlposts += '<div class="' + formatEcoTags(tag) + ' tag'+Math.ceil(tagsize)+'"></div>';
-            });   
-
-            htmlposts += '</div>' +
-            	'<div class="content">' +
-            	'<p>' + post.description + '</p></br>';
-
-            if (post.type === "poll") {
-                post.options.forEach(function(opt) {
-                    htmlposts += '<input type="radio" name="radio_user_post_poll" value="' + opt +'"> ' +  opt + '</br>';
-                });
-                htmlposts += '</br><button onclick="pollVote(this)">Vote</button>'
-               
-            }
-     	    
-			htmlposts += '</div>'+
-				'<hr>' +
-				'<div class="social-media-buttons">' +
-				'<button onClick="like(this);"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button><div id="numlikes" class="likes">' + likes + '</div>' +
-				'<button onClick="openInput(this);"><span class="glyphicon glyphicon-comment"></span> Comment</button><div id="numcomments" class="likes">' + comments.length + '</div><div class="comment-input"></div>' +
-				'</div>' +
-				'<hr>' +
-				'<div class="comments">'; 
-			
-			var numcom = 0;
-			comments.forEach(function(c) {
-				numcom = numcom + 1;
-
-				htmlposts += '<div class="comment">' +
-						'<h5>' +numcom + '</h5>' +
-						'<h4>' +c.name+'</h4>' +
-						'<p>'+c.comment + '</p>' +
-						'</div>';
-			});
-
-			htmlposts += "</div></div>";
-
+        	var htmlposts = createPost(id, p);
 			if ((count % 2) === 0) {
 				htmlpostsright += htmlposts;
 				
 			} else {
 				htmlpostsleft += htmlposts;
 			}
-				
-    	    //submitCommentPost
-        
-            
+                    
         });
+
         $(".posts .column1").append(htmlpostsleft);
         $(".posts .column2").append(htmlpostsright);
    });
@@ -205,13 +278,8 @@ function createUsersList(users) {
 	$(".overlay .userList .list").html("");
    	users.forEach(function (user) {
  		
- 		var htmluser = "<div onclick='viewIdolProfile(\"" + user._id +"\");'>";
+ 		var htmluser = "<div onclick='viewIdolProfile(\"" + user._id +"\");'><img src='" + user.image + "'>";
  		
- 		if(user.gender==="female") {
- 			htmluser += '<img src="images/woman1.png">';
- 		} else {
- 			htmluser += '<img src="images/man1.png">';
- 		}
 		
 		htmluser += '<h2>' + user.name +'</h2></div>';
 					
@@ -225,6 +293,11 @@ function createUsersList(users) {
 function openEditUserInfo() {
 	$(".overlay .userList h1").html("Edit User Info");
     var form = "<div id='edituserform'><div class='error'></div><div class='success'></div>" +
+        "<div class='edituserformitem'><h4>Edit Image</h4>" +
+        "<img src='"+ document.getElementById("userImg").src + "' height='200' width = '150' id='imagePreview' alt='Image preview...'>" +
+        "<input type='file' id='imageInput' onchange='previewFile()' accept='.png, .jpeg, .jpg, .bmp, .gif'>" + 
+        "<button onclick='editImage(this);'>Edit</button>" + 
+        "</div>" +
         "<div class='edituserformitem'><h4>Edit Password</h4>" +
         "<input type='password' placeholder='old password' size=30>" +
         "<input type='password' placeholder='new password' size=30>" +
@@ -239,11 +312,83 @@ function openEditUserInfo() {
         "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
-         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
+        "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
         "</div>";
        $(".overlay .userList .edituser").html(form);
        openOverlay();
 }
+
+function editImage(trigger){
+    var socket = io.connect("/");
+
+    //alert(document.getElementById("imagePreview").src);
+
+    var newData = {
+        action_type: "editUserImage",
+        message: {
+            image: document.getElementById("imagePreview").src
+        }, 
+        user_id: getCookie().client_id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message",function(message){  
+        message = JSON.parse(message);
+        if (message.update === true) {
+            $(".success").html("* Image successfully updated.");
+            document.getElementById("userImg").src = document.getElementById("imagePreview").src;
+            $(".error").html("");
+            // $(siblings[0]).val('');
+            $(".userInformation .userBox #username").html(username);
+        } else if (message.update === false){
+            $(".error").html("* We were not able to edit your image, try again.");
+        }
+    });
+    
+}
+
+function previewFile(){
+            console.log("Test");
+            var x = document.getElementById("imageInput");
+            var txt = "";
+            if ('files' in x) {
+                if (x.files.length == 0) {
+                    return;
+                } else {
+                    for (var i = 0; i < x.files.length; i++) {
+                        var file = x.files[i];
+                        if ('size' in file) {
+                            // console.log("File size:", file.size);
+                            // SIZE LIMIT 2MB (Average of cellphone photo size)
+                            if(file.size > 2000000) {
+                                alert("Sorry, try again with a another image smaller than 1mb.");
+                                return;
+                            }
+                        }
+                    }
+                }
+            } 
+
+
+
+            var preview = document.querySelector('img');
+            var file = document.querySelector('input[type=file]').files[0]; 
+            var reader = new FileReader();
+
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                // console.log("Source:", preview.src);
+                // console.log(preview.src.length);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); //reads the data as a URL
+            } else {
+                preview.src = "";
+            }
+        }
+
 
 function editPassword(trigger) {
     $(".success").html("");

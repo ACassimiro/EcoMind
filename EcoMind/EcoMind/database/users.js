@@ -12,13 +12,13 @@ module.exports = function () {
             console.log("database.users: users and relationship collection created");
         },
 
-        add: function (email, pass, name, birthdate, gender, preferences, callback) {
+        add: function (email, pass, name, birthdate, gender, preferences, userImage, callback) {
             var _userNotFound_then_add = function (err, obj) {
                 if (err) {
                     callback(err, undefined);
                 } else if (!obj) {
                     var tokens = createTokens.extractTokens(name);
-                    users.insert({email: email, pass: pass, name: name, tokens: tokens, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences}, {safe: true}, callback);
+                    users.insert({email: email, pass: pass, name: name, tokens: tokens, registerDate: new Date(), birthdate: birthdate, gender: gender, preferences: preferences, image: userImage}, {safe: true}, callback);
                 } else {
                     callback({err: 'User email already in use'}, undefined);
                 }
@@ -51,6 +51,10 @@ module.exports = function () {
         editPassword: function (userId, new_pass, callback) {
             users.update({_id: new mongo.ObjectID(userId)}, {$set: { pass: new_pass }}, {safe: true}, callback);
            
+        },
+
+        editImage: function (userId, new_image, callback) {
+            users.update({_id: new mongo.ObjectID(userId)}, {$set: { image: new_image }}, {safe: true}, callback);           
         },
 
         updateUser: function (userId, fields, callback) {

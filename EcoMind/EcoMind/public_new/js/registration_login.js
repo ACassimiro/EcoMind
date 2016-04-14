@@ -31,6 +31,49 @@ function login() {
     });
 }
 
+function previewFileRegister(){
+    
+  var x = document.getElementById("imageInput");
+  var txt = "";
+  if ('files' in x) {
+      if (x.files.length == 0) {
+          return;
+      } else {
+          for (var i = 0; i < x.files.length; i++) {
+              var file = x.files[i];
+              if ('size' in file) {
+                console.log("File size:", file.size);
+              // SIZE LIMIT 2MB (Average of cellphone photo size)
+                  if(file.size > 2000000) {
+                    alert("Sorry, try again with a another image smaller than 1mb.");
+                    return;
+                  }
+              }
+          }
+      }
+  } 
+
+
+
+  var preview = document.getElementById("profileImage");
+  var file = document.querySelector('input[type=file]').files[0]; 
+  var reader = new FileReader();
+
+
+  reader.onloadend = function () {
+      preview.src = reader.result;
+      console.log("Source:", preview.src);
+      console.log(preview.src.length);
+  }
+
+  if (file) {
+      reader.readAsDataURL(file); //reads the data as a URL
+  } else {
+      preview.src = "";
+  }
+}
+
+
 function registerUser() {
 	var socket = io.connect("/"); 
 
@@ -46,7 +89,9 @@ function registerUser() {
 	            password: pass,
 	            name: $('#reg_name').val(),
 	            birthdate: $("#reg_dob").val(),
-	            gender: $("#reg_gender option:selected").val()
+	            gender: $("#reg_gender option:selected").val(),
+              image: document.getElementById("profileImage").src
+
 	        }, 
 	        user_id: undefined      
 	    };
@@ -148,7 +193,6 @@ function submitEcoInfoForm() {
             $(".success").html("Your Eco-Information was succesfully saved");   
        } else {
             $(".error").html("We were not able to save your Eco-Information. Try it later");
-           
        }
        
        $("#question1").val("");

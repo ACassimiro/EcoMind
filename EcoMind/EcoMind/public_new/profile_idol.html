@@ -17,7 +17,7 @@
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
-<body onload="createUserProfile()">
+<body onload="createIdolProfile()">
 	<header>
 		<div class="row">
 			<div id="logo">
@@ -30,7 +30,7 @@
 				<div>
 					<a href="home.html"> Home</a> 
 				</div>
-				<div class="active">
+				<div>
 					<a href="profile.html"> Profile</a> 
 				</div>
 				<div>
@@ -70,12 +70,13 @@
 	<section class="userInformation">
 		<div class="userBox">
 			<h1 id="username"></h1>
-			<a class="edit" onClick="openEditUserInfo()"><span class="glyphicon glyphicon-cog"></span> edit</a>
 			<div id="photo"></div>
 			<div id="buttons">
-				<button onClick="getFansList('user')"><span class="glyphicon glyphicon-star"></span> Fans</button>
-				<button onClick="getIdolsList('user')"><span class="glyphicon glyphicon-user"></span> Idols</button>
+				<button onClick="getFansList('idol')"><span class="glyphicon glyphicon-star"></span> Fans</button>
+				<button onClick="getIdolsList('idol')"><span class="glyphicon glyphicon-user"></span> Idols</button></br>
+				<button id="becomeFanButton" onClick="becomeFanOfOtherUser()">Become a fan</button>
 			</div>
+
 		</div>
 		<div class="profileUserInfo">
 			<h2>Date of Birth</h2>
@@ -93,7 +94,6 @@
 		    <ul class="tab-links">
 		        <li class="active"><a href="#tab1">Evolution</a></li>
 		        <li><a href="#tab2">Objectives and Achievements</a></li>
-		        <li><a href="#tab3" onclick="openRedoEcoForm()"><span class="glyphicon glyphicon-cog"></span> Eco-Information Form</a></li>
 		    </ul>
 		 
 		    <div class="tab-content">
@@ -119,10 +119,6 @@
 		            	<li><span class="glyphicon glyphicon-remove-circle negative"></span> Reduce in 5% the car usage</li>
 		            	<li><span class="glyphicon glyphicon-ok-circle positive"></span> Reduce in 3 Pounds the food loss</li>
 		            </ul>
-		        </div>
-
-		        <div id="tab3" class="tab">
-
 		        </div>
 		 
 		    </div>

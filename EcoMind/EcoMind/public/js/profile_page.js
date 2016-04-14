@@ -151,7 +151,7 @@ function createEditUserInfo(title) {
         "<input type='checkbox' name='userPrefencesCheckbox' value='food waste'> Food Waste<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='trash'> Trash<br/>" +
         "<input type='checkbox' name='userPrefencesCheckbox' value='car usage'> Car Usage<br/>" +
-         "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
+        "<button onclick='editUserPreferences(this);'>Edit</button></div>" +
         "</div>";
 
     return form;
@@ -398,8 +398,6 @@ function checkIdol() {
 }
 
 function viewIdolProfile(id) {
-    console.log("CARALHO");
     document.cookie=("idol_id=").concat(id);
     location.href = "profile_page_idol.html";
-    
 }
