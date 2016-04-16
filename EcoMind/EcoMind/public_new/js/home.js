@@ -168,3 +168,52 @@ function addPollPostOption(trigger) {
  $("#pollPostOptions").append("<input class='radio' type='radio' name='poll_options' value='"+newValue+"'><label>"+newValue+"</label><br/>");
 
 }
+
+function submitUserPost() {
+    var socket = io.connect("/"); 
+    var ecological_field = [];
+    $("input[type='checkbox'][name='home_ecological_field']:checked").each( function () {
+        ecological_field.push($(this).val());
+    });   
+    var type = $($("input[type='radio'][name='radio_user_post_type']:checked")[0]).val();
+    var user = getCookie().client_id;
+    var message = {
+        user: user,
+        type: type,
+        ecological_field: ecological_field,
+        title: $("#home_user_post_title").val(),
+        description: $("#home_user_post_body").val()
+    };
+ 
+    if (type === 'poll') {
+      message["options"] = [];
+      $("#pollPostOptions").children().each( function () {
+           var e = $(this).val();
+          if (e !== "") {
+              message["options"].push(e); 
+          }
+            
+        });
+    }
+    socket.on("message",function(response){  
+
+        response = JSON.parse(response);
+        if (response.data) {
+            alert("Your post was succesfully created");
+        } else {
+            alert("We were not able to create your post");
+        }
+        $("#home_user_post_title").val('');
+        $("#home_user_post_body").val('');
+        $("input[type='checkbox'][name='home_ecological_field']:checked").attr('checked', false);
+    });
+
+    var data = { /*creating a Js ojbect to be sent to the server*/ 
+        action_type: "createPost",
+        message: message, 
+        user_id: user           
+   };
+   
+   socket.send(JSON.stringify(data)); 
+
+}
