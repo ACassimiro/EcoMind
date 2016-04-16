@@ -8,7 +8,10 @@
 	<link rel="stylesheet" href="css/menu_bar.css">
 	<link rel="stylesheet" href="css/news.css">
 	
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script src="libs/jquery-2.2.2.js"></script>
+	<script src="js/news.js"></script>
+	<script src="js/Home.js"></script>
 	<script src="js/general-function.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
@@ -57,41 +60,46 @@
 		<div class="block">
 			<div>
 				<figure>
-					<img src = "http://wallpapercanyon.com/wp-content/uploads/2016/01/Water-Wallpaper-14-800x600.jpg"/>
+					<img src = "http://wallpapercanyon.com/wp-content/uploads/2016/01/Water-Wallpaper-14-800x600.jpg" id="water" onclick="newsSelected()"/>
 					<figcaption>Water</figcaption>
 				</figure>
 			</div>
 			<div>
 				<figure>
-					<img src="https://assets-production-webvanta-com.s3-us-west-2.amazonaws.com/000000/44/16/original/articles/General/2014/05_May/800px-Plastic_and_Styrofoam_Contamination_in_Municipal_Compost.jpg"/>
+					<img src="https://assets-production-webvanta-com.s3-us-west-2.amazonaws.com/000000/44/16/original/articles/General/2014/05_May/800px-Plastic_and_Styrofoam_Contamination_in_Municipal_Compost.jpg" id="trash" onclick="newsSelected()"/>
 					<figcaption>Trash</figcaption>
 				</figure>
 			</div>
 			<div>
 				<figure>
-					 <img src="http://nation.com.pk/print_images/large/2013-12-22/china-caps-car-buying-to-curb-pollution-1387736084-5442.jpg"/>
+					 <img src="http://nation.com.pk/print_images/large/2013-12-22/china-caps-car-buying-to-curb-pollution-1387736084-5442.jpg" id="car_usage" onclick="newsSelected()"/>
 					<figcaption>Car Usage</figcaption>
 				</figure>
 			</div>
 			<div>
 				<figure>
-					<img src="http://extendaswitch.com/~extendaswitch/files/outlet.jpg"/>
+					<img src="http://extendaswitch.com/~extendaswitch/files/outlet.jpg" id="electricity" onclick="newsSelected()"/>
 					<figcaption>Electricity</figcaption>
 				</figure>
 			</div>
 			<div>
 				<figure>
-					<img src="https://aishasoasis.files.wordpress.com/2014/10/wpid-food-waste-jpg.jpeg"/>
+					<img src="https://aishasoasis.files.wordpress.com/2014/10/wpid-food-waste-jpg.jpeg" id="food_waste" onclick="newsSelected()"/>
 					<figcaption>Food Waste</figcaption>
 				</figure>
 			</div>
 			<div>
 				<figure>
-					<img src="https://d13yacurqjgara.cloudfront.net/users/121630/screenshots/1854889/plus-minus.gif"/>
+					<img src="https://d13yacurqjgara.cloudfront.net/users/121630/screenshots/1854889/plus-minus.gif" id="misc" onclick="newsSelected()"/>
 					<figcaption>Miscelaneous</figcaption>
 				</figure>
 			</div>
 		</div>
+		<section class="news">
+			<div class="list" id="newsContainer">
+			
+			</div>
+		</section>
 	</section>
 	<script type="text/javascript">
 	   $(document).ready(function () {

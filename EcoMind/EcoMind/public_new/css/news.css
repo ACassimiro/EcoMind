@@ -53,3 +53,9 @@ section.news .block > div img {
 section.news .block > div img:hover{
 	opacity: 0.8;
 }
+
+#newsContainer {
+	margin-top: -20vh;
+	margin-left: 25vw;
+	margin-right: 25vw;
+}
