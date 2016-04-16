@@ -35,3 +35,55 @@ function loadOnScroll(filter) {
         	
     });  
 }
+
+function search(){
+	if(document.getElementById("searchBox").value === ""){
+		return;
+	}
+
+	my_form=document.createElement('FORM');
+	my_form.name='myForm';
+	my_form.method='GET';
+	my_form.action="searchres.html";
+
+	my_tb=document.createElement('INPUT');
+	my_tb.type='TEXT';
+	my_tb.name='search';
+	my_tb.value= encodeURIComponent(document.getElementById("searchBox").value);
+	my_form.appendChild(my_tb);
+
+	document.body.appendChild(my_form);
+	my_form.submit();
+
+}
+
+function fillSearch(){
+	$.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null){
+            return null;
+        } else{
+            return results[1] || 0;
+        }
+    } 
+    var number = -5;
+    var position;
+    window.scrollTo(0, 10);
+    window.scrollTo(0, 0);
+    var query = $.urlParam('search');
+    query = decodeURIComponent(decodeURIComponent(query));
+    // alert(query);
+    
+	getUserList(number, {"tokens" : query});
+    getPostList(number, {"tokens" : query});
+              
+
+    // $(window).scroll(function() {       
+    //     position = $("#postEnd").position();
+    //     if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
+    //           getUserList(number, {"tokens" : query});
+    //           getPostList(number, {"tokens" : query});
+    //           number = number + 5;
+    //     }
+    // });
+}
