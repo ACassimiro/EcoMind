@@ -55,7 +55,7 @@ function getNewsList(number, filter){
 	       filter: f,
 	       user_id: undefined
 	   };
-
+	   console.log("I'm here");
 	   socket.send(JSON.stringify(data)); 
 	   
 	   socket.on("message", function(message) {

@@ -48,7 +48,7 @@ module.exports = function () {
 
         getUserPosts: function (user, number, limit, callback) {
             var cursor = news_posts.find({user: user}).skip(number);
-                
+            // console.log(news_posts.find({user: user}).skip(number).limit(1));
             if (limit !== null && limit !== undefined) {
                 cursor.limit(limit);
             }

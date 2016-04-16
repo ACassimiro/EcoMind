@@ -44,6 +44,11 @@ function removeIdol(){
     });
 }
 
+function loadUserPosts(userId) {
+    alert("Hello", userId);
+
+}
+
 
 function createUserProfile() {
 
@@ -67,7 +72,8 @@ function createUserProfile() {
         } else {
             alart("Sorry. We could not load the user. Try again.");
         }
-
+        alert("Here");
+        loadUserPosts(userId);
     });
 }
 
