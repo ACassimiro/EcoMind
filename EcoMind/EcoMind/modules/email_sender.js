@@ -3,6 +3,7 @@ var nodemailer = require("nodemailer");
 var app=express();
 
 function sendEmail(socket, req){
+
 	var transporter = nodemailer.createTransport({
 			service: "Gmail",
 			auth: {
@@ -14,17 +15,17 @@ function sendEmail(socket, req){
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
 		from: "ecomindsu@gmail.com", // sender address
-		to: "speerbetsy@gmail.com", // list of receivers
-		subject: 'Hello ', // Subject line
-		text: 'Hello world', // plaintext body
-		html: '<b>Hello world </b>' 
+		to: "ecomindsu@gmail.com", // list of receivers
+		subject: 'user @' + req.user_id + ' - ' + req.message.title, // Subject line
+		text: req.message.msg, // plaintext body
+		html: req.message.msg
 	};
 
 	transporter.sendMail(mailOptions, function(error, response){
 		if (error){
 			console.log(error);
 		} else{
-			console.log("Message sent");
+			console.log("Message sent from @" + req.user_id);
 		}
 	
 	});

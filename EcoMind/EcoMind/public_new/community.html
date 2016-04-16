@@ -7,7 +7,9 @@
 	<link rel="stylesheet" href="css/general.css">
 	<link rel="stylesheet" href="css/menu_bar.css">
 	<link rel="stylesheet" href="css/community.css">
+	<script src="js/general-function.js"></script>
 	
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script> 
 	<script src="libs/jquery-2.2.2.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>	
@@ -98,7 +100,7 @@
 		<h2>CONTACT US</h2>
 		<p> Please contact us with any inquiries, tips, or to report another user</p>
 
-		<div class="top"><h3>Title</h3><input type="text" id="emailtitle" placeholder="Message Title ..."><button>Send</button></div>
+		<div class="top"><h3>Title</h3><input type="text" id="emailtitle" placeholder="Message Title ..."><button onclick="sendEmail()">Send</button></div>
 		<div></div><textarea id="emailmessage" rows="4" cols="100" placeholder="message..."></textarea></div>
 	</section>
 
