@@ -47,7 +47,7 @@ module.exports = function () {
         },
 
         getUserPosts: function (user, number, limit, callback) {
-            var cursor = news_posts.find({user: user}).skip(number);
+            var cursor = news_posts.find({user: user}).skip(number).sort({timestamp: -1});
             // console.log(news_posts.find({user: user}).skip(number).limit(1));
             if (limit !== null && limit !== undefined) {
                 cursor.limit(limit);
@@ -58,7 +58,7 @@ module.exports = function () {
         },
 
         getList: function (filter, number, callback) {
-    	    news_posts.find(filter).skip(number + 5).limit(5).toArray(callback);
+    	    news_posts.find(filter).skip(number + 5).limit(5).sort({timestamp: -1}).toArray(callback);
     	},
 
 
@@ -67,7 +67,7 @@ module.exports = function () {
         },
 
         findEcologicalField: function(ecological_field) {
-            news_posts.find({ecological_field:  {'$in': ecological_field}}).toArray(callback);
+            news_posts.find({ecological_field:  {'$in': ecological_field}}).sort({timestamp: -1}).toArray(callback);
         },
 
         findByType: function(type) {
