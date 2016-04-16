@@ -72,6 +72,7 @@ function fillUserProfile(user) {
     
     getUserPosts(user._id, 0);
 
+    loadChart(user._id);
     //getObjectivesAchievements(user._id);
     
 
@@ -98,7 +99,7 @@ function createIdolProfile() {
     socket.on("message", function(message){  
 
         message = JSON.parse(message);
-        console.log(message); /*converting the data into JS object */
+        
         if (message.user !== null && message.user !== undefined) {
             checkIdol();
             fillUserProfile(message.user);
@@ -186,19 +187,19 @@ function removeIdol(){
 }
 
 function getUserPosts(id, number) {
-    console.log("Trying to get user posts");
-   var socket = io.connect("/"); 
-   console.log(id);
-   var data = {  
-       action_type: "getUserPosts",
-       user_id: id,
-       number: number
-   };
+    
+    var socket = io.connect("/"); 
+   
+    var data = {  
+        action_type: "getUserPosts",
+        user_id: id,
+        number: number
+    };
 
-   socket.send(JSON.stringify(data)); 
+    socket.send(JSON.stringify(data)); 
 
-   socket.on("message", function(message){  
-        console.log("Message arrived");
+    socket.on("message", function(message){  
+        
         message = JSON.parse(message);
      
         var htmlpostsleft = "";
@@ -219,7 +220,7 @@ function getUserPosts(id, number) {
 
         $(".posts .column1").append(htmlpostsleft);
         $(".posts .column2").append(htmlpostsright);
-   });
+    });
 }
 
 function closeProfileOverlay() {
@@ -357,46 +358,46 @@ function editImage(trigger){
 }
 
 function previewFile(){
-            console.log("Test");
-            var x = document.getElementById("imageInput");
-            var txt = "";
-            if ('files' in x) {
-                if (x.files.length == 0) {
-                    return;
-                } else {
-                    for (var i = 0; i < x.files.length; i++) {
-                        var file = x.files[i];
-                        if ('size' in file) {
-                            // console.log("File size:", file.size);
-                            // SIZE LIMIT 2MB (Average of cellphone photo size)
-                            if(file.size > 2000000) {
-                                alert("Sorry, try again with a another image smaller than 1mb.");
-                                return;
-                            }
-                        }
+        
+    var x = document.getElementById("imageInput");
+    var txt = "";
+    if ('files' in x) {
+        if (x.files.length == 0) {
+            return;
+        } else {
+            for (var i = 0; i < x.files.length; i++) {
+                var file = x.files[i];
+                if ('size' in file) {
+                    // console.log("File size:", file.size);
+                    // SIZE LIMIT 2MB (Average of cellphone photo size)
+                    if(file.size > 2000000) {
+                        alert("Sorry, try again with a another image smaller than 1mb.");
+                        return;
                     }
                 }
-            } 
-
-
-
-            var preview = document.querySelector('img');
-            var file = document.querySelector('input[type=file]').files[0]; 
-            var reader = new FileReader();
-
-
-            reader.onloadend = function () {
-                preview.src = reader.result;
-                // console.log("Source:", preview.src);
-                // console.log(preview.src.length);
-            }
-
-            if (file) {
-                reader.readAsDataURL(file); //reads the data as a URL
-            } else {
-                preview.src = "";
             }
         }
+    } 
+
+
+
+    var preview = document.querySelector('img');
+    var file = document.querySelector('input[type=file]').files[0]; 
+    var reader = new FileReader();
+
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+        // console.log("Source:", preview.src);
+        // console.log(preview.src.length);
+    }
+
+    if (file) {
+        reader.readAsDataURL(file); //reads the data as a URL
+    } else {
+        preview.src = "";
+    }
+}
 
 
 function editPassword(trigger) {
@@ -524,6 +525,66 @@ function editUserPreferences(trigger) {
     });
 }
 
+function loadChart(id) {
+    if (id === null || id === undefined) {
+        id = getCookie().client_id;
+    }
+    
+    var socket = io.connect("/");
+    var newData = {
+        action_type: "processProgress",
+        user_id: id
+    };
+    socket.send(JSON.stringify(newData));
+
+     socket.on("message", function(message){  
+        message = JSON.parse(message);
+        
+        if (message.progress !== null) {
+            var data = [];
+            for (var p in message.progress) {
+                var a = {
+                    showInLegend: true, 
+                    type: "spline",
+                    name: p,
+                    legendText: p,
+                    dataPoints: []
+                };
+
+                message.progress[p].forEach(function(line) {
+                    a.dataPoints.push({label: line.date , y: line.progress});
+                });
+                
+
+                data.push(a);
+            }
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title:{
+                    text: "User evolution",
+                    fontSize: 20          
+                },
+                height: 280,
+                axisY: {
+                    title: "Percentage",
+                    suffix: "%",
+                    labelFontSize: 14,
+                    titleFontSize: 12      
+                },
+                axisX: {
+                    title: "Date of update",
+                    labelFontSize: 14,
+                    titleFontSize: 20
+                },
+                animationEnabled: true,
+                data: data
+            });
+            chart.render();
+        }
+
+    });
+}
+
 jQuery(document).ready(function() {
     jQuery('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = jQuery(this).attr('href');
@@ -538,68 +599,7 @@ jQuery(document).ready(function() {
     });
 });
 
-window.onload = function () {
-	var chart = new CanvasJS.Chart("chartContainer", {
-		title:{
-			text: "User evolution",
-			fontSize: 20          
-		},
-		height: 280,
-		axisY: {
-			title: "Quantity",
-			suffix: " Gallons",
-			labelFontSize: 14,
-			titleFontSize: 20      
-		},
-		axisX: {
-			title: "Date of update",
-			labelFontSize: 14,
-			titleFontSize: 20
-		},
-		animationEnabled: true,
-		data: [              
-			{
-				type: "spline",
-				name: "Water Waste",
-				dataPoints: [
-			        {label: "Jan 2016" , y: 44} ,     
-			        {label:"Feb 2016", y: 37} ,     
-			        {label: "Mar 2016", y: 34}
-			    ]
-			},
-			{
-				type: "spline",
-				name: "Electricity Waste",
-				dataPoints: [
-			        {label: "Jan 2016" , y: 300} ,     
-			        {label:"Feb 2016", y: 230} ,     
-			        {label: "Mar 2016", y: 400}
-			    ]
-			},
-			{
-				type: "spline",
-				name: "Food Waste",
-				dataPoints: [
-			        {label: "Jan 2016" , y: 20} ,     
-			        {label:"Feb 2016", y: 37} ,     
-			        {label: "Mar 2016", y: 25}
-			    ]
-			},
-			{
-				type: "spline",
-				name: "Trash",
-				dataPoints: [
-			        {label: "Jan 2016" , y: 32} ,     
-			        {label:"Feb 2016", y: 39} ,     
-			        {label: "Mar 2016", y: 49}
-			    ]
-			}
-
-		]
-	});
-	chart.render();
-}
-
 $(window).on("scroll", function() {
 	$("body").toggleClass("scrolled", $(window).scrollTop() > 0);
 });
+

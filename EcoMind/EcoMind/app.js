@@ -9,6 +9,7 @@ var login_registration_server = require('./modules/login_registration_server.js'
 var posts_news_server = require('./modules/posts_news_server.js');
 var user_actions_server = require('./modules/user_actions_server.js');
 var email_sender = require('./modules/email_sender.js');
+var user_evolution = require('./modules/user_evolution.js');
 var io;
  
  /*
@@ -49,6 +50,7 @@ function requestHandler(socket){
         login_registration_server.requestListener(socket, data);
         posts_news_server.requestListener(socket, data);
         user_actions_server.requestListener(socket, data);
+        user_evolution.requestListener(socket, data);
 
     });
 }

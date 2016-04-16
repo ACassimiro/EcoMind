@@ -91,6 +91,16 @@ module.exports = function () {
 
         addUserProgress: function (userId, ecological_footprint, callback) {
             progress.insert({"userId": userId, "timestamp": new Date(), "ecological_footprint": ecological_footprint }, callback)
+        },
+
+        getUserProgress:function (userId, callback) {
+            progress.find({userId: userId}).sort({timestamp:1}).toArray(callback);
+        },
+
+        getHighestProgress: function(questionNum, callback) {
+            var aggquery = "$ecological_footprint." + questionNum;
+            progress.aggregate({$group: {_id:'', question1: {$max: "$ecological_footprint.question1"}, question2: {$max: "$ecological_footprint.question2"}, question4: {$max: "$ecological_footprint.question4"}, 
+                question5: {$max: "$ecological_footprint.question5"}, question7: {$max: "$ecological_footprint.question7"}, question8: {$max: "$ecological_footprint.question8"}}}, callback);
         }
 
     };
