@@ -34,7 +34,7 @@ function getUserPosts(socket, req) {
                 message_to_client['posts'] = null;
                 socket.send(JSON.stringify(message_to_client));
             } else {
-                processPosts(posts, socket); 
+                processPosts(posts, socket);
             }
         });
     }
@@ -58,7 +58,9 @@ function getPostList(socket, req) {
 function processPosts(posts, socket) {
     var message_to_client = {};
     var postContent = [];  
-                             
+    
+    console.log("Processing post");
+
     posts.forEach(function(post) {
         if(post.likes == null){
            likes = 0;

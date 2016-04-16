@@ -16,6 +16,7 @@ function openRedoEcoForm() {
     });
 }
 
+
 function createUserProfile() {
     var userId = getCookie().client_id;
 
@@ -35,8 +36,15 @@ function createUserProfile() {
         if (message.user !== null && message.user !== undefined) {
            fillUserProfile(message.user);
         } else {
-            alart("Sorry. We could not load the user. Try again.");
+            alert("Sorry. We could not load the user. Try again.");
+            return;
         }
+
+        $(window).scroll(function() { 
+            console.log(userId);   
+        });    
+
+
 
     });
 }
@@ -178,8 +186,9 @@ function removeIdol(){
 }
 
 function getUserPosts(id, number) {
-
+    console.log("Trying to get user posts");
    var socket = io.connect("/"); 
+   console.log(id);
    var data = {  
        action_type: "getUserPosts",
        user_id: id,
@@ -189,7 +198,7 @@ function getUserPosts(id, number) {
    socket.send(JSON.stringify(data)); 
 
    socket.on("message", function(message){  
-
+        console.log("Message arrived");
         message = JSON.parse(message);
      
         var htmlpostsleft = "";
