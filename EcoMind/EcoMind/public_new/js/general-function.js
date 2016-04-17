@@ -20,7 +20,7 @@ function closeInput(trigger) {
 
 function createSearchedUser(user){
     var htmlposts = "";
-    console.log(user.name);
+    // console.log(user.name);
     htmlposts += '<div class="post" id="' + user.name +'">';
 
     if(user.image == null || user.image == undefined){
@@ -33,10 +33,11 @@ function createSearchedUser(user){
         htmlposts += '<img src="' + user.image + '" class="searchedPhoto" id="userImg">'
     }
 
-
+    console.log(user._id);
     htmlposts +=  '<p>   </p><h3>' + user.name + '</h3>' +
-                   '<br><br><button type="button" id="' + user._id + '" onclick="accessUserProfile()">Check Profile</button>'   +
+                   '<br><br><button onclick="viewIdolProfile(\'' + user._id + '\');">Check Profile</button>'   +
                    '</div>';
+
 
     return htmlposts;  
 }
