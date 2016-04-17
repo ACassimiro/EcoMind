@@ -58,9 +58,15 @@ module.exports = function () {
         },
 
         getList: function (filter, number, callback) {
-    	    news_posts.find(filter).skip(number + 5).limit(5).sort({timestamp: -1}).toArray(callback);
-    	},
+            news_posts.find(filter).skip(number + 5).limit(5).sort({timestamp: -1}).toArray(callback);
+        },
 
+        getSearchList: function (filter, number, callback) {
+            var tokenizedFilter = createTokens.extractTokens(filter);
+            console.log(tokenizedFilter);
+
+            news_posts.find({'tokens': {$in:tokenizedFilter}}).skip(number + 5).limit(5).sort({timestamp: -1}).toArray(callback);
+        },
 
         findOne: function (id, callback) {
             news_posts.findOne({ _id: id}, callback);

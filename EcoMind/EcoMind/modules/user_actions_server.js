@@ -229,7 +229,6 @@ function getUserList(socket, req) {
 function editUserImage(socket, req) {
     var message_to_client = {};
     console.log("Message arrived");
-    console.log(req.message.image);
     if (req.message !== null && req.message !== undefined) {
         database['users'].editImage(req.user_id, req.message.image, function (err, user) {
             if (err || !user) {
@@ -243,6 +242,22 @@ function editUserImage(socket, req) {
         });
     }
     
+}
+
+
+function getSearchUsers(socket, req){
+    var message_to_client = {};
+    // console.log(JSON.stringify(req));
+    database['users'].getSearchUsers(req.filter, req.number, function (err, users) {
+            if (err || !users) {
+                message_to_client['users'] = null;
+                socket.send(JSON.stringify(message_to_client));
+            } else {
+                message_to_client['users'] = users;
+                console.log("I'm sending the Users back");
+                socket.send(JSON.stringify(message_to_client));
+            }
+    });
 }
 
 
@@ -283,6 +298,9 @@ function requestListener(socket, req) {
             break;
         case 'getIdolsIds':
             getIdolsIds(socket, req);
+            break;
+        case 'getSearchUsers':
+            getSearchUsers(socket, req);
             break;
         default:
             return false;

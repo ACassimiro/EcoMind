@@ -18,6 +18,29 @@ function closeInput(trigger) {
 	$(trigger).css("color", "#717171");
 }
 
+function createSearchedUser(user){
+    var htmlposts = "";
+    console.log(user.name);
+    htmlposts += '<div class="post" id="' + user.name +'">';
+
+    if(user.image == null || user.image == undefined){
+        if(user.gender == "female"){
+            htmlposts += '<img src="images/woman1.png" class="searchedPhoto"  id="userImg">';
+        }else {
+            htmlposts += '<img src="images/man1.png" class="searchedPhoto"  id="userImg">';
+        }
+    } else {
+        htmlposts += '<img src="' + user.image + '" class="searchedPhoto" id="userImg">'
+    }
+
+
+    htmlposts +=  '<p>   </p><h3>' + user.name + '</h3>' +
+                   '<br><br><button type="button" id="' + user._id + '" onclick="accessUserProfile()">Check Profile</button>'   +
+                   '</div>';
+
+    return htmlposts;  
+}
+
 function createPost(id, post) {
 
     var htmlposts = "";

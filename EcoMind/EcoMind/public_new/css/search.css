@@ -1,0 +1,17 @@
+#searchedNewsContainer {
+	margin-top: 3vh;
+	margin-left: 7vw;
+	margin-right: 53vw;
+}
+
+#searchedUserContainer {
+	margin-top: 3vh;
+	margin-left: 53vw;
+	margin-right: 7vw;
+}
+
+.searchedPhoto {
+	float: left;
+	height: 10vh;
+	width: 5vw;
+}

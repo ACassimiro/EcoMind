@@ -43,6 +43,13 @@ module.exports = function () {
             users.find(filter).skip(number + 5).limit(5).toArray(callback);
         },
 
+        getSearchUsers: function (filter, number, callback) {
+            var tokenizedFilter = createTokens.extractTokens(filter);
+            console.log(tokenizedFilter);    
+
+            users.find({'tokens': {$in:tokenizedFilter}}).skip(number + 5).limit(5).toArray(callback);
+        },
+
         getUserIdServer: function (comId, user) {
             user = users.findOne({_id: new mongo.ObjectID(comId)});
             return user;

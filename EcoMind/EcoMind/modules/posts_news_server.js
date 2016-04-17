@@ -161,6 +161,26 @@ function commentOnPost(socket, req){
     });
 }
 
+
+function getSearchPosts(socket, req) {
+    
+    var message_to_client = {};
+
+
+    database['news_posts'].getSearchList(req.filter, req.number, function (err, posts) {
+        console.log("Received the request");
+        
+        if (err || !posts) {
+            message_to_client['posts'] = null
+            socket.send(JSON.stringify(message_to_client));
+        } else {
+            console.log(posts);
+            processPosts(posts, socket); 
+        }
+    });
+}
+
+
 function requestListener(socket, req) {
   switch (req.action_type) {
         case 'createPost':
@@ -180,6 +200,9 @@ function requestListener(socket, req) {
             break;
         case 'commentOnPost':
             commentOnPost(socket, req);
+            break;
+        case 'getSearchPosts':
+            getSearchPosts(socket, req);
             break;
         default:
             return false;
