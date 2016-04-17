@@ -1,22 +1,67 @@
 {
 	"objectives": [
 		{
-			"title": "Reduce in 5 gallons",
-			"description": "You need to reduce the usage of water in 5 galons to gain a star.",
+			"title": "Achieve 70% of water saving",
 			"ecological_field": "water",
-			"value": 5
+			"number": true,
+			"value": 70,
+			"question": "progress"
 		},
 		{
-			"title": "Reduce in 5% the car usage",
-			"description": "You need to reduce the usage of car in 5% in the week.",
-			"ecological_field": "car usage",
-			"value": "5%"
+			"title": "Your car usage must be greater than 50%",
+			"ecological_field": "car-usage",
+			"number": true,
+			"value": 50,
+			"question": "progress"
 		},
 		{
-			"title": "Reduce in 3 Pounds the food loss ",
-			"description": "You need to reduce the food loss in 3 pounds.",
-			"ecological_field": "food waste",
-			"value": 5
+			"title": "Your food loss must be greater than 60%",
+			"ecological_field": "food-waste",
+			"number": true,
+			"value": 60,
+			"question": "progress"
+		},
+		{
+			"title": "Your electricity waste must be greater than 50%",
+			"ecological_field": "electricity",
+			"number": true,
+			"value": 50,
+			"question": "progress"
+		},
+		{
+			"title": "You must recycle trash",
+			"ecological_field": "trash",
+			"number": false,
+			"value": "yes",
+			"question": "question3"
+		},
+		{
+			"title": "You must not use a car at least during the last month",
+			"ecological_field": "car-usage",
+			"number": false,
+			"value": "no",
+			"question": "question6"
+		},
+		{
+			"title": "Use Alcohol in the car instead of gasoline",
+			"ecological_field": "car-usage",
+			"number": false,
+			"value": "alcohol",
+			"question": "question9"
+		},
+		{
+			"title": "Make your trash disposal be greater than 65%",
+			"ecological_field": "trash",
+			"number": true,
+			"value": 65,
+			"question": "progress"
+		},
+		{
+			"title": "Water saving must be greater than 50%",
+			"ecological_field": "water",
+			"number": true,
+			"value": 50,
+			"question": "progress"	
 		}
 
 	]

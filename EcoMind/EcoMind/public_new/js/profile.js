@@ -73,7 +73,7 @@ function fillUserProfile(user) {
     getUserPosts(user._id, 0);
 
     loadChart(user._id);
-    //getObjectivesAchievements(user._id);
+    loadObjectivesAchievements(user._id);
     
 
 }
@@ -584,6 +584,24 @@ function loadChart(id) {
 
     });
 }
+
+function loadObjectivesAchievements(id) {
+    if (id === null || id === undefined) {
+        id = getCookie().client_id;
+    }
+    
+    var socket = io.connect("/");
+    var newData = {
+        action_type: "getObjectivesAchievements",
+        user_id: id
+    };
+    socket.send(JSON.stringify(newData));
+
+    socket.on("message", function(message){  
+        message = JSON.parse(message);
+    });
+}
+
 
 jQuery(document).ready(function() {
     jQuery('.tabs .tab-links a').on('click', function(e)  {

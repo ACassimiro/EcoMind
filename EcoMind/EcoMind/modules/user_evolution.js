@@ -75,6 +75,10 @@ function processProgress(socket, req) {
 	});
 }
 
+function getObjectivesAchievements(socket, req) {
+	
+}
+
 function calculatePercentage(max, userval) {
 	return ((100*userval)/max);
 }
@@ -88,6 +92,9 @@ function requestListener(socket, req) {
         case 'processProgress':
             processProgress(socket, req);
             break;
+        case 'getObjectivesAchievements':
+        	getObjectivesAchievements(socket, req);
+        	break;
         default:
             return false;
     }
