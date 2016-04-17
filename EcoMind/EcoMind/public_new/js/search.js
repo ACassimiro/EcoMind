@@ -69,8 +69,10 @@ function fillSearch(){
     window.scrollTo(0, 0);
     var query = $.urlParam('search');
     query = decodeURIComponent(decodeURIComponent(query));
-    // alert(query);
     
+    query = query.toLowerCase();
+    // alert(query);
+
     getSearchUser(number, query);
     getSearchList(number, query);
               
