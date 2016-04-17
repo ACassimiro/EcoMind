@@ -75,12 +75,12 @@ function fillSearch(){
     getSearchList(number, query);
               
 
-    // $(window).scroll(function() {       
-    //     position = $("#postEnd").position();
-    //     if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
-    //           getUserList(number, {"tokens" : query});
-    //           getPostList(number, {"tokens" : query});
-    //           number = number + 5;
-    //     }
-    // });
+    $(window).scroll(function() {       
+        position = $("#postEnd").position();
+        if (($(window).scrollTop() == ($(document).height() - $(window).height()))) {
+              number = number + 5;
+              getSearchUser(number, query);
+              getSearchList(number, query);
+        }
+    });
 }
