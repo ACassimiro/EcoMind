@@ -1,6 +1,7 @@
 function loadhome() {
 	setPreferences(function(p) {
 		loadPosts(p);
+
 	});
 }
 
@@ -43,6 +44,22 @@ function loadPosts(preferences) {
 	
 	getNewsList(-5, filter);
 	getPostList(0, filter);
+    getGoogleSearch(preferences);
+}
+
+function getGoogleSearch(preferences) {
+    var search = "";
+    var count = 0;
+    preferences.forEach(function(p) {
+        count = count + 1;
+        search += p + " news ";
+        if (preferences.length !== count) {
+            search += "OR ";
+        }
+    });
+
+    $(".gsc-input input").val(search);
+    $(".gsc-search-button input").click();
 }
 
 function getNewsList(number, filter){
