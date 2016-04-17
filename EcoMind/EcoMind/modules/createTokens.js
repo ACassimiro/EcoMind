@@ -29,7 +29,7 @@ function removeDuplicatedWords(a) {
 	var uniqueArray = a.filter(function(item, pos) {
     	return a.indexOf(item) == pos;
 	});
-	console.log(uniqueArray);
+	
 	return uniqueArray;
 }
 

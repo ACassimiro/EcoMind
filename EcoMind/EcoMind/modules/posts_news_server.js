@@ -44,7 +44,6 @@ function getPostList(socket, req) {
     
     var message_to_client = {};
     database['news_posts'].getList(req.filter, req.number, function (err, posts) {
-        console.log("Received the request");
         
         if (err || !posts) {
             message_to_client['posts'] = null
@@ -58,8 +57,6 @@ function getPostList(socket, req) {
 function processPosts(posts, socket) {
     var message_to_client = {};
     var postContent = [];  
-    
-    console.log("Processing post");
 
     posts.forEach(function(post) {
         if(post.likes == null){
@@ -73,7 +70,6 @@ function processPosts(posts, socket) {
             postContent.push(post);
             if(postContent.length == posts.length){
                 message_to_client['posts'] = posts;
-                console.log("Sending with 0 comment post")
                 socket.send(JSON.stringify(message_to_client));
             }
         } else {
@@ -93,7 +89,7 @@ function processPosts(posts, socket) {
                     database['users'].getUserId(commentID.id, function (err, users) {
                             if (err || !users) {
                                 commentID = null;
-                                console.log("Error message");
+                                console.log("Error message: comments");
                             } else {
                                 a.push({name: users.name, comment: commentID.comment, id: commentID.id});
                             }
@@ -106,7 +102,6 @@ function processPosts(posts, socket) {
                             
                             if(postContent.length == posts.length){
                                 message_to_client['posts'] = posts;
-                                console.log("Sending with commented post");
                                 socket.send(JSON.stringify(message_to_client));
                             }
 
