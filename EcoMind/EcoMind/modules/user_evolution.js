@@ -1,8 +1,6 @@
 var database = require('./database.js');
 var socketio = require('socket.io');
-
-//db.progress.aggregate([{$group: {_id:'',question1: {$max: "$ecological_footprint.question9"}}}])
-
+var objectives = require('./../objectives.json');
 
 function processProgress(socket, req) {
 	var message_to_client = {};
@@ -76,6 +74,37 @@ function processProgress(socket, req) {
 }
 
 function getObjectivesAchievements(socket, req) {
+	var obj = objectives.objectives;
+	var achievements = [];
+	
+	database['users'].getUserProgressByTimestam(req.user_id, req.progress['water'][req.progress['water'].length - 1].date, function(err, form) {
+		if (err || !form) {
+			socket.send(JSON.stringify({achievements: null}));
+		} else {
+			for (o in obj) {
+				var a = {title: obj[o].title};
+
+				if (obj[o].question === "progress") {
+					if (req.progress[obj[o].ecological_field][req.progress[obj[o].ecological_field].length - 1].progress >= obj[o].value) {
+						a['obj'] = "positive";
+					} else {
+						a['obj'] = "negative"
+					}
+				} else {
+					if (form.ecological_footprint[obj[o].question] === obj[o].value) {
+						a['obj'] = "positive";
+					} else {
+						a['obj'] = "negative"
+					}
+				}
+
+				achievements.push(a);
+			}
+			socket.send(JSON.stringify({achievements: achievements}));
+		}
+	});
+	
+
 	
 }
 

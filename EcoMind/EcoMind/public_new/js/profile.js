@@ -73,8 +73,6 @@ function fillUserProfile(user) {
     getUserPosts(user._id, 0);
 
     loadChart(user._id);
-    loadObjectivesAchievements(user._id);
-    
 
 }
 
@@ -580,12 +578,13 @@ function loadChart(id) {
                 data: data
             });
             chart.render();
+            loadObjectivesAchievements(id, message.progress);
         }
 
     });
 }
 
-function loadObjectivesAchievements(id) {
+function loadObjectivesAchievements(id, progress) {
     if (id === null || id === undefined) {
         id = getCookie().client_id;
     }
@@ -593,12 +592,27 @@ function loadObjectivesAchievements(id) {
     var socket = io.connect("/");
     var newData = {
         action_type: "getObjectivesAchievements",
-        user_id: id
+        user_id: id,
+        progress: progress
     };
     socket.send(JSON.stringify(newData));
 
     socket.on("message", function(message){  
         message = JSON.parse(message);
+        var htmlachie = "";
+    
+        if (message.achievements !== null) {
+            message.achievements.forEach(function(a) {
+                htmlachie += "<li>";
+                if (a.obj === 'positive') {
+                    htmlachie += '<span class="glyphicon glyphicon-ok-circle positive"></span>';
+                } else {
+                    htmlachie += '<span class="glyphicon glyphicon-remove-circle negative"></span>';
+                }
+                htmlachie += a.title + '</li>';
+            });
+            $("#tab2 ul").html(htmlachie);
+        }
     });
 }
 

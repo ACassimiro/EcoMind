@@ -104,6 +104,10 @@ module.exports = function () {
             progress.find({userId: userId}).sort({timestamp:1}).toArray(callback);
         },
 
+        getUserProgressByTimestam: function (userId, timestamp, callback) {
+            progress.findOne({userId:userId, timestamp: new Date(timestamp)}, callback);
+        },
+
         getHighestProgress: function(questionNum, callback) {
             var aggquery = "$ecological_footprint." + questionNum;
             progress.aggregate({$group: {_id:'', question1: {$max: "$ecological_footprint.question1"}, question2: {$max: "$ecological_footprint.question2"}, question4: {$max: "$ecological_footprint.question4"}, 

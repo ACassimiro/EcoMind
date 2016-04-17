@@ -32,14 +32,14 @@
 			"title": "You must recycle trash",
 			"ecological_field": "trash",
 			"number": false,
-			"value": "yes",
+			"value": "Yes",
 			"question": "question3"
 		},
 		{
 			"title": "You must not use a car at least during the last month",
 			"ecological_field": "car-usage",
 			"number": false,
-			"value": "no",
+			"value": "No",
 			"question": "question6"
 		},
 		{
