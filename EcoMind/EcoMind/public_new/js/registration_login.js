@@ -87,7 +87,6 @@ function registerUser() {
 
     if(profileImage ==  "http://www.mv.mu/en/forfait/img/point_interrogation.png"){
       profileImage = null;
-      alert("Here");
     }
      
 

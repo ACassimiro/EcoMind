@@ -45,7 +45,6 @@ function submitCommentPost(){
 	
 	var userId = getCookie().client_id;
 	// comment = userId + "," + comment;
-	alert(userId);
 
 	var data = {  
         action_type: "commentOnPost",
