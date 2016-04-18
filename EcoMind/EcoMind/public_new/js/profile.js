@@ -17,6 +17,17 @@ function openRedoEcoForm() {
 }
 
 
+function profileScroll(userId){
+    var number = 5;
+    $(window).scroll(function() {  
+        if (($(window).scrollTop() == ($(document).height() - $(window).height()))) {
+            getUserPosts(userId, number);
+            number = number + 5;
+        }      
+    });  
+}
+
+
 function createUserProfile() {
     var userId = getCookie().client_id;
 
@@ -43,9 +54,6 @@ function createUserProfile() {
         $(window).scroll(function() { 
             console.log(userId);   
         });    
-
-
-
     });
 }
 
@@ -74,6 +82,7 @@ function fillUserProfile(user) {
 
     loadChart(user._id);
 
+    profileScroll(user._id);
 }
 
 function viewIdolProfile(id) {

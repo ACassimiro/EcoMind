@@ -172,38 +172,64 @@ function dislike(trigger) {
 }
 
 function sendComment(trigger) {
+    var userId = getCookie().client_id;
+    var userName = "";
+
     var socket = io.connect("/"); 
     
-    var comment = $(trigger).siblings("input").val();
-    
-    var postid = $(trigger).parent().parent().parent().attr("id");
-
-    var userId = getCookie().client_id;
-
-    var data = {  
-        action_type: "commentOnPost",
-        post_id: postid,
-        userId: userId,
-        comment: comment
+    var data = { 
+        action_type: "getUserInfo",
+        http_type: "GET",
+        user_id: userId
     };
-    
+
     socket.send(JSON.stringify(data)); 
-    
+
     socket.on("message", function(message){  
 
         message = JSON.parse(message);
-        console.log(message);
-        if (message.data) {
-            $(trigger).siblings("input").val("");
-            
-            var newcomment = '<div class="comment">' +
-                '<h5>NEW</h5>' +
-                '<p>'+ comment + '</p>' +
-            '</div>';
-            console.log($(trigger).parent().parent().siblings(".comments"));
-            $(trigger).parent().parent().siblings(".comments").append(newcomment);
+        if (message.user !== null && message.user !== undefined) {
+           userName = message.user.name;
+        } else {
+            alert("Sorry. We could not post your comment. Try again.");
+            return;
         }
+
+        var socket = io.connect("/"); 
+        
+        var comment = $(trigger).siblings("input").val();
+        
+        var postid = $(trigger).parent().parent().parent().attr("id");
+
+        var userId = getCookie().client_id;
+
+        var data = {  
+            action_type: "commentOnPost",
+            post_id: postid,
+            userId: userId,
+            comment: comment
+        };
+        
+        socket.send(JSON.stringify(data)); 
+        
+        socket.on("message", function(message){  
+
+            message = JSON.parse(message);
+            console.log(message);
+            if (message.data) {
+                $(trigger).siblings("input").val("");
+                
+                var newcomment = '<div class="comment">' +
+                    '<h5>' + userName + '</h5>' +
+                    '<p>'+ comment + '</p>' +
+                '</div>';
+                console.log($(trigger).parent().parent().siblings(".comments"));
+                $(trigger).parent().parent().siblings(".comments").append(newcomment);
+            }
+        });
+        
     });
+
     
 }
 

@@ -42,9 +42,30 @@ function loadPosts(preferences) {
 		filter.push({"ecological_field": {"$in": [p]}});
 	});
 	
-	getNewsList(-5, filter);
+	getNewsList(0, filter);
 	getPostList(0, filter);
     getGoogleSearch(preferences);
+
+    // alert($(".posts"));
+    // alert(document.getElementByClass("news"));
+    var numberNews = 5;
+    $("#homeNews").scroll(function() { 
+        // alert("here");
+        if ($("#homeNews").scrollTop() >= $(".news .list").height() - $("#homeNews").height()) {
+            console.log($("#homeNews").scrollTop() +" - "+ $(".news .list").height() ); 
+            getNewsList(numberNews, filter);
+            numberNews = numberNews + 5;
+        }      
+    }); 
+
+    var numberPosts = 5;
+    $("#homePosts").scroll(function() { 
+        if ($("#homePosts").scrollTop() >= $(".posts .list").height()) {
+            // console.log($("#homePosts").scrollTop() +" - "+ $(".posts .list").height() ); 
+            getPostList(numberPosts, filter);
+            numberPosts = numberPosts + 5;
+        }      
+    }); 
 }
 
 function getGoogleSearch(preferences) {

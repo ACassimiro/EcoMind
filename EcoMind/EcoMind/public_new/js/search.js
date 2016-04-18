@@ -1,3 +1,25 @@
+function search(){
+  if(document.getElementById("searchBox").value === ""){
+    return;
+  }
+
+  my_form=document.createElement('FORM');
+  my_form.name='myForm';
+  my_form.method='GET';
+  my_form.action="searchres.html";
+
+  my_tb=document.createElement('INPUT');
+  my_tb.type='TEXT';
+  my_tb.name='search';
+  my_tb.value= encodeURIComponent(document.getElementById("searchBox").value);
+  my_form.appendChild(my_tb);
+
+  document.body.appendChild(my_form);
+  my_form.submit();
+
+}
+
+
 
 function getSearchList(number, filter){
     var cookie = getCookie();
