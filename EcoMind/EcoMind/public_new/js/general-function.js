@@ -100,10 +100,12 @@ function createPost(id, post) {
     var numcom = 0;
     comments.forEach(function(c) {
         numcom = numcom + 1;
+        console.log(c.id);
+        console.log(c.id + " - " + getCookie().client_id);
 
         htmlposts += '<div class="comment">' +
                 '<h5>' +numcom + '</h5>' +
-                '<h4>' +c.name+'</h4>' +
+                '<h4 onclick="viewIdolProfile(\'' + c.id + '\');">' +c.name+'</h4>' +
                 '<p>'+c.comment + '</p>' +
                 '</div>';
     });
@@ -220,7 +222,7 @@ function sendComment(trigger) {
                 $(trigger).siblings("input").val("");
                 
                 var newcomment = '<div class="comment">' +
-                    '<h5>' + userName + '</h5>' +
+                    '<h5 onclick="viewIdolProfile(\'' + userId + '\');">' + userName + '</h5>' +
                     '<p>'+ comment + '</p>' +
                 '</div>';
                 console.log($(trigger).parent().parent().siblings(".comments"));

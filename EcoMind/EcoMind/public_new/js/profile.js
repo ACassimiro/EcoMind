@@ -86,6 +86,11 @@ function fillUserProfile(user) {
 }
 
 function viewIdolProfile(id) {
+    console.log(id + " - " + getCookie().user_id);
+    if(id === getCookie().user_id){
+        console.log("Clicking on yourself");
+        return;
+    }
     document.cookie=("idol_id=").concat(id);
     location.href = "profile_idol.html";
 }
