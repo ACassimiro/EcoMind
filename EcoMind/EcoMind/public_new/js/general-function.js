@@ -100,8 +100,8 @@ function createPost(id, post) {
     var numcom = 0;
     comments.forEach(function(c) {
         numcom = numcom + 1;
-        console.log(c.id);
-        console.log(c.id + " - " + getCookie().client_id);
+        // console.log(c.id);
+        // console.log(c.id + " - " + getCookie().client_id);
 
         htmlposts += '<div class="comment">' +
                 '<h5>' +numcom + '</h5>' +
