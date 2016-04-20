@@ -272,5 +272,7 @@ function removeECookie(key) {
 }
 
 function formatEcoTags(tag) {
-	return tag.split(' ').join('-');
+	var t = tag.split(' ').join('-');
+    t = t.split('_').join('-');
+    return t;
 }

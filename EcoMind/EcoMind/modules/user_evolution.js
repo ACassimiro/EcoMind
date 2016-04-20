@@ -5,7 +5,8 @@ var objectives = require('./../objectives.json');
 function processProgress(socket, req) {
 	var message_to_client = {};
 	database['users'].getHighestProgress('question1', function(err, qmax){
-		
+		console.log("MAAAX");
+		console.log(qmax);
 		if (err || !qmax) {
 			message_to_client['progress'] = null;
             socket.send(JSON.stringify(message_to_client));
@@ -27,6 +28,8 @@ function processProgress(socket, req) {
 			
 						for (var q in quser[qu].ecological_footprint) {
 							if (quser[qu].ecological_footprint[q] !== null && quser[qu].ecological_footprint[q] !== undefined) {
+								console.log("User");
+								console.log(quser[qu].ecological_footprint[q]);
 								if (q === 'question1') {
 									userProgress.water.push({date: quser[qu].timestamp, 
 										progress: invertPercentage(

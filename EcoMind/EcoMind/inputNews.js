@@ -13,7 +13,7 @@ function fillDatabase() {
 	var news = [];
 
 	car_usage.news.forEach(function(car){
-		car['ecological_field'] = ["car_usage"];
+		car['ecological_field'] = ["car usage"];
 		news.push(car);
 	});
 
@@ -23,7 +23,7 @@ function fillDatabase() {
 	});
 
 	food_waste.news.forEach(function(food){
-		food['ecological_field'] = ["food_waste"];
+		food['ecological_field'] = ["food waste"];
 		news.push(food);
 	});
 
