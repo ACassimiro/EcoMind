@@ -184,14 +184,14 @@ function closeOverlay() {
 function submitEcoInfoForm() {
    var socket = io.connect("/"); 
    var responses = {
-       question1: $("#question1").val(),
-       question2: $("#question2").val(),
+       question1: Number($("#question1").val()),
+       question2: Number($("#question2").val()),
        question3: $($("input[type='radio'][name='recycle_trash_radio']:checked")[0]).val(),
-       question4: $("#question4").val(),
-       question5: $("#question5").val(),
+       question4: Number($("#question4").val()),
+       question5: Number($("#question5").val()),
        question6: $($("input[type='radio'][name='car_usage_radio']:checked")[0]).val(),
-       question7: $("#question7").val(),
-       question8: $("#question8").val(),
+       question7: Number($("#question7").val()),
+       question8: Number($("#question8").val()),
        question9: $("#question9").val()
    };
 
