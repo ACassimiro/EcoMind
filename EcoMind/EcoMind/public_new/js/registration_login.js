@@ -33,7 +33,7 @@ function login() {
 
 function previewFileRegister(){
     
-  var x = document.getElementById("imageInput");
+  var x = document.getElementById("profileImage");
   var txt = "";
   if ('files' in x) {
       if (x.files.length == 0) {
@@ -56,6 +56,7 @@ function previewFileRegister(){
 
 
   var preview = document.getElementById("profileImage");
+  console.log(preview);
   var file = document.querySelector('input[type=file]').files[0]; 
   var reader = new FileReader();
 
