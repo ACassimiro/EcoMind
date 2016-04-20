@@ -18,9 +18,10 @@ function openRedoEcoForm() {
 
 
 function profileScroll(userId){
-    var number = 0;
+    var number = 5;
     $(window).scroll(function() {  
         if (($(window).scrollTop() == ($(document).height() - $(window).height()))) {
+            console.log("Bottom of the page");
             getUserPosts(userId, number);
             number = number + 5;
         }      
