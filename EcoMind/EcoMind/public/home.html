@@ -1,137 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <link rel="icon" href="images/favicon_ecomind.ico">
+<html>
+<head>
+	<title>EcoMind</title>
+	<link rel="icon" href="images/favicon_ecomind.ico">
 
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/posts.css" rel="stylesheet">
-    <link href="css/navbar-static-top.css" rel="stylesheet">
-
-    <script src="js/ie-emulation-modes-warning.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script> 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
+	<link rel="stylesheet" href="css/general.css">
+	<link rel="stylesheet" href="css/menu_bar.css">
+	<link rel="stylesheet" href="css/home.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	
-    <script src="js/client.js"></script>
-    <script src="js/search.js"></script>
-	<script src="js/posts.js"></script>
-    
-    <title>Ecomind</title>
-  </head>
-
-  <body>
-
-	<!-- USER EMAIL MUST BE DYNAMIC CHANGE HERE -->
-    <div id="userEmailID" style="display: none;">admin@gmail.com</div>
-
-
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="home.html">Ecomind</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home.html">Home</a></li>
-            <li><a href="profile_page.html">User Profile</a></li>
-            <li><a href="news.html">News</a></li>
-            <!--<li><a href="#community">Community</a></li>-->
-            <li><a href="community_page.html">Community</a></li>
-          </ul>
-
-          <ul class ="nav navbar-nav navbar-center">
-             <li>
-              <form action="searchres.html">
-                <input type="text" name="search" value="">
-                <input type ="submit">
-              </form>
-            </li>
-          </ul>
-
-
-          <ul class="nav navbar-nav navbar-right">
-            <!--<li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li> -->
-            <li><a id="logoutSubmit">Logout</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-    <div class="container">
-
-      <!-- Functionality to User be able to Post -->
-      <!-- As we do not have the user login yet, I cant put the user name dynamically, so the userid it is hardcoded for a while -->
-    <div class="container">
-        <div class="userpostbox">
-        <h1 id="openPostArea" onclick='openUserPostBlock()'>What are you going to share now?</h1>
-        <div id="formplace">
-        
-        </div>
-      </div>
-    </div>
-
-  <hr class="featurette-divider">
-
-
-	<div id="postContainer">
+	<script src="libs/jquery-2.2.2.js"></script>
+	<script src="js/general-function.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/profile.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script> 
+	<script src="js/radio.js" type ="text/javascript"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>	
+<body onload="loadhome()">
+	<header>
+		<div class="row">
+			<div id="logo">
+				<h1>EcoMind</h1>
+			</div>
+			<div id="logout">
+				<a href="#" onClick="logout()">Logout <span class="glyphicon glyphicon-log-out"></span></a> 
+			</div>
+			<div id="nav">
+				<div class="active">
+					<a href="home.html"> Home</a> 
+				</div>
+				<div>
+					<a href="profile.html"> Profile</a> 
+				</div>
+				<div>
+					<a href="news.html"> News</a> 
+				</div>
+				<div>
+					<a href="community.html"> Community</a> 
+					<div>
+						<div>
+							<a href="community.html#aboutus"> About us</a> 
+						</div>
+						<div>
+							<a href="community.html#guidelines"> Guidelines</a> 
+						</div>
+						<div>
+							<a href="community.html#contactus"> Contact us</a> 
+						</div>
+					</div>
+				</div>
+				
+				<input type="text" placeholder="Search..." id="searchBox" required> <button onclick="search()">&#128270;</button>
+			</div>
+		</div>
+	</header>
 	
-	</div>
-	<div id="postEnd"></div>
+	<section class="posting-area">
+		<h1>What are you going to share now? <span class="glyphicon glyphicon-pencil"></span></h1>
+		<div class="posting-input">
+			<h2>Type:</h2>
+	        <input class="radio" type="radio" name="radio_user_post_type" value="post" onclick="createPostsHome()" checked><label>Post</label>
+	        <input class="radio" type="radio" name="radio_user_post_type" value="news" onclick="createNewsHome()"><label>News</label>
+	        <input class="radio" type="radio" name="radio_user_post_type" value="poll" onclick="createPollPostHome()"><label>Poll</label>
+	        <br/>
+	        <h2>Ecological Field: </h2><br/>
+	        <input class="checkbox" type="checkbox" name="home_ecological_field" value="water"/><label>Water</label>
+	        <input class="checkbox" type="checkbox" name="home_ecological_field" value="electricity"/><label>Electricity</label>
+	        <input class="checkbox"type="checkbox" name="home_ecological_field" value="food waste"/><label>Food waste</label>
+	        <input class="checkbox" type="checkbox" name="home_ecological_field" value="trash"/><label>Trash</label>
+	        <input class="checkbox" type="checkbox" name="home_ecological_field" value="car usage"/><label>Car usage</label>
+	        <div id="userPostArea">
+	        <h2>Title: </h2>
+	        <input class="title" id="home_user_post_title" type="text" style="width:440px" /><br/>
+	        <textarea id="home_user_post_body" cols="60" rows="10" placeholder="Type your text here..."></textarea>
+	        </div>
+	        <button type="button" class="btn btn-lg btn-default" onclick="submitUserPost()">Post</button>
+		</div>
+	</section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript">
-	    $(document).ready(function() {
-	    	var number = -5;
-        var flag = 1;
-	    	var position;
-	    	window.scrollTo(0, 10);
-	    	window.scrollTo(0, 0);
-	    	$(window).scroll(function() {     	
-	        	position = $("#postEnd").position();
-            if(flag == 1){
-                if (position.top - 10 <= ($(window).height() + $(window).scrollTop())) {
-                      flag = 0;
-                      //alert(number);
-                      console.log('Bottom reached!');
-                      getPostList(number, {});
-                      number = number + 5;
-                      flag = 1;
-                }
+	<section class="preferences">
+		<div class="user-preferences">
+		</div>
+	</section>
 
-             }
-	        });
-	    });      
-    
-	    $(function(){
-            $('#logoutSubmit').click(function(){ /*listening to the button click using Jquery listener*/
-            	document.cookie = "client_id=;";
-            	alert("Current user id :" + document.cookie);
-            	location.href = "login_page.html";
-            	
-            });
-        });
+	
+	<section class="news" id="homeNews">
+		<div class="fixed-name-news">
+			N <br/>
+			E <br/>
+			W <br/>
+			S <br/>
+		</div>
+		<script>
+		  (function() {
+		    var cx = '016511544665751304066:pr253i4bfic';
+		    var gcse = document.createElement('script');
+		    gcse.type = 'text/javascript';
+		    gcse.async = true;
+		    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+		        '//cse.google.com/cse.js?cx=' + cx;
+		    var s = document.getElementsByTagName('script')[0];
+		    s.parentNode.insertBefore(gcse, s);
+		  })();
+		</script>
+		<gcse:search></gcse:search>
+		<div class="list">
+			
+		</div>
+	</section>
 
-     </script>
-    </script>
-  </body>
+	<section class="posts" id="homePosts">
+		<div class="fixed-name-posts">
+			P <br/>
+			O <br/>
+			S <br/>
+			T <br/>
+			S <br/>
+		</div>
+		<div class="list">
+		</div>
+	</section>
+
+	<script type="text/javascript">
+	   $(document).ready(function () {
+	      $('head').append('<link href="css/general.css" rel="stylesheet" />');
+	   });
+	</script>
+	<script src="js/home.js"></script>
+	<script src="js/general-event.js"></script>
+</body>
 </html>
